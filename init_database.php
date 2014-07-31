@@ -179,6 +179,14 @@
             "STOLEN PROPERTY CHARGES" , "OPERATING UNDER INFLUENCE" , "GATHER" , "INVPER" , "DRUG CHARGES" , "LANDLORD" , "PUBDRINK" ,
             "DISORDERLY" , "PROSTITUTION CHARGES" , "GAMBLING OFFENSE" , "ARGUE" , "VANDALISM" , "SIMPLE ASSAULT" ,
             "LABOR" , "PLATES", "MANSLAUG"];
+			
+		$CRIMEScorrect = ["Crimes against Children" , "Homicide" , "Arson" , "Hate Crime" , "Gun Charge" , "Weapons Charge" ,
+            "Aggravated Assault" , "Biological Threat" , "Death Ivestigation" , "Harassement" , "Trespassing" , "Bomb Threat" , 
+            "Explosives" , "Larceny" , "Residential Burglary" , "Automobile Theft" , "Robbery" , "Fire" , "Prison" ,
+            "Commercial Burglary" , "Property Damage", "Stolen Property Charges" , "Operating under Influence" , 
+            "Gathering" , "Invasion of Personal Space" , "Drug Charges" , "Landlord" , "Public Drinking" ,
+            "Disorderly Conduct" , "Prostitution Charges" , "Gambling Offense" , "Argue" , "Vandalism" , "Simple Assault" ,
+            "Labor Violation" , "Plates", "Manslaughter"];
         
         $CRIME_CATEGORIES = ["Violence" , "Homicide" , "Other" , "Violence" , "Weapons" , "Weapons" ,
             "Violence" , "Other" , "Violence" , "Harassement" , "Property" , "Other" , "Other" , "Larceny/Theft/B&E" , 
@@ -188,10 +196,57 @@
             "Other" , "Noise/Disturbance" , "Property" , "Simple Assault" , "Other" , "Other", "Violence"];
         
         $CRIME_VALUES = [10,10,6,7,5,5,4,3,6,3,2,3,3,4,4,5,4,3,2,3,3,3,3,5,2,4,4,7,7,3,2,3,2,3,1,1,8];
+		
+		$HOTLINE = ["Street Light Outages","Pick up Dead Animal","Improper Storage of Trash (Barrels)",
+            "Poor Conditions of Property","Rodent Activity","Sidewalk Repair (Make Safe)","Graffiti Removal",
+            "Pothole Repair (Internal)","Sidewalk Repair (Internal)","Illegal Rooming House","Request for Pothole Repair",
+            "Unsafe Dangerous Conditions","Work w/out Permit","Sign Repair","Pigeon Infestation","Sidewalk Repair",
+            "Abandoned Vehicles","Unsatisfactory Living Conditions","Traffic Signal Repair","Unsanitary Conditions - Establishment",
+            "Bed Bugs","Short Measure - Gas","No Utilities Residential - Electricity","Unsanitary Conditions - Food",
+            "Illegal Dumping","Trash on Vacant Lot","Working Beyond Hours","Sewage/Septic Back-Up",
+            "Rental Unit Delivery Conditions","Maintenance Complaint - Residential","Student Overcrowding","Missing Sign",
+            "Unsanitary Conditions - Employees","Street Light Outages (Internal)","Mice Infestation - Residential",
+            "Illegal Occupancy","Abandoned Building","No Utilities Residential - Water","Overcrowding","Overflowing or Un-kept Dumpster",
+            "Work Hours-Loud Noise Complaints","Squalid Living Conditions","Chronic Dampness/Mold","Plumbing",
+            "Heat - Excessive  Insufficient","Unsatisfactory Utilities - Electrical  Plumbing","No Utilities Residential - Gas",
+            "Pest Infestation - Residential","Carbon Monoxide","Lead","Construction Debris","Mosquitoes (West Nile)",
+            "Upgrade Existing Lighting","Food Alert - Confirmed","Bridge Maintenance","Water in Gas - High Priority",
+            "No Utilities - Food Establishment - Electricity","PWD Graffiti","Rat Bite","Yardwaste Asian Longhorned Beetle Affected Area",
+            "No Utilities - Food Establishment - Water","Watermain Break","Fire Hydrant","Sidewalk Cover / Manhole",
+            "No Utilities - Food Establishment - Flood","BWSC Pothole","Abandoned Vehicles - Private Tow",
+            "No Utilities - Food Establishment - Sewer","Student Move-in Issues",
+            "Roadway Flooding","Power Outage","Big Buildings Recycling (INTERNAL)","Loud Parties/Music/People",
+            "Public Events Noise Disturbances"];
+
+
+
+
+
+		$HOTLINE_Cat = ["Street Light Outages","Dead Animal Pick up","Illegal Dumping/Trash",
+            "Poor/Dangerous Conditions of Property","Pest Activity","Sidewalk Repair","Graffiti",
+            "Pothole Repair","Sidewalk Repair","Other","Pothole Repair",
+            "Poor/Dangerous Conditions of Property","Work w/out Permit","Traffic Signal/Sign Repair","Pest Activity",
+			"Sidewalk Repair","Abandoned Vehicle","Unsatisfactory Living Conditions","Traffic Signal/Sign Repair","Unsatisfactory Living Conditions","Pest Activity","Utilities Issues ","Utilities Issues ","Unsatisfactory Living Conditions",
+            "Illegal Dumping/Trash","Illegal Dumping/Trash","Other","Utilities Issues",
+            "Unsatisfactory Living Conditions","Other","Other","Traffic Signal/Sign Repair",
+            "Unsatisfactory Living Conditions","Street Light Outages","Pest Activity",
+            "Other","Other","Utilities Issues","Other","Illegal Dumping/Trash",
+            "Noise/Disturbances","Unsatisfactory Living Conditions","Unsatisfactory Living Conditions","Utilities Issues",
+            "Utilities Issues","Utilities Issues","Utilities Issues",
+            "Pest Activity","Other","Other","Other","Other","Street Light Outages","Other","Other","Utilities Issues",
+            "Utilities Issues","Graffiti","Pest Activity","Pest Activity",
+            "Utilities Issues","Utilities Issues","Other","Sidewalk Repair",
+            "Utilities Issues","Pothole Repair","Abandoned Vehicle",
+            "Utilities Issues","Other","Other","Utilities Issues","Other","Noise/Disturbances",
+            "Noise/Disturbances"];
+              
+        $HOTLINE_Ratings = [3,5,6,7,8,4,5,6,4,7,6,7,7,2,6,4,6,9,6,7,10,5,8,8,6,5,4,10,9,9,9,2,9,3,10,9,9,10,9,7,7,
+            9,10,8,5,7,8,10,10,10,4,9,5,9,6,10,8,5,10,9,8,8,6,6,7,5,6,8,8,8,8,7,7,8];
 
         echo "Tables emptied</br>";
         mysqli_query($con, 'TRUNCATE TABLE violations');
         mysqli_query($con, 'TRUNCATE TABLE crimes');
+		mysqli_query($con, 'TRUNCATE TABLE hotline');
 
         echo "violations populated</br>";
 		for ($i = 0; $i < count($VIOLATIONS); $i++) {
@@ -209,11 +264,24 @@
 		for ($i = 0; $i < count($CRIMES); $i++) {
 
 			$name = trim($CRIMES[$i]);
+			$proper = trim($CRIMEScorrect[$i]);
 			$category = trim($CRIME_CATEGORIES[$i]);
 			$value = trim($CRIME_VALUES[$i]);
 
 			mysqli_query($con, "INSERT INTO crimes
-								VALUES ('$name', '$category', '$value')");
+								VALUES ('$name', '$proper', '$category', '$value')");
+		}
+		
+		echo "hotline populated</br>";
+		for ($i = 0; $i < count($HOTLINE); $i++) {
+
+			$name = trim($HOTLINE[$i]);
+			$proper = trim($HOTLINE[$i]);
+			$category = trim($HOTLINE_Cat[$i]);
+			$value = trim($HOTLINE_Ratings[$i]);
+
+			mysqli_query($con, "INSERT INTO hotline
+								VALUES ('$name', '$proper', '$category', '$value')");
 		}
 
 		mysql_close($con);

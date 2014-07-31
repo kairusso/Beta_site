@@ -140,10 +140,11 @@ function parseJson($response) {
 	$lat = $cell['latitude'];
 	$lng = $cell['longitude'];
 
-	$doubleArray = fire($lat, $lng);
+	$tripleArray = fire($lat, $lng);
 	
-	$result['crime'] = $doubleArray[0];
-	$result['noise'] = $doubleArray[1];
+	$result['crime'] = $tripleArray[0];
+	$result['noise'] = $tripleArray[1];
+	$result['hotline'] = $tripleArray[2];
 	
 	//foreach($noiseCategoryArray as $item) echo $item->__toString;
 	
@@ -202,10 +203,13 @@ function fire($lat, $lng) {
 	$socrata2 = new Socrata("http://data.cityofboston.gov/api");
 	
 	$query2 = "within_circle(location, $lat, $lng, 250)";
-			   
-
 	$params2 = array("\$where" => $query2);
 	$response2 = $socrata2->get("/resource/7cdf-6fgx.json", $params2);
+	
+	
+	$query3 = "within_circle(geocoded_location, $lat, $lng, 250)";
+	$params3 = array("\$where" => $query3);
+	$response3 = $socrata2->get("/resource/awu8-dc52.json", $params3);
 	
 	$temp = new crimeIncident(0, "other", 0);
 	
@@ -215,6 +219,9 @@ function fire($lat, $lng) {
 	$noiseArray = array();
 	$noiseCategoryArray = array();
 	
+	$hotlineArray = array();
+	$hotlineCategoryArray = array();
+	
 	foreach($response2 as $item) {
 		$temp = relabelCrime($item['incident_type_description']);
 		
@@ -223,6 +230,18 @@ function fire($lat, $lng) {
 			array_push($noiseArray, $temp);
 		} else {
 			array_push($crimeArray, $temp);
+		}
+		
+	}
+	
+	foreach($response3 as $item) {
+		$temp = relabelNoise($item['case_title']);
+		
+		if($temp == null) { }
+		elseif ($temp->cat == "Noise/Disturbance") {
+			array_push($noiseArray, $temp);
+		} else {
+			array_push($hotlineArray, $temp);
 		}
 		
 	}
@@ -237,8 +256,23 @@ function fire($lat, $lng) {
 			}
 		}
 		if($test) { 
-			$temp = new crimeIncident(1, $crime->cat, $crime->rat);
+			$temp = new crimeIncident(1, "", $crime->cat, $crime->rat);
 			array_push($crimeCategoryArray, $temp);
+		}
+	}
+	
+	foreach($hotlineArray as $hot) {
+		$test = true;
+		foreach($hotlineCategoryArray as $cat) {
+			if($cat->cat == $hot->cat) {
+				$cat->incFreq();
+				$cat->addToRat($hot->rat);
+				$test = false;
+			}
+		}
+		if($test) { 
+			$temp = new crimeIncident(1, "", $hot->cat, $hot->rat);
+			array_push($hotlineCategoryArray, $temp);
 		}
 	}
 	
@@ -247,21 +281,21 @@ function fire($lat, $lng) {
 	foreach($noiseArray as $noise) {
 		$test = true;
 		foreach($noiseCategoryArray as $cat) {
-			if($cat->cat == $noise->cat) {
+			if($cat->cat == $noise->proper) {
 				$cat->incFreq();
 				$cat->addToRat($noise->rat);
 				$test = false;
 			}
 		}
 		if($test) { 
-			$temp = new crimeIncident(1, $noise->cat, $noise->rat);
+			$temp = new crimeIncident(1, "", $noise->proper, $noise->rat);
 			array_push($noiseCategoryArray, $temp);
 		}
 	}
 	
-	$doubleArray = array($crimeCategoryArray, $noiseCategoryArray);
+	$tripleArray = array($crimeCategoryArray, $noiseCategoryArray, $hotlineCategoryArray);
 	
-	return $doubleArray;
+	return $tripleArray;
 }
 
 
@@ -276,7 +310,7 @@ function relabelCrime($string) {
 	if ( $stmt = mysqli_query( $con, $query ) ) {
 
 			$row = mysqli_fetch_array( $stmt );
-			
+			$proper = $row['proper'];
 			$cat = $row['category'];
 			$rat = $row['value'];
 
@@ -284,7 +318,32 @@ function relabelCrime($string) {
 				is_null($rat)) {
 				return null;
 			}
-			else { return new crimeIncident(1, $cat, $rat); }
+			else { 
+				return new crimeIncident(1, $proper, $cat, $rat); }
+	}
+
+	mysqli_close($con);
+}
+
+function relabelNoise($string) {
+	$con = mysqli_connect("localhost", "root", "root", "DOIT");
+
+	$query = "SELECT * FROM hotline WHERE
+			  name= '$string'";
+
+	if ( $stmt = mysqli_query( $con, $query ) ) {
+
+			$row = mysqli_fetch_array( $stmt );
+			$proper = $row['proper'];
+			$cat = $row['category'];
+			$rat = $row['value'];
+
+			if (is_null($cat) ||
+				is_null($rat)) {
+				return null;
+			}
+			else { 
+				return new crimeIncident(1, $proper, $cat, $rat); }
 	}
 
 	mysqli_close($con);
@@ -292,18 +351,21 @@ function relabelCrime($string) {
 
 class crimeIncident {
 
+	
 	public $freq;
+	public $proper;
 	public $cat;
 	public $rat;
 
-	public function __construct($freq, $cat, $rat) {
+	public function __construct($freq, $proper, $cat, $rat) {
 		$this->freq = $freq;
+		$this->proper = $proper;
 		$this->cat  = $cat;
 		$this->rat  = $rat;
 	}
 
 	public function __toString() {
-		return $this->freq . ' ' . $this->cat . ' ' . $this->rat;
+		return $this->freq . ' ' . $this->proper . ' ' . $this->cat . ' ' . $this->rat;
 	}
 
 	//increase the frequency by 1
