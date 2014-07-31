@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" charset="utf-8"/>
+	<!---Latest compiled and minified CSS Boostrap-->
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<!---Link my stylesheet -->
+	<link rel="stylesheet" type="text/css" href="stylesSearch_final.css">
+
+	<!---Require JQUERY-->
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+		<!---Require javascripts-->
+	<script src="my.js"></script>
+
+
+</script>
+</head>
+<body>
+
+<div class="containerMAIN">
+
+	<div class="container">
+		
+		<div class="logo_start">
+			<img src="images/72.jpg" alt="logo">
+		</div>
+		
+	</div>
+	
+	<div class="intro_container">
+		<div class="intro">
+			<div class="span"><p>Get your Apartment Rating based on Past Inspections as well as Crime and Noise Stats in the Area</p></div>
+		</div>
+	</div>
+	
+	<div class="content">
+		<div class="container">	
+		
+				
+			<div class="search">
+
+				<!--<input id="search" type="text" size="30" placeholder="Address">-->
+				
+				<input id="street_num"type="text" size="7" placeholder="Number">
+
+				<input id="street_name" type="text" size="30" placeholder="Street">
+						
+				<input id="submit" type="submit" value="search">
+			</div>
+			
+			
+				
+			
+		</div>
+		
+		<div class="containerResults">	
+			<div class="address">
+				<p>405 Beacon Street, Boston 02115</p>
+			</div>
+			<div class="owner">
+				<p>Alpha Management</p>
+			</div>
+			
+			<div class="resultsRating">
+				<div class="addressResults">
+					<div class="FrameBIG1">
+						<div class="Total_A"><p>6.56</P></div>
+						<div class="RatingName"><p>Total Rating</p></div>
+					</div>
+					<div class="FrameSMALL">
+						<div class="Breakdown5"><p id="violaJS"></P></div>
+						<div class="RatingName"><p>Violation Rating</p></div>
+					</div>
+					<div class="FrameSMALL">
+						<div class="Breakdown8"><p>8.92</P></div>
+						<div class="RatingName"><p>Crime Rating</p></div>
+					</div>
+					<div class="FrameSMALL">
+						<div class="Breakdown4"><p>4.74</P></div>
+						<div class="RatingName"><p>Noise Rating</p></div>
+					</div>
+					<div class="FrameSMALL">
+						<div class="Breakdown2"><p>2.53</P></div>
+						<div class="RatingName"><p>Hotline Rating</p></div>
+					</div>
+				</div>
+				<div class="ownerResults">
+					<div class="FrameBIG2">
+						<div class="Total_O"><p>1.37</P></div>
+						<div class="RatingName"><p>Owner Rating</p></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="BreakdownOfCategory">
+			<div class="TopResults"><p>Click on one of the Ratings to get the Breakdown of the Score!</p></div>
+			
+			<div id="results"></div>
+			
+			<div class="bottomResults"></p>
+		</div>
+	
+		
+	
+	</div>
+	
+	<div class="footer">
+		<p>Presented to you by Charles, Kai (and Barb)</p>
+	</div>
+	
+</div>
+	
+		
+</body>
+</html>
