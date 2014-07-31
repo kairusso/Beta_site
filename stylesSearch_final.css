@@ -3,6 +3,10 @@ body  	{
 }
 
 
+img#icon {
+width: 25px;
+/* height: 50%; */
+}
 
 @keyframes spin {
 	from { transform: rotate(0deg); }
@@ -97,13 +101,28 @@ div.container
 	
 }
 
-#results {
+#all_results {
 	min-height: 0px;
 	width:800px;
 	
 	border-left: 1px solid #434343;
 	border-right: 1px solid #434343;
-	
+}
+
+#violation_results {
+	z-index: 3;
+}
+
+#crime_results {
+	z-index: 2;
+	/*
+	position: absolute;
+	z-index: 2;*/
+}
+
+#noise_results {
+	position: absolute;
+	z-index: 1;
 }
 
 
@@ -175,8 +194,6 @@ div.container
 	}
 
 .resultsRating {
-	width: 780px;
-	
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
@@ -189,7 +206,7 @@ div.container
 
 .addressResults {
 	float: left;
-	width: 625px;
+	width: 650px;
 	height: 150px;
 	
 	border-radius: 5px;

@@ -31,9 +31,8 @@
 				$('#results').empty();
 
 				console.log(returnedData);
-				console.log(returnedData.list);
-				console.log(returnedData.address);
-				style(returnedData.list, returnedData.address);
+				styleViol(returnedData.list, returnedData.address);
+				styleCrime(returnedData.crime);
 
 				//generate a score 
 				score();
@@ -45,17 +44,23 @@
 		}
 	});
 
-		function style(list, address) {
+		function styleCrime(list) {
+			$.each(list, function() {
+				$('#crime_results').append('<p>' + $(this).attr('cat') + $(this).attr('freq') + '</p>');		
+			});
+		}
+
+		function styleViol(list, address) {
 			var count = list.length;
 
 			if (count === 0) {
-				$('#results').append("No violations found at this adress");
+				$('#violation_results').append("No violations found at this adress");
 			}
 			else {
-			$('#results').append("Found <strong>" + total(list) + '</strong> violations at: ' + address);	
+			$('#violation_results').append("Found <strong>" + total(list) + '</strong> violations at: ' + address);	
 
 			$.each(list, function() {
-				$('#results').append('<h2 id="year">' + $(this).attr('name') + '</h2><p>' + pick($(this).attr('loInc')) + '</p>');
+				$('#violation_results').append('<h2 id="year">' + $(this).attr('name') + '</h2><p>' + pick($(this).attr('loInc')) + '</p>');
 			});
 			}
 		}
