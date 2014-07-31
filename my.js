@@ -33,6 +33,8 @@
 				console.log(returnedData);
 				styleViol(returnedData.list, returnedData.address);
 				styleCrime(returnedData.crime);
+				styleCrime(returnedData.noise);
+				styleCrime(returnedData.hotline);
 
 				//generate a score 
 				score();
