@@ -26,17 +26,35 @@
 
 				$('#results').css("padding-left", '15px');
 				$('#results').css("padding-top", '15px');
-				$('#results').css("padding-bottom", '15px');
+				//$('#results').css("padding-bottom", '15px');
 
-				$('#results').empty();
+				var violations = styleViol(returnedData.list, returnedData.address);
+				var crime = styleCrime(returnedData.crime);
+				var noise = styleCrime(returnedData.noise);
+				var hotline = styleCrime(returnedData.hotline);
 
-				console.log(returnedData);
-				styleViol(returnedData.list, returnedData.address);
-				styleCrime(returnedData.crime);
-				styleCrime(returnedData.noise);
-				styleCrime(returnedData.hotline);
+				$('#all_results').append(violations);
 
-				//generate a score 
+				$('#viol_circle').click( function() {
+					$('#all_results').empty();
+					$('#all_results').append(violations);
+				});
+
+				$('#crime_circle').click( function() {
+					$('#all_results').empty();
+					$('#all_results').append(crime);
+				});
+
+				$('#noise_circle').click( function() {
+					$('#all_results').empty();
+					$('#all_results').append(noise);
+				});
+
+				$('#hotline_circle').click( function() {
+					$('#all_results').empty();
+					$('#all_results').append(hotline);
+				});
+
 				score();
 			})
 			.fail( function() {
@@ -47,24 +65,30 @@
 	});
 
 		function styleCrime(list) {
+			var string = '';
+
 			$.each(list, function() {
-				$('#crime_results').append('<p>' + $(this).attr('cat') + $(this).attr('freq') + '</p>');		
+				string = string + '<p>' + $(this).attr('cat') + ' (' + $(this).attr('freq') + ')</p>';		
 			});
+			return string;
 		}
 
 		function styleViol(list, address) {
 			var count = list.length;
+			var string = '';
 
 			if (count === 0) {
-				$('#violation_results').append("No violations found at this adress");
+				return "No violations found at this adress";
 			}
 			else {
-			$('#violation_results').append("Found <strong>" + total(list) + '</strong> violations at: ' + address);	
+			string = string + "<p>Found <strong>" + total(list) + '</strong> violations at: ' + address + '</p></br>';	
 
 			$.each(list, function() {
-				$('#violation_results').append('<h2 id="year">' + $(this).attr('name') + '</h2><p>' + pick($(this).attr('loInc')) + '</p>');
+				string = string + '<h2 id="year">' + $(this).attr('name') + '</h2><p>' + pick($(this).attr('loInc')) + '</p>';
 			});
 			}
+
+			return string;
 		}
 
 		function total(list) {
@@ -95,13 +119,13 @@
 
 			if (cat === 'Trash') { src = 'trash.png'}
 			else if (cat === 'Overgrown Weeds') { src = 'weeds.png' }
-			else if (cat === 'Graffiti') { src = 'graffiti.png' }
-			else if (cat === 'Permit/Registration') { src = 'permit.png' }
+			else if (cat === 'Graffiti') { src = 'graff.png' }
+			else if (cat === 'Permit/Registration') { src = 'permitsreg.png' }
 			else if (cat === 'Repair/Maintenance') { src = 'repair.png' }
-			else if (cat === 'Safety/Fire Protection') { src = 'fire.png' }
+			else if (cat === 'Safety/Fire Protection') { src = 'firesafety.png' }
 			else { src = 'other.png' }
 
-			return '<img id="icon" src="images/' + src + '"/>';
+			return '<img id="icon" src="ICONS/' + src + '"/>';
 		}
 
 		function score() {
