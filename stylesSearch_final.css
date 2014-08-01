@@ -11,7 +11,7 @@ width: 25px;
 @keyframes spin {
 	from { transform: rotate(0deg); }
 	to { transform: rotate(360deg); }
-	
+
 	/*animation-name: spin; 
 	animation-duration: 3s;
 	animation-iteration-count: infinite; 
@@ -25,13 +25,13 @@ div.container
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	
+
 }
 
 .intro_container {
 	width: 100%;
 	background-color: #000000;
-	
+
 }
 
 
@@ -40,14 +40,14 @@ div.container
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	
+
 	margin-bottom:10px;
-	
+
 	text-align:left;
 	/*font-weight:bold;*/
 	color: #484848;
 	text-shadow: 2px 2px 3px #7F7F7F;
-	
+
 	z-index: 1;
 }
 
@@ -74,42 +74,42 @@ margin-top: 0px;
 
 .BreakdownOfCategory {
 	width: 800px;
-	
+
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 10px;
 }
-	
+
 .TopResults p {
 	margin: 0px;
 }	
-	
+
 .TopResults	{
 	height: 40px;
 	width: 800px;
-	
+
 	text-align: center;
 	line-height: 40px; 
 	vertical-align: middle;
-	
+
 
 	border-top-left-radius: 5px 5px;
 	border-top-right-radius: 5px 5px;
-	
+
 	background-color: #cccccc;
     background-image: linear-gradient(#A0A0A0, #A0A0A0);
 	border-left: 1px solid #434343;
 	border-right: 1px solid #434343;
 	border-top: 1px solid #434343;
-	
+
 }
 
 #all_results {
 	min-height: 0px;
 	width:800px;
 	/*position: relative;*/
-	
+
 	border-left: 1px solid #434343;
 	border-right: 1px solid #434343;
 }
@@ -144,7 +144,7 @@ padding-left: 5px;
 
 	border-bottom-left-radius: 5px 5px;
 	border-bottom-right-radius: 5px 5px;
-	
+
 	background-color: #cccccc;
     background-image: linear-gradient(#A0A0A0, #A0A0A0);
 	border-left: 1px solid #434343;
@@ -164,19 +164,19 @@ padding-left: 5px;
 {
 	width: 800px;
 	height: 250px;
-	
+
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 10px;
-	
+
 	border: 1px solid #434343;
 	border-radius: 5px;
 	background-color: #cccccc;
     background-image: linear-gradient(#A0A0A0, #A0A0A0);
-	
-	
-	
+
+
+
 }
 
 .address {
@@ -184,7 +184,7 @@ padding-left: 5px;
 	padding-left: 10px;
 	padding-right: 10px;
 	margin-bottom: 20px;
-	
+
 	border-bottom: 1px solid #AAAAAA;
 	border-right: 1px solid #AAAAAA;
 	border-radius: 0px 0px 10px 0px;
@@ -196,7 +196,7 @@ padding-left: 5px;
 	padding-right:10px;
 	padding-left: 10px;
 	margin-bottom: 20px;
-	
+
 	border-bottom: 1px solid #AAAAAA;
 	border-left: 1px solid #AAAAAA;
 	border-radius: 0px 0px 0px 10px;
@@ -218,7 +218,7 @@ padding-left: 5px;
 	float: left;
 	width: 650px;
 	height: 150px;
-	
+
 	border-radius: 5px;
 	background-color: #EEEEEE;
 	border: 1px solid #AAAAAA;
@@ -227,23 +227,23 @@ padding-left: 5px;
 
 
 /* Spinning, gradient circle; CSS only! */
-.Total_A {
+#Total_A {
 	width: 115px;
 	height: 115px;
 	border-radius: 50%;
-	
+
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 10px;
-	
+
 	text-align:center;
 	line-height: 120px; 
 	vertical-align: middle;
 
 	color: #FFFFFF;
 	font-size: 45px;
-	
+
 	background-image: -moz-radial-gradient(45px 45px 45deg, circle cover, #CCFF33 0%, #66FF33 100%, green 95%);
 	background-image: -webkit-radial-gradient(45px 45px, circle cover, #CCFF33, green);
 	background-image: radial-gradient(45px 45px 45deg, circle cover, #CCFF33 0%, orange 100%, green 95%);
@@ -253,109 +253,109 @@ padding-left: 5px;
 	width: 115px;
 	height: 115px;
 	border-radius: 50%;
-	
+
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 10px;
-	
+
 	text-align:center;
 	line-height: 120px; 
 	vertical-align: middle;
 
 	color: #FFFFFF;
 	font-size: 45px;
-	
+
 	background-image: -moz-radial-gradient(45px 45px 45deg, circle cover, red 15%, orange 100%, yellow 100%);
 	background-image: -webkit-radial-gradient(45px 45px, circle cover, red, orange);
 	background-image: radial-gradient(45px 45px 45deg, circle cover, red 15% , orange 100%, yellow 100%);
 }
 
-.Breakdown5 {
+#BreakdownV {
 	width: 75px;
 	height: 75px;
 	border-radius: 50%;
-	
+
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 50px;
-	
+
 	text-align:center;
 	line-height: 75px; 
 	vertical-align: middle;
 
 	color: #FFFFFF;
 	font-size: 25px;
-	
+
 	background-image: -moz-radial-gradient(45px 45px 45deg, circle cover, yellow 0%, orange 100%, red 95%);
 	background-image: -webkit-radial-gradient(45px 45px, circle cover, yellow, orange);
 	background-image: radial-gradient(45px 45px 45deg, circle cover, yellow 0%, orange 100%, red 95%);
 }
 
-.Breakdown8 {
+#BreakdownC {
 	width: 75px;
 	height: 75px;
 	border-radius: 50%;
-	
+
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 50px;
-	
+
 	text-align:center;
 	line-height: 75px; 
 	vertical-align: middle;
 
 	color: #FFFFFF;
 	font-size: 25px;
-	
+
 	background-image: -moz-radial-gradient(45px 45px 45deg, circle cover, #00FF00 0%, #007D00 100%, #004000 95%);
 	background-image: -webkit-radial-gradient(45px 45px, circle cover, #00FF00, #007D00);
 	background-image: radial-gradient(45px 45px 45deg, circle cover, #00FF00 0%, #007D00 100%, #004000 95%);
 }
 
 
-.Breakdown4 {
+#BreakdownN {
 	width: 75px;
 	height: 75px;
 	border-radius: 50%;
-	
+
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 50px;
-	
+
 	text-align:center;
 	line-height: 75px; 
 	vertical-align: middle;
 
 	color: #FFFFFF;
 	font-size: 25px;
-	
+
 	background-image: -moz-radial-gradient(45px 45px 45deg, circle cover, yellow 0%, orange 100%, red 95%);
 	background-image: -webkit-radial-gradient(45px 45px, circle cover, yellow, orange);
 	background-image: radial-gradient(45px 45px 45deg, circle cover, yellow 0%, orange 100%, red 95%);
 }
 
 
-.Breakdown2 {
+#BreakdownH {
 	width: 75px;
 	height: 75px;
 	border-radius: 50%;
-	
+
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 50px;
-	
+
 	text-align:center;
 	line-height: 75px; 
 	vertical-align: middle;
 
 	color: #FFFFFF;
 	font-size: 25px;
-	
+
 	background-image: -moz-radial-gradient(45px 45px 45deg, circle cover, red 15%, orange 100%, yellow 100%);
 	background-image: -webkit-radial-gradient(45px 45px, circle cover, red, orange);
 	background-image: radial-gradient(45px 45px 45deg, circle cover, red 15% , orange 100%, yellow 100%);
@@ -365,7 +365,7 @@ padding-left: 5px;
 	float: right;
 	width: 140px;
 	height: 150px;
-	
+
 	border-radius: 5px;
 	background-color: #EEEEEE;
 	border: 1px solid #AAAAAA;
@@ -382,15 +382,15 @@ padding-left: 5px;
 	border: 1px solid #777777;
 	line-height: 0px; 
 	display: inline-block;
-	
+
 	padding-left: 5px;
 	padding-right: 5px;
-	
+
 	line-height: 30px;
-	
+
 	margin-top: 10px;
 	margin-left: 5px;
-	
+
 	font-size: 15px;
 }
 
@@ -399,16 +399,16 @@ padding-left: 5px;
 	width: 125px;
 	height: 125px;
 	}
-	
+
 .FrameBIG2 {
 	width: 125px;
 	height: 125px;
-	
+
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 	}
-	
+
 .FrameSMALL {
 	float:left;
 	width: 125px;
