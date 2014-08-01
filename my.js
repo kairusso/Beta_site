@@ -32,9 +32,12 @@
 
 				$('#results').css("padding-left", '15px');
 				$('#results').css("padding-top", '15px');
-				$('#results').css("padding-bottom", '15px');
+				//$('#results').css("padding-bottom", '15px');
 
-				$('#results').empty();
+				var violations = styleViol(returnedData.list, returnedData.address);
+				var crime = styleCrime(returnedData.crime);
+				var noise = styleCrime(returnedData.noise);
+				var hotline = styleCrime(returnedData.hotline);
 
 				console.log(returnedData);
 				styleViol(returnedData.list, returnedData.address);
@@ -100,6 +103,7 @@
 				document.getElementById("Total_A").style.borderWidth = "0";
 				
 				document.getElementById("totalJS").innerHTML = Total_Rating;
+
 			})
 			.fail( function() {
 				console.log("Error retrieving server query");
@@ -108,29 +112,27 @@
 		}
 	});
 
-		function styleCrime(list, type) {
-			$.each(list, function() {
-				$('#crime_results').append('<p>' + $(this).attr('cat') + $(this).attr('freq') + '</p>');
-				
-				if(type === 1) { CRIME_TOTAL += parseInt($(this).attr('rat')); }
-				else if(type === 2) { NOISE_TOTAL += parseInt($(this).attr('rat')); }
-				else { HOTLINE_TOTAL += parseInt($(this).attr('rat')); }
+
 			});
+			return string;
 		}
 
 		function styleViol(list, address) {
 			var count = list.length;
+			var string = '';
 
 			if (count === 0) {
-				$('#violation_results').append("No violations found at this adress");
+				return "No violations found at this adress";
 			}
 			else {
-			$('#violation_results').append("Found <strong>" + total(list) + '</strong> violations at: ' + address);	
+			string = string + "<p>Found <strong>" + total(list) + '</strong> violations at: ' + address + '</p></br>';	
 
 			$.each(list, function() {
-				$('#violation_results').append('<h2 id="year">' + $(this).attr('name') + '</h2><p>' + pick($(this).attr('loInc')) + '</p>');
+				string = string + '<h2 id="year">' + $(this).attr('name') + '</h2><p>' + pick($(this).attr('loInc')) + '</p>';
 			});
 			}
+
+			return string;
 		}
 
 		function total(list) {
@@ -161,13 +163,13 @@
 
 			if (cat === 'Trash') { src = 'trash.png'}
 			else if (cat === 'Overgrown Weeds') { src = 'weeds.png' }
-			else if (cat === 'Graffiti') { src = 'graffiti.png' }
-			else if (cat === 'Permit/Registration') { src = 'permit.png' }
+			else if (cat === 'Graffiti') { src = 'graff.png' }
+			else if (cat === 'Permit/Registration') { src = 'permitsreg.png' }
 			else if (cat === 'Repair/Maintenance') { src = 'repair.png' }
-			else if (cat === 'Safety/Fire Protection') { src = 'fire.png' }
+			else if (cat === 'Safety/Fire Protection') { src = 'firesafety.png' }
 			else { src = 'other.png' }
 
-			return '<img id="icon" src="images/' + src + '"/>';
+			return '<img id="icon" src="ICONS/' + src + '"/>';
 		}
 
 		function score(VIOLATIONS_10, totalCount) {

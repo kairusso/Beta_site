@@ -49,10 +49,6 @@ div.container
 	text-shadow: 2px 2px 3px #7F7F7F;
 	
 	z-index: 1;
-	
-	 
-	
-	
 }
 
 .span { 
@@ -67,6 +63,14 @@ div.container
 
 /* ----------------------- *//* ----------------------- *//* ----------------------- *//* ----------------------- */
 
+h2#year {
+font-size: 20px;
+border-bottom: 1px solid blue;
+border-bottom-style: dotted;
+padding-bottom: 5px;
+padding-left: 5px;
+margin-top: 0px;
+}
 
 .BreakdownOfCategory {
 	width: 800px;
@@ -104,28 +108,34 @@ div.container
 #all_results {
 	min-height: 0px;
 	width:800px;
+	/*position: relative;*/
 	
 	border-left: 1px solid #434343;
 	border-right: 1px solid #434343;
 }
 
+#all_results p {
+	margin: 0px;
+	padding-bottom: 5px;
+padding-left: 5px;
+}
+
 #violation_results {
-	z-index: 3;
+	z-index: 4;
 }
 
 #crime_results {
-	z-index: 2;
-	/*
+	z-index: 3;
 	position: absolute;
-	z-index: 2;*/
+}
+
+#hotline_results {
+	z-index: 2;
 }
 
 #noise_results {
-	position: absolute;
 	z-index: 1;
 }
-
-
 
 .bottomResults {
 
@@ -419,7 +429,7 @@ div.container
     border-style: solid;
     border-color: #AAAAAA #AAAAAA #AAAAAA;            
     width: 780px;
-    height: 35px;
+    height: 50px;
     padding: 10px;
     overflow: hidden; /* Clear floats */
   
