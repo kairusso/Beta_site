@@ -222,7 +222,7 @@ function fire($lat, $lng) {
 
 	$socrata2 = new Socrata("http://data.cityofboston.gov/api");
 	
-	$query2 = "within_circle(location, $lat, $lng, 215)";
+	$query2 = "within_circle(location, $lat, $lng, 215) AND year=2013";
 	$params2 = array("\$where" => $query2);
 	$response2 = $socrata2->get("/resource/7cdf-6fgx.json", $params2);
 	
@@ -245,7 +245,7 @@ function fire($lat, $lng) {
 	foreach($response2 as $item) {
 		$temp = relabelCrime($item['incident_type_description']);
 		
-		if($temp == null) { }
+		if($temp == null) {  }
 		elseif ($temp->cat == "Noise/Disturbance") {
 			array_push($noiseArray, $temp);
 		}
@@ -263,7 +263,6 @@ function fire($lat, $lng) {
 		} else {
 			array_push($hotlineArray, $temp);
 		}
-		
 	}
 	
 	foreach($crimeArray as $crime) {
@@ -295,8 +294,6 @@ function fire($lat, $lng) {
 			array_push($hotlineCategoryArray, $temp);
 		}
 	}
-	
-	//foreach($crimeCategoryArray as $temp) echo $temp->__toString();
 	
 	foreach($noiseArray as $noise) {
 		$test = true;
