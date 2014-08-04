@@ -2,6 +2,7 @@
 require_once("socrata.php");
 $socrata = new Socrata("http://data.cityofboston.gov/api");
 
+
 if(isset($_POST['address'])) {
 	$suffixTakeOut = array("ST", "Street", "AV", "Ave", "Avenue", "RD", "Road", "TE", "Terrace", "PL", "Place", 
 	"SQ", "Square", "CT", "Court", "PK", "Park", "HW", "Highway", "DR", "Drive", "Wy", "Way", "BL", "Boulevard", 
@@ -33,6 +34,7 @@ if(isset($_POST['address'])) {
 	$snum = $pieces[0];
 	$sname = $streetName;
 }
+
 
 $query = "street = '$sname' AND (stno = '$snum' OR (stno <= '$snum' AND sthigh >= '$snum'))";
 
@@ -160,8 +162,6 @@ function parseJson($response) {
 		}
 	}
 	
-	
-	
 	$cell = $response[0];
 	
 	$lat = $cell['latitude'];
@@ -179,9 +179,6 @@ function parseJson($response) {
 }
 
 function getAddress($cell) {
-	
-
-
 	if (isset($cell['sthigh'])) {
 		return $cell['stno'].'-'.$cell['sthigh'].' '.$cell['street'].' '.strtolower($cell['suffix'])
 		.' '.$cell['city'].' '.$cell['zip'];
@@ -224,8 +221,6 @@ parseJson($response);
 //--------------------------------------//------------------------------//--------------------//---------//----//--//- 
  
 function fire($lat, $lng) {
-	//echo $lat;
-	//echo $lng;
 
 	$socrata2 = new Socrata("http://data.cityofboston.gov/api");
 	
@@ -255,10 +250,10 @@ function fire($lat, $lng) {
 		if($temp == null) { }
 		elseif ($temp->cat == "Noise/Disturbance") {
 			array_push($noiseArray, $temp);
-		} else {
+		}
+		else {
 			array_push($crimeArray, $temp);
 		}
-		
 	}
 	
 	foreach($response3 as $item) {
@@ -282,7 +277,7 @@ function fire($lat, $lng) {
 				$test = false;
 			}
 		}
-		if($test) { 
+		if($test) {
 			$temp = new crimeIncident(1, "", $crime->cat, $crime->rat);
 			array_push($crimeCategoryArray, $temp);
 		}
@@ -332,7 +327,7 @@ function relabelCrime($string) {
 	$con = mysqli_connect("localhost", "root", "root", "DOIT");
 
 	$query = "SELECT * FROM crimes WHERE
-			  name= '$string'";
+			  name = '$string'";
 
 	if ( $stmt = mysqli_query( $con, $query ) ) {
 
