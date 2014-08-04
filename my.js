@@ -24,7 +24,7 @@
 		}
 		else {
 			$.ajax({
-				url: "my.php", 
+				url: "my2.php", 
 				type: "POST",
 				data: {address: add},
 				dataType: "json"
@@ -37,6 +37,7 @@
 				var hotline = styleCrime(returnedData.hotline, 3);
 				
 				$('#all_results').append(violations);
+				$('#all_results').css({'padding-left' : '15px', 'padding-top' : '15px'});
 				
 				$('#viol_circle').click( function() {
 					$('#all_results').empty();
@@ -131,7 +132,7 @@
 		var string = '';
 		
 			$.each(list, function() {
-				string = string + '<p>' + $(this).attr('cat') + ' (' + $(this).attr('freq') + ')</p>';
+				string = string + '<p id="listed">' + $(this).attr('cat') + ' (' + $(this).attr('freq') + ')</p>';
 
 				if(type === 1) { CRIME_TOTAL += parseInt($(this).attr('rat')); }
 				else if(type === 2) { NOISE_TOTAL += parseInt($(this).attr('rat')); }
@@ -145,14 +146,18 @@
 			var count = list.length;
 			var string = '';
 
+			$('.address').empty();
+			$('.address').append(address);
+
 			if (count === 0) {
 				return "No violations found at this adress";
 			}
-			else {
-			string = string + "<p>Found <strong>" + total(list) + '</strong> violations at: ' + address + '</p></br>';	
+			else {	
+				
+			string = string + "<p>Found <strong>" + total(list) + '</strong> violations'+ '</p>';	
 
 			$.each(list, function() {
-			string = string + '<h2 id="year">' + $(this).attr('name') + '</h2><p>' + pick($(this).attr('loInc')) + '</p>';
+			string = string + '<h2 id="year">' + $(this).attr('name') + '</h2>' + pick($(this).attr('loInc'));
 			});
 			}
 			
@@ -175,7 +180,7 @@
 			var result = '';
 
 			$.each(list, function() {
-				result = result + '<p>' + setIcon($(this).attr('cat')) + $(this).attr('desc') + ' (' + $(this).attr('freq') + ')' + '</p>' + '</br>';
+				result = result + '<p id="listed">' + setIcon($(this).attr('cat')) + $(this).attr('desc') + ' (' + $(this).attr('freq') + ')' + '</p>';
 				VIOLATIONS_TOTAL = VIOLATIONS_TOTAL + parseInt($(this).attr('rat'));
 			});
 
