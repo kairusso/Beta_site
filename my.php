@@ -2,7 +2,6 @@
 require_once("socrata.php");
 $socrata = new Socrata("http://data.cityofboston.gov/api");
 
-
 if(isset($_POST['address'])) {
 	$suffixTakeOut = array("ST", "Street", "AV", "Ave", "Avenue", "RD", "Road", "TE", "Terrace", "PL", "Place", 
 	"SQ", "Square", "CT", "Court", "PK", "Park", "HW", "Highway", "DR", "Drive", "Wy", "Way", "BL", "Boulevard", 
@@ -34,7 +33,6 @@ if(isset($_POST['address'])) {
 	$snum = $pieces[0];
 	$sname = $streetName;
 }
-
 
 $query = "street = '$sname' AND (stno = '$snum' OR (stno <= '$snum' AND sthigh >= '$snum'))";
 
