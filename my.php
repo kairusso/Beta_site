@@ -2,10 +2,37 @@
 require_once("socrata.php");
 $socrata = new Socrata("http://data.cityofboston.gov/api");
 
-//if(isset($_POST['streetnum'], $_POST['streetname'])) {
-$snum = 51;//$_POST['streetnum'];
-$sname = "Calumet";//$_POST['streetname'];
-//}
+if(isset($_POST['address'])) {
+	$suffixTakeOut = array("ST", "Street", "AV", "Ave", "Avenue", "RD", "Road", "TE", "Terrace", "PL", "Place", 
+	"SQ", "Square", "CT", "Court", "PK", "Park", "HW", "Highway", "DR", "Drive", "Wy", "Way", "BL", "Boulevard", 
+	"PW", "Parkway", "CI", "Circle", "LA", "Lane", "CC", "Crescent", "GR", "Green", "PZ", "Plaza", "RO", "Row", 
+	"Wh", "Wharf", "LN", "Ts", "Terrace", "Xt", "BR", "bridge");
+	
+	$address = $_POST['address'];
+	$pieces = explode(' ', $address);
+	
+	$streetName = '';
+	$suffixNotThere = true;
+	
+	for($i = 2; $i < count($pieces); $i++) {
+		foreach($suffixTakeOut as $item) {
+			if(strcasecmp($var1, $var2) == 0) {
+				$suffixNotThere = false;
+				$streetName = $pieces[1];
+				for($j = 2; $j < $i; $j++) $streetName = $streetName . ' ' . $pieces[$j];
+			}
+		}
+	}
+	if($suffixNotThere) {
+		$streetName = $pieces[1];
+		for($j = 2; $j < count($pieces); $j++) {
+			$streetName = $streetName . ' ' . $pieces[$j];
+		}
+	}
+	
+	$snum = $pieces[0];
+	$sname = $streetName;
+}
 
 $query = "street = '$sname' AND (stno = '$snum' OR (stno <= '$snum' AND sthigh >= '$snum'))";
 
@@ -202,12 +229,12 @@ function fire($lat, $lng) {
 
 	$socrata2 = new Socrata("http://data.cityofboston.gov/api");
 	
-	$query2 = "within_circle(location, $lat, $lng, 250)";
+	$query2 = "within_circle(location, $lat, $lng, 215)";
 	$params2 = array("\$where" => $query2);
 	$response2 = $socrata2->get("/resource/7cdf-6fgx.json", $params2);
 	
 	
-	$query3 = "within_circle(geocoded_location, $lat, $lng, 250)";
+	$query3 = "within_circle(geocoded_location, $lat, $lng, 215)";
 	$params3 = array("\$where" => $query3);
 	$response3 = $socrata2->get("/resource/awu8-dc52.json", $params3);
 	

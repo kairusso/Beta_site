@@ -7,14 +7,15 @@
 
 		$("input#submit").click( function() {
 
-			var address = $("input#search").val().trim();
-			var addressArray = address.split(" ");
-			var num = addressArray[0];
-			var name = addressArray[1];
-			console.log(num + " " + name);
+			var add = $("input#search").val().trim();
+			add = add.replace(',', '');
+			add = add.replace('.', '');
+			
+			var parts = add.split(" ");
+			
+			console.log(add);
 
-			if (num === '' ||
-				name === '') {
+			if (add === '', isNaN(parts[0])) {
 				alert("Please fill all Boxes");
 
 			$('div.header').children().each( function() {
@@ -25,7 +26,7 @@
 			$.ajax({
 				url: "my.php", 
 				type: "POST",
-				data: {streetnum : num, streetname : name},
+				data: {address: add},
 				dataType: "json"
 			})
 			.done( function( returnedData ) {
@@ -59,11 +60,11 @@
 
 				console.log(returnedData);
 
-				styleCrime(returnedData.crime, 1);
+				
 				var CRIME_10 = [180,234,367,575,706,854,978,1118,1355,8000];
 				var crime_rating = score(CRIME_10, CRIME_TOTAL);
-
 				var crime_color = coloring(crime_rating);
+				
 				document.getElementById("BreakdownC").style.backgroundImage = crime_color[0];
 				document.getElementById("BreakdownC").style.backgroundImage = crime_color[1];
 				document.getElementById("BreakdownC").style.backgroundImage = crime_color[2];
@@ -71,7 +72,7 @@
 
 				document.getElementById("crimeJS").innerHTML = crime_rating;
 
-				styleCrime(returnedData.noise, 2);
+				
 				var NOISE_10 = [95,127,213,285,356,434,531,644,781,2750];
 				var noise_rating = score(NOISE_10, NOISE_TOTAL);
 				var noise_color = coloring(noise_rating);
@@ -83,7 +84,7 @@
 
 				document.getElementById("noiseJS").innerHTML = noise_rating;
 
-				styleCrime(returnedData.hotline, 3);
+				
 				var HOTLINE_10 = [0,1200,1750,2150,2640,3050,3375,4550,6000,10000];
 				var hotline_rating = score(HOTLINE_10, HOTLINE_TOTAL);
 				var hotline_color = coloring(hotline_rating);
@@ -109,8 +110,6 @@
 
 				var Total_Rating = (parseInt(crime_rating) + parseInt(noise_rating) + 
 				parseInt(hotline_rating) + parseInt(violation_rating))/4;
-
-
 				var Total_color = coloring(Total_Rating);
 
 				document.getElementById("Total_A").style.backgroundImage = Total_color[0];
