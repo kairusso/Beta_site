@@ -135,7 +135,6 @@ function relabel($string) {
 			}
 			else { return new Incident(1, $proper, $cat, $rat); }
 	}
-
 	mysqli_close($con);
 }
 

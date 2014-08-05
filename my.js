@@ -1,4 +1,117 @@
+	google.load('visualization', '1.0', {'packages':['corechart']});
+
+	function drawChartV(myData) {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+
+        data.addColumn('string', 'Year');
+        data.addColumn('number', 'Cleanliness');
+        data.addColumn('number', 'Fire/Safety');
+        data.addColumn('number', 'Graffiti');
+        data.addColumn('number', 'Other');
+        data.addColumn('number', 'Permits/Regulations');
+        data.addColumn('number', 'Repair');
+        data.addColumn('number', 'Trash');
+        data.addColumn('number', 'Weeds');
+
+        $.each(myData, function() {
+        	data.addRows([makeRow($(this))]);
+        });
+
+        // Set chart options
+        var options = {
+        	title: 'Violations',
+            width:500,
+            height:400,
+             isStacked: true,
+         };
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.BarChart(document.getElementById('charts'));
+        chart.draw(data, options);
+      }
+
+      function makeRow(data) {
+      	var year = data.attr('name');
+      	var clean;
+      	var fire;
+      	var graf;
+      	var other;
+      	var permit;
+      	var repair;
+      	var trash;
+      	var weeds;
+
+      	$.each(data.attr('loInc'), function() {
+      		if ($(this).attr('cat') === "Permit/Registration") {
+      			permit = $(this).attr('freq');
+      		}
+      		else if ($(this).attr('cat') === "Trash") {
+      			trash = $(this).attr('freq');
+      		}
+      		else if ($(this).attr('cat') === "Overgrown Weeds") {
+      			weeds = $(this).attr('freq');
+      		}
+      		else if ($(this).attr('cat') === "Graffiti") {
+      			graf = $(this).attr('freq');
+      		}
+      		else if ($(this).attr('cat') === "Safety/Fire Protection") {
+      			fire = $(this).attr('freq');
+      		}
+      		else if ($(this).attr('cat') === "Repair/Maintenance") {
+      			repair = $(this).attr('freq');
+      		}
+      		else if ($(this).attr('cat') === "Cleanliness") {
+      			clean = $(this).attr('freq');
+      		}
+      		else if ($(this).attr('cat') === "Other") {
+      			other = $(this).attr('freq');
+      		}
+      	});
+
+      	return [year, clean, fire, graf, other, permit, repair, trash, weeds];
+      }
+
+      function drawChartOther(myData) {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+
+        data.addColumn('string', 'Crime Type');
+        data.addColumn('number', '# of violations');
+
+        $.each(myData, function() {
+        	data.addRows([
+        	  [$(this).attr('cat'), getFreqs($(this))]
+        	]);
+        });
+
+        // Set chart options
+        var options = {
+        	title: 'Violations',
+            width:500,
+            height:400,
+             orientation:'horizontal',
+             legend:'none'
+         };
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.BarChart(document.getElementById('charts'));
+        chart.draw(data, options);
+      }
+
+      function getFreqs(data) {
+        	  	var count = 0;
+        	  	$.each(data, function() {
+        	  		count = count + $(this).attr('freq');
+        	  	});	
+        	  	return count;
+      }
+
 	$(document).ready( function() {
+
+
 
 		var VIOLATIONS_TOTAL = 0;
 		var CRIME_TOTAL = 0;
@@ -24,7 +137,7 @@
 		}
 		else {
 			$.ajax({
-				url: "my2.php", 
+				url: "my.php", 
 				type: "POST",
 				data: {address: add},
 				dataType: "json"
@@ -35,28 +148,36 @@
 				var crime = styleCrime(returnedData.crime, 1);
 				var noise = styleCrime(returnedData.noise, 2);
 				var hotline = styleCrime(returnedData.hotline, 3);
-				
-				$('#all_results').append(violations);
-				$('#all_results').css({'padding-left' : '15px', 'padding-top' : '15px'});
+
+				$('#text_output').append(violations);
+				$('#text_output').css({'padding-left' : '15px', 'padding-top' : '15px'});
 				
 				$('#viol_circle').click( function() {
-					$('#all_results').empty();
-					$('#all_results').append(violations);
+					$('#charts').empty();
+					$('#text_output').empty();
+					$('#text_output').append(violations);
+					drawChartV(returnedData.list);
 				});
 				
 				$('#crime_circle').click( function() {
-					$('#all_results').empty();
-					$('#all_results').append(crime);
+					$('#charts').empty();
+					$('#text_output').empty();
+					$('#text_output').append(crime);
+					drawChartOther(returnedData.crime);
 				});
 				
 				$('#noise_circle').click( function() {
-					$('#all_results').empty();
-					$('#all_results').append(noise);
+					$('#charts').empty();
+					$('#text_output').empty();
+					$('#text_output').append(noise);
+					drawChartOther(returnedData.noise);
 				});
 				
 				$('#hotline_circle').click( function() {
-					$('#all_results').empty();
-					$('#all_results').append(hotline);
+					$('#charts').empty();
+					$('#text_output').empty();
+					$('#text_output').append(hotline);
+					drawChartOther(returnedData.hotline);
 				});
 
 				console.log(returnedData);
