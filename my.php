@@ -32,6 +32,8 @@ if(isset($_POST['address'])) {
 	
 	$snum = $pieces[0];
 	$sname = $streetName;
+
+
 }
 
 $query = "street = '$sname' AND (stno = '$snum' OR (stno <= '$snum' AND sthigh >= '$snum'))";
@@ -135,6 +137,7 @@ function relabel($string) {
 			}
 			else { return new Incident(1, $proper, $cat, $rat); }
 	}
+
 	mysqli_close($con);
 }
 
@@ -230,15 +233,10 @@ function fire($lat, $lng) {
 	$params3 = array("\$where" => $query3);
 	$response3 = $socrata2->get("/resource/awu8-dc52.json", $params3);
 	
-	$temp = new crimeIncident(0, "other", 0);
-	
-	$crimeArray = array();
 	$crimeCategoryArray = array();
 	
-	$noiseArray = array();
 	$noiseCategoryArray = array();
 	
-	$hotlineArray = array();
 	$hotlineCategoryArray = array();
 	
 	foreach($response2 as $item) {
@@ -246,10 +244,35 @@ function fire($lat, $lng) {
 		
 		if($temp == null) {  }
 		elseif ($temp->cat == "Noise/Disturbance") {
-			array_push($noiseArray, $temp);
-		}
-		else {
-			array_push($crimeArray, $temp);
+
+			$test = true;
+			foreach($noiseCategoryArray as $cat) {
+				if($cat->cat == $temp->proper) {
+					$cat->incFreq();
+					$cat->addToRat($temp->rat);
+					$test = false;
+				}
+			}
+			if($test) { 
+				$tempN = new crimeIncident(1, "", $temp->proper, $temp->rat);
+				array_push($noiseCategoryArray, $tempN);
+			}
+
+		} else {
+			
+			$test = true;
+			foreach($crimeCategoryArray as $cat) {
+				if($cat->cat == $temp->cat) {
+					$cat->incFreq();
+					$cat->addToRat($temp->rat);
+					$test = false;
+				}
+			}
+			if($test) {
+				$tempC = new crimeIncident(1, "", $temp->cat, $temp->rat);
+				array_push($crimeCategoryArray, $tempC);
+			}
+
 		}
 	}
 	
@@ -258,54 +281,34 @@ function fire($lat, $lng) {
 		
 		if($temp == null) { }
 		elseif ($temp->cat == "Noise/Disturbance") {
-			array_push($noiseArray, $temp);
+			
+			$test = true;
+			foreach($noiseCategoryArray as $cat) {
+				if($cat->cat == $temp->proper) {
+					$cat->incFreq();
+					$cat->addToRat($temp->rat);
+					$test = false;
+				}
+			}
+			if($test) { 
+				$tempN = new crimeIncident(1, "", $temp->proper, $temp->rat);
+				array_push($noiseCategoryArray, $tempN);
+			}
+
 		} else {
-			array_push($hotlineArray, $temp);
-		}
-	}
-	
-	foreach($crimeArray as $crime) {
-		$test = true;
-		foreach($crimeCategoryArray as $cat) {
-			if($cat->cat == $crime->cat) {
-				$cat->incFreq();
-				$cat->addToRat($crime->rat);
-				$test = false;
+			
+			$test = true;
+			foreach($hotlineCategoryArray as $cat) {
+				if($cat->cat == $temp->cat) {
+					$cat->incFreq();
+					$cat->addToRat($temp->rat);
+					$test = false;
+				}
 			}
-		}
-		if($test) {
-			$temp = new crimeIncident(1, "", $crime->cat, $crime->rat);
-			array_push($crimeCategoryArray, $temp);
-		}
-	}
-	
-	foreach($hotlineArray as $hot) {
-		$test = true;
-		foreach($hotlineCategoryArray as $cat) {
-			if($cat->cat == $hot->cat) {
-				$cat->incFreq();
-				$cat->addToRat($hot->rat);
-				$test = false;
+			if($test) { 
+				$tempH = new crimeIncident(1, "", $temp->cat, $temp->rat);
+				array_push($hotlineCategoryArray, $tempH);
 			}
-		}
-		if($test) { 
-			$temp = new crimeIncident(1, "", $hot->cat, $hot->rat);
-			array_push($hotlineCategoryArray, $temp);
-		}
-	}
-	
-	foreach($noiseArray as $noise) {
-		$test = true;
-		foreach($noiseCategoryArray as $cat) {
-			if($cat->cat == $noise->proper) {
-				$cat->incFreq();
-				$cat->addToRat($noise->rat);
-				$test = false;
-			}
-		}
-		if($test) { 
-			$temp = new crimeIncident(1, "", $noise->proper, $noise->rat);
-			array_push($noiseCategoryArray, $temp);
 		}
 	}
 	
