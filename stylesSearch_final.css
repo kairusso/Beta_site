@@ -191,19 +191,10 @@ margin-right: 15px;
 }
 
 #address {
-	float: left;
 	font-size: 15px;
 	line-height: 30px; 
 	vertical-align: middle;
 	padding-left: 10px;
-}
-
-#owner {
-	float: right;
-	font-size: 15px;
-	line-height: 30px; 
-	vertical-align: middle;
-	padding-right: 10px;
 }
 
 
@@ -215,16 +206,19 @@ margin-right: 15px;
 	background-color: blue;
 }
 
+
+
 #results_scoring {
-	width: 100px;
+	width: 85px;
 	background-color: #C9C9C9;
 	padding-top: 5px;
 	padding-bottom: 5px;
+	
 }
 
 .results_scoring_individual {
-	height: 90px;
-	width: 90px;
+	height: 85px;
+	width: 85px;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
@@ -242,7 +236,7 @@ margin-right: 15px;
 }  
 
 #results_breakdown {
-	float: right;
+	/*float: right;*/
 }
 
 
