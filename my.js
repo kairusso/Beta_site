@@ -35,6 +35,7 @@
       }
 
       function makeRow(data) {
+      	
       	var year = data.attr('name');
       	var clean;
       	var fire;
