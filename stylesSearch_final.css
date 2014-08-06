@@ -1,44 +1,6 @@
-* {
-	font-family: 'Lato', sans-serif;
+body  	{
+	font-family: arial;
 }
-
-/* Header Styles */
-.page-header {
-	margin: 0px;
-	padding: 0px;
-
-	h1 {
-		margin: 5px 5px 5px 5px;
-		padding-left: 30px;
-	}
-
-	a {
-		display: block;
-		border-left: 1px solid;
-		height: 49px;
-		text-decoration: none;
-	}
-
-	a:hover {
-		border-bottom: 3px solid gray;
-	}
-}
-
-p.intro_text {
-font-size: 20px;
-text-align: center;
-width: 800px;
-margin: auto;
-}
-
-.footer {
-position: absolute;
-bottom: 0;
-width: 100%;
-height: 60px;
-background-color: #f5f5f5;
-}
-/* */ 
 
 .square{
   margin:auto;
@@ -80,9 +42,6 @@ background-color: #f5f5f5;
     opacity:.7;
   }
 }
-
-/* Spinner ---------------------------------------------------------------*/
-
 .square div{
   position:absolute;
   background-color:yellow;
@@ -99,7 +58,6 @@ background-color: #f5f5f5;
   -moz-animation: s1 2s cubic-bezier(1,.45,.45,1) infinite;
   animation: s1 2s cubic-bezier(1,.45,.45,1) infinite; 
 }
-
 .square div + div, .square div + div div{
   position:absolute;
   background-color:teal;
@@ -108,7 +66,6 @@ background-color: #f5f5f5;
   top:-6px;
   right:-6px;
 }
-
 .two{
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
@@ -128,7 +85,6 @@ background-color: #f5f5f5;
 	animation-timing-function: linear;
 	*/
 }
-/*----------------------------------------------------------------------*/
 
 img#icon {
 height: 25px;
@@ -156,13 +112,52 @@ margin-bottom: 0px;
 margin-right: 15px;
 }
 
-.container {
+.container
+{
 	width: 80%;
 	min-width: 800px;
 	
 	display: block;
 	margin-left: auto;
-	margin-right: auto;	
+	margin-right: auto;
+	
+}
+
+.intro_container {
+	width: 100%;
+	background-color: #000000;
+	
+}
+
+
+.intro {
+	width: 800px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	
+	margin-bottom:10px;
+	
+	text-align:left;
+	/*font-weight:bold;*/
+	color: #484848;
+	text-shadow: 2px 2px 3px #7F7F7F;
+	
+	z-index: 1;
+	
+	 
+	
+	
+}
+
+.span { 
+	padding-left:10px;
+	width: 725px;
+    background-color: #FFFFFF;
+}
+
+.logo_start {
+	margin-left: 0px;
 }
 
 /* ----------------------- *//* ----------------------- *//* ----------------------- *//* ----------------------- */
@@ -170,7 +165,7 @@ margin-right: 15px;
 /* ----------------------- *//* ----------------------- *//* ----------------------- *//* ----------------------- */
 /* ----------------------- *//* ----------------------- *//* ----------------------- *//* ----------------------- */
 
-.container_results
+.container_Results
 {
 	width: 80%;
 	min-width: 800px;
@@ -212,6 +207,14 @@ margin-right: 15px;
 }
 
 
+.col-md-2 {
+	background-color: green;
+}
+
+.col-md-10 {
+	background-color: blue;
+}
+
 #results_scoring {
 	width: 250px;
 	background-color: #C9C9C9;
@@ -248,6 +251,51 @@ margin-right: 15px;
 
 
 /* ----------------------- *//* ----------------------- *//* ----------------------- *//* ----------------------- */
+
+
+.search
+{
+             
+    width: 80%;
+    min-width: 950px;
+    overflow: hidden; /* Clear floats */
+  
+}
+
+#search, 
+#submit {
+    float: left;
+}
+
+#search {
+    height: 35px;
+    width: -moz-calc(80% - 90px);
+    width: -webkit-calc(80% - 90px);
+    width: calc(80% - 90px);
+    min-width: 860px;
+    border: 1px solid #BABABA;
+    font: normal 13px 'trebuchet MS', arial, helvetica;
+    background: #f1f1f1;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) inset, 0 1px 0 rgba(255, 255, 255, 1);   
+	font-size:20px;
+}
+
+#submit
+{       
+    background-color: #333333;
+    background-image: linear-gradient(#666666, #333333);  
+    border-width: 1px;
+    border-style: solid;
+    border-color: #999999 ;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 
+                0 1px 0 rgba(255, 255, 255, 0.3) inset;
+    width: 90px;
+    height: 35px;
+    cursor: pointer;
+    font: bold 14px Arial, Helvetica;
+    color: #EBEBEB;    
+    text-shadow: 0 0px 0 rgba(255,255,255,0.5);
+}
 
 #submit:hover {       
     background-color: #E6E6E6;
@@ -286,5 +334,16 @@ border-right: 1px solid rgb(175, 175, 175);
 
 .content {
 	padding-bottom:65px;   /* Height of the footer element */
+}
+.footer {
+	font-size: 10px;
+	text-align: center;
+	width:100%;
+	height:25px;
+	position:absolute;
+	bottom:0;
+	left:0;
+	background:#E3E3E3;
+	padding-bottom: 10px;
 }
 /* ----------------------- *//* ----------------------- *//* ----------------------- *//* ----------------------- */
