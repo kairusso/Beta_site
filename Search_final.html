@@ -5,118 +5,50 @@
 	<!---Latest compiled and minified CSS Boostrap-->
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<!---Link my stylesheet -->
-	<link rel="stylesheet" type="text/css" href="stylesSearch_final.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
 
 	<!---Require JQUERY-->
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+	<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+
 	<script type="text/javascript">
+	</script>
 
-
-      </script>
-
-    <!---Require javascripts-->
+	<!---Require javascripts-->
 	<script src="my.js"></script>
 
 </head>
 <body>
-
-<div class="containerMAIN">
+	<div class="page-header">
+		<div class="row">
+			<h1 class="col-md-6">SPOTit</h1>
+			<a class="col-md-1 navbar-right" href="http://www.w3schools.com/">Methodology</a>
+			<a class="col-md-1 navbar-right" href="http://www.w3schools.com/">About</a>
+		</div>
+	</div>
 
 	<div class="container">
-		
-		<div class="logo_start">
-			<img src="images/72.jpg" alt="logo">
-		</div>
-		
+		<p class="intro_text">Welcome to Spotit.  For the first time, view public housing data in an interactive way.  Search for any address in Boston and view code violations, crime, noise, and hotline incidents for the last 10 years. </p>
 	</div>
-	
-	<div class="intro_container">
-		<div class="intro">
-			<div class="span"><p>Get your Apartment Rating based on Past Inspections as well as Crime and Noise Stats in the Area</p></div>
-		</div>
-	</div>
-	
-	<div class="content">
-		<div class="container">	
-		
-				
-			<div class="search">
 
-				<input id="search" type="text" size="30" placeholder="Address">
-						
-				<input id="submit" type="submit" value="search">
-			</div>
-			
-			
-				
-			
-		</div>
-		
-		<div class="containerResults">	
-			<div class="address">
-				<p>405 Beacon Street, Boston 02115</p>
-			</div>
-			<div class="owner">
-				<p>Alpha Management</p>
-			</div>
-			
-			<div class="resultsRating">
-				<div class="addressResults">
-					<div class="FrameBIG1">
-						<div id="Total_A"><p id="totalJS"></P></div>
-						<div class="RatingName"><p>Total Rating</p></div>
-					</div>
-					<div id="viol_circle" class="FrameSMALL">
-						<div id="BreakdownV"><p id="violaJS"></P></div>
-						<div class="RatingName"><p>By Violation</p></div>
-					</div>
-					<div id="crime_circle" class="FrameSMALL">
-						<div id="BreakdownC"><p id="crimeJS"></P></div>
-						<div class="RatingName"><p>By Crime</p></div>
-					</div>
-					<div id="noise_circle" class="FrameSMALL">
-						<div id="BreakdownN"><p id="noiseJS"></P></div>
-						<div class="RatingName"><p>By Noise</p></div>
-					</div>
-					<div id="hotline_circle" class="FrameSMALL">
-						<div id="BreakdownH"><p id="hotlineJS"></P></div>
-						<div class="RatingName"><p>By Hotline</p></div>
-					</div>
+	<div class="container">
+
+		<div id="nav-wrap">
+			<form class="navbar-form navbar-left" role="search">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Search">
 				</div>
-				<div class="ownerResults">
-					<div class="FrameBIG2">
-						<div id="Total_O"><p>1.37</P></div>
-						<div class="RatingName"><p>Owner Rating</p></div>
-					</div>
-				</div>
-			</div>
+				<button type="submit" class="btn btn-default">Submit</button>
+			</form>
 		</div>
-		
-		<div class="BreakdownOfCategory">
-			<div class="TopResults"><p>Click on one of the Ratings to get the Breakdown of the Score!</p></div>
-			
-			<div id="all_results">
-				<div class='row'>
-					<div class='col-md-2' id="text_output"></div>
-					<div class='col-md-1' id="charts"></div>
-				</div>
-			</div>
-			<div class="bottomResults"></div>
-		</div>
-	
-		
-	
+
 	</div>
-	
-	<div class="footer">
-		<p>Presented to you by Charles, Kai (and Barb!)</p>
-	</div>
-	
-</div>
-	
-		
+
+	<div class="footer"></div>	
+
+
 </body>
 </html>
