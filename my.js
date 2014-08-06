@@ -1,5 +1,7 @@
 	google.load('visualization', '1.0', {'packages':['corechart']});
 
+	
+
 	function drawChartV(myData) {
 
         // Create the data table.
@@ -111,7 +113,11 @@
 
 	$(document).ready( function() {
 
-
+		$("input#search").keyup(function(event){
+    		if(event.keyCode == 13){
+        		$("input#submit").click();
+    		}
+		});
 
 		var VIOLATIONS_TOTAL = 0;
 		var CRIME_TOTAL = 0;
@@ -136,6 +142,10 @@
 			});
 		}
 		else {
+
+			document.getElementsByClassName('square')[0].style.height = '12px';
+			document.getElementsByClassName('square')[0].style.width = '12px';
+
 			$.ajax({
 				url: "my.php", 
 				type: "POST",
@@ -182,15 +192,15 @@
 
 				console.log(returnedData);
 
+				document.getElementsByClassName('square')[0].style.height = '0px';
+				document.getElementsByClassName('square')[0].style.width = '0px';
+
 				
 				var CRIME_10 = [180,234,367,575,706,854,978,1118,1355,8000];
 				var crime_rating = score(CRIME_10, CRIME_TOTAL);
 				var crime_color = coloring(crime_rating);
 				
-				document.getElementById("BreakdownC").style.backgroundImage = crime_color[0];
-				document.getElementById("BreakdownC").style.backgroundImage = crime_color[1];
-				document.getElementById("BreakdownC").style.backgroundImage = crime_color[2];
-				document.getElementById("BreakdownC").style.borderWidth = "0";
+				document.getElementById("crime_circle").className = "c100 p" + 10*parseInt(crime_rating) + " small " + crime_color;
 
 				document.getElementById("crimeJS").innerHTML = crime_rating;
 
@@ -199,10 +209,7 @@
 				var noise_rating = score(NOISE_10, NOISE_TOTAL);
 				var noise_color = coloring(noise_rating);
 
-				document.getElementById("BreakdownN").style.backgroundImage = noise_color[0];
-				document.getElementById("BreakdownN").style.backgroundImage = noise_color[1];
-				document.getElementById("BreakdownN").style.backgroundImage = noise_color[2];
-				document.getElementById("BreakdownN").style.borderWidth = "0";
+				document.getElementById("noise_circle").className = "c100 p" + 10*parseInt(noise_rating) + " small " + noise_color;
 
 				document.getElementById("noiseJS").innerHTML = noise_rating;
 
@@ -211,10 +218,7 @@
 				var hotline_rating = score(HOTLINE_10, HOTLINE_TOTAL);
 				var hotline_color = coloring(hotline_rating);
 
-				document.getElementById("BreakdownH").style.backgroundImage = hotline_color[0];
-				document.getElementById("BreakdownH").style.backgroundImage = hotline_color[1];
-				document.getElementById("BreakdownH").style.backgroundImage = hotline_color[2];
-				document.getElementById("BreakdownH").style.borderWidth = "0";
+				document.getElementById("hotline_circle").className = "c100 p" + 10*parseInt(hotline_rating) + " small " + hotline_color;
 
 				document.getElementById("hotlineJS").innerHTML = hotline_rating;
 
@@ -223,23 +227,17 @@
 				var violation_rating = score(VIOLATIONS_10, VIOLATIONS_TOTAL);
 				var violation_color = coloring(violation_rating);
 
-				document.getElementById("BreakdownV").style.backgroundImage = violation_color[0];
-				document.getElementById("BreakdownV").style.backgroundImage = violation_color[1];
-				document.getElementById("BreakdownV").style.backgroundImage = violation_color[2];
-				document.getElementById("BreakdownV").style.borderWidth = "0";
+				document.getElementById("viola_circle").className = "c100 p" + 10*parseInt(violation_rating) + " small " + violation_color;
 
 				document.getElementById("violaJS").innerHTML = violation_rating;
 
-				var Total_Rating = (parseInt(crime_rating) + parseInt(noise_rating) + 
-				parseInt(hotline_rating) + parseInt(violation_rating))/4;
+				var Total_Rating = (parseInt(crime_rating) + parseInt(noise_rating) + parseInt(hotline_rating) + parseInt(violation_rating))/4;
 				var Total_color = coloring(Total_Rating);
 
-				document.getElementById("Total_A").style.backgroundImage = Total_color[0];
-				document.getElementById("Total_A").style.backgroundImage = Total_color[1];
-				document.getElementById("Total_A").style.backgroundImage = Total_color[2];
-				document.getElementById("Total_A").style.borderWidth = "0";
+				document.getElementById("total_circle").className = "c100 p" + 10*parseInt(Total_Rating) + " small " + Total_color;
 
 				document.getElementById("totalJS").innerHTML = Total_Rating;
+
 			})
 			.fail( function() {
 				console.log("Error retrieving server query");
@@ -247,6 +245,10 @@
 
 		}
 	});
+
+
+
+		
 
 		function styleCrime(list, type) {
 		
@@ -340,70 +342,31 @@
                 VIOLA_SCORE = 0.0;
             }
 
-			return VIOLA_SCORE = VIOLA_SCORE.toFixed(2);
+			return VIOLA_SCORE = VIOLA_SCORE.toFixed(1);
 		}
 
 		function coloring(Score_Color) {
-			if(Score_Color < 1) {
-				var temp =  ["-moz-radial-gradient(45px 45px 45deg, circle cover, #800000 20%, #993366 100%, #1A0000 45%)",
-				"-webkit-radial-gradient(45px 45px, circle cover, #800000, #1A0000)",
-				"radial-gradient(45px 45px 45deg, circle cover, #800000 20%, yellow 0%, #800000 45%)"];
-
-
-			} else if (Score_Color < 2) {
-				var temp = ["-moz-radial-gradient(45px 45px 45deg, circle cover, #FF5050 20%, #993366 100%, #4C1818 95%)",
-				"-webkit-radial-gradient(45px 45px, circle cover, #FF5050, #4C1818)",
-				"radial-gradient(45px 45px 45deg, circle cover, #FF5050 20%, yellow 0%, #4C1818 95%)"];
-
-
-			} else if (Score_Color < 3) {
-				var temp = ["-moz-radial-gradient(45px 45px 45deg, circle cover, #FF3300 80%, #336600 100%, #800000 95%)",
-				"-webkit-radial-gradient(45px 45px, circle cover, #FF3300, #800000)",
-				"radial-gradient(45px 45px 45deg, circle cover, #FF3300 100%, yellow 0%, #800000 95%)"];
+			if(Score_Color < 2) {
+				var temp =  "red";
 
 
 			} else if (Score_Color < 4) {
-				var temp = ["-moz-radial-gradient(45px 45px 45deg, circle cover, orange 100%, orange 5%, yellow 5%)",
-				"-webkit-radial-gradient(45px 45px, circle cover, red, orange)",
-				"radial-gradient(45px 45px 45deg, circle cover, orange 100% , orange 5%, yellow 5%)"];
-
-
-			} else if (Score_Color < 5) {
-				var temp = ["-moz-radial-gradient(45px 45px 45deg, circle cover, #FFFF00 80%, #336600 100%, #CC3300 95%)",
-				"-webkit-radial-gradient(45px 45px, circle cover, #FFFF00, #CC3300)",
-				"radial-gradient(45px 45px 45deg, circle cover, #FFFF00 100%, yellow 0%, #CC3300 95%)"];
+				var temp = "orange";
 
 
 			} else if (Score_Color < 6) {
-				var temp = ["-moz-radial-gradient(45px 45px 45deg, circle cover, #FFFF00 80%, #336600 100%, #FF6600 95%)",
-				"-webkit-radial-gradient(45px 45px, circle cover, #FFFF00, #FF6600)",
-				"radial-gradient(45px 45px 45deg, circle cover, #FFFF00 100%, yellow 0%, #FF6600 95%)"];
-
-
-			} else if (Score_Color < 7) {
-				var temp = ["-moz-radial-gradient(45px 45px 45deg, circle cover, yellow 100%, orange 50%, red 5%)",
-				"-webkit-radial-gradient(45px 45px, circle cover, yellow, orange)",
-				"radial-gradient(45px 45px 45deg, circle cover, yellow 100%, orange 50%, red 5%)"];
+				var temp =  "yellow";
 
 
 			} else if (Score_Color < 8) {
-				var temp = ["-moz-radial-gradient(45px 45px 45deg, circle cover, #FFFF00 80%, #336600 100%, #66FF33 95%)",
-				"-webkit-radial-gradient(45px 45px, circle cover, #FFFF00, #66FF33)",
-				"radial-gradient(45px 45px 45deg, circle cover, #FFFF00 100%, yellow 0%, ##66FF33 95%)"];
-
-
-			} else if (Score_Color < 9) {
-			var temp = ["-moz-radial-gradient(45px 45px 45deg, circle cover, #00FF00 0%, #007D00 100%, #004000 95%)",
-			"-webkit-radial-gradient(45px 45px, circle cover, #00FF00, #007D00)",
-			"radial-gradient(45px 45px 45deg, circle cover, #00FF00 0%, #007D00 100%, #004000 95%)"];
-
+				var temp = "green";
 
 
 			} else {
-			var temp = ["-moz-radial-gradient(45px 45px 45deg, circle cover, #66FF66 80%, #336600 100%, #142F14 95%)",
-			"-webkit-radial-gradient(45px 45px, circle cover, #66FF66, #142F14)",
-			"radial-gradient(45px 45px 45deg, circle cover, #66FF66 100%, yellow 0%, #142F14 95%)"];
-			}
+				var temp = "secondGreen";
+
+
+			} 
 			return temp;
 		}
 	});

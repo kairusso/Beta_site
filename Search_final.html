@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<!---Link my stylesheet -->
 	<link rel="stylesheet" type="text/css" href="stylesSearch_final.css">
+	<link rel="stylesheet" href="circle.css">
 
 	<!---Require JQUERY-->
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -44,7 +45,7 @@
 
 	
 	
-	<div class="content">
+	
 		<div class="container">	
 		
 				
@@ -70,33 +71,79 @@
 				<div id="address">
 					<p>405 Beacon Street, Boston 02115</p>
 				</div>
-				<div id="owner">
-					<p>Alpha Management</p>
+			</div>
+	
+			<div id="results_table">
+				<div id="results_scoring">
+					<div class="results_scoring_individual">
+						<div id="total_circle" class="c100 p0 small">
+                    		<span id="totalJS">Total</p></span>
+                    		<div class="slice">
+                        		<div class="bar"></div>
+                        		<div class="fill"></div>
+                    		</div>
+            		    </div>
+            		</div>
+            		<div class="results_scoring_individual">
+						<div id="owner_circle" class="c100 p0 small">
+                    		<span id="ownerJS">Owner</p></span>
+                    		<div class="slice">
+                        		<div class="bar"></div>
+                        		<div class="fill"></div>
+                    		</div>
+            		    </div>
+            		</div>
+            		<div class="results_scoring_individual">
+						<div id="viola_circle" class="c100 p0 small">
+                    		<span id="violaJS">Violations</p></span>
+                    		<div class="slice">
+                        		<div class="bar"></div>
+                        		<div class="fill"></div>
+                    		</div>
+            		    </div>
+            		</div>
+            		<div class="results_scoring_individual">
+						<div id="crime_circle" class="c100 p0 small">
+                    		<span id="crimeJS">Crime</span>
+                    		<div class="slice">
+                        		<div class="bar"></div>
+                        		<div class="fill"></div>
+                    		</div>
+            		    </div>
+            		</div>
+            		<div class="results_scoring_individual">
+						<div id="noise_circle" class="c100 p0 small">
+                    		<span id="noiseJS">Noise</p></span>
+                    		<div class="slice">
+                        		<div class="bar"></div>
+                        		<div class="fill"></div>
+                    		</div>
+            		    </div>
+            		</div>
+            		<div class="results_scoring_individual">
+						<div id="hotline_circle" class="c100 p0 small">
+                    		<span id="hotlineJS">Hotline</p></span>
+                    		<div class="slice">
+                        		<div class="bar"></div>
+                        		<div class="fill"></div>
+                    		</div>
+            		    </div>
+            		</div>
+				</div>
+
+
+				<div id="results_breakdown">
+					<div id="all_results">
+					
+							<div class='row'>
+								<div class='col-md-2' id="text_output"></div>
+								<div class='col-md-1' id="charts"></div>
+							</div>
+						</div>
+				
 				</div>
 			</div>
-	
-			<div id="results_scoring">
-				<div class="results_scoring_individual"><p id="totalJS">7.3</p></div>
-				<div class="results_scoring_individual"><p id="ownerJS">Owner</p></div>
-				<div class="results_scoring_individual"><p id="violaJS">6.3</p></div>
-				<div class="results_scoring_individual"><p id="crimeJS">5.4</p></div>
-				<div class="results_scoring_individual"><p id="noiseJS">4.2</p></div>
-				<div class="results_scoring_individual"><p id="hotlineJS">9.1</p></div>
-			</div>
-
-
-			<div id="results_breakdown">
-				<div id="all_results">
-				
-						<div class='row'>
-							<div class='col-md-2' id="text_output"></div>
-							<div class='col-md-1' id="charts"></div>
-						</div>
-					</div>
-				
-			</div>
-	
-	</div>
+		</div>
 	
 	<div class="footer">
 		<p>Presented to you by Charles, Kai (and Barb!)</p>
