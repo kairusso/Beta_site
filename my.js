@@ -124,7 +124,7 @@
 		var NOISE_TOTAL = 0;
 		var HOTLINE_TOTAL = 0;
 
-		$("button#submit").click( function() {
+		$("input#submit").click( function() {
 
 			var add = $("input#search").val().trim();
 			add = add.replace(',', '');
