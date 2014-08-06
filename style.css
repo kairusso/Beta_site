@@ -117,10 +117,12 @@ img#icon {
   height: 25px; }
 
 h2#year {
-  margin-top: 0px;
+  margin-top: 15px;
   margin-right: 15px;
-  padding-left: 30px;
-  border-bottom: 2px solid gray; }
+  margin-bottom: 5px;
+  padding-left: 10px;
+  border-bottom: 2px solid gray;
+  font-size: 20px; }
 
 div#text_output {
   width: 330px;
@@ -130,7 +132,7 @@ div#charts {
   margin-left: -55px; }
 
 p#listed {
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid #eeeeee;
   margin-bottom: 0px;
   margin-right: 15px; }
 
@@ -158,7 +160,6 @@ p#listed {
 /* ----------------------- */
 /* ----------------------- */
 .container_results {
-  width: 80%;
   min-width: 800px;
   display: block;
   margin-left: auto;
@@ -190,7 +191,8 @@ p#listed {
   width: 250px;
   background-color: #C9C9C9;
   padding-top: 20px;
-  padding-bottom: 20px; }
+  padding-bottom: 20px;
+  margin-left: -230px; }
 
 .results_scoring_individual {
   height: 200px;

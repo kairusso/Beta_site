@@ -119,7 +119,7 @@
 		var NOISE_TOTAL = 0;
 		var HOTLINE_TOTAL = 0;
 
-		$("input#submit").click( function() {
+		$("button#submit").click( function() {
 
 			var add = $("input#search").val().trim();
 			add = add.replace(',', '');
@@ -150,34 +150,34 @@
 				var noise = styleCrime(returnedData.noise, 2);
 				var hotline = styleCrime(returnedData.hotline, 3);
 
-				$('#text_output').append(violations);
-				$('#text_output').css({'padding-left' : '15px', 'padding-top' : '15px'});
+				$('#output').append(violations);
+				$('#output').css({'padding-left' : '15px', 'padding-top' : '15px'});
 				
 				$('#viol_circle').click( function() {
 					$('#charts').empty();
-					$('#text_output').empty();
-					$('#text_output').append(violations);
+					$('#output').empty();
+					$('#output').append(violations);
 					drawChartV(returnedData.list);
 				});
 				
 				$('#crime_circle').click( function() {
 					$('#charts').empty();
-					$('#text_output').empty();
-					$('#text_output').append(crime);
+					$('#output').empty();
+					$('#output').append(crime);
 					drawChartOther(returnedData.crime);
 				});
 				
 				$('#noise_circle').click( function() {
 					$('#charts').empty();
-					$('#text_output').empty();
-					$('#text_output').append(noise);
+					$('#output').empty();
+					$('#output').append(noise);
 					drawChartOther(returnedData.noise);
 				});
 				
 				$('#hotline_circle').click( function() {
 					$('#charts').empty();
-					$('#text_output').empty();
-					$('#text_output').append(hotline);
+					$('#output').empty();
+					$('#output').append(hotline);
 					drawChartOther(returnedData.hotline);
 				});
 
