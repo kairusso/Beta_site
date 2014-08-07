@@ -27,6 +27,7 @@
             width:500,
             height:400,
              isStacked: true,
+             backgroundColor: "rgb(235, 235, 235)",
          };
 
         // Instantiate and draw our chart, passing in some options.
@@ -95,7 +96,8 @@
             width:500,
             height:400,
              orientation:'horizontal',
-             legend:'none'
+             legend:'none',
+             backgroundColor: "rgb(235, 235, 235)",
          };
 
         // Instantiate and draw our chart, passing in some options.
@@ -112,6 +114,8 @@
       }
 
 	$(document).ready( function() {
+
+		$('#big_one').css('background-color', 'rgb(235, 235, 235)');
 
 		$("input#search").keyup(function(event){
     		if(event.keyCode == 13){
@@ -159,36 +163,58 @@
 				var noise = styleCrime(returnedData.noise, 2);
 				var hotline = styleCrime(returnedData.hotline, 3);
 
-				$('#text').append(violations);
-				$('#text').css({'padding-left' : '15px', 'padding-top' : '15px'});
+				$('#text_output').append(violations);
 				
-				$('#viola_circle').click( function() {
+				$('#violations').click( function() {
 					$('#charts').empty();
-					$('#output').empty();
-					$('#output').append(violations);
+					$('#text_output').empty();
+					$('#text_output').append(violations);
 					console.log("hi");
 					drawChartV(returnedData.list);
+
+					$('#violations').css('background-color', 'rgb(235, 235, 235)');
+					$('li#big_one').css('background-color', 'white');
+					$('li#crime').css('background-color', 'white');
+					$('li#noise').css('background-color', 'white');
+					$('li#hotline').css('background-color', 'white');
 				});
 				
-				$('#crime_circle').click( function() {
+				$('#crime').click( function() {
 					$('#charts').empty();
-					$('#output').empty();
-					$('#output').append(crime);
+					$('#text_output').empty();
+					$('#text_output').append(crime);
 					drawChartOther(returnedData.crime);
+
+					$('#crime').css('background-color', 'rgb(235, 235, 235)');
+					$('li#big_one').css('background-color', 'white');
+					$('#violations').css('background-color', 'white');
+					$('li#noise').css('background-color', 'white');
 				});
 				
-				$('#noise_circle').click( function() {
+				$('#noise').click( function() {
 					$('#charts').empty();
-					$('#output').empty();
-					$('#output').append(noise);
+					$('#text_output').empty();
+					$('#text_output').append(noise);
 					drawChartOther(returnedData.noise);
+
+					$('#noise').css('background-color', 'rgb(235, 235, 235)');
+					$('#violations').css('background-color', 'white');
+					$('li#crime').css('background-color', 'white');
+					$('li#hotline').css('background-color', 'white');
+					$('li#big_one').css('background-color', 'white');
 				});
 				
-				$('#hotline_circle').click( function() {
+				$('#hotline').click( function() {
 					$('#charts').empty();
-					$('#output').empty();
-					$('#output').append(hotline);
+					$('#text_output').empty();
+					$('#text_output').append(hotline);
 					drawChartOther(returnedData.hotline);
+
+					$('#hotline').css('background-color', 'rgb(235, 235, 235)');
+					$('#violations').css('background-color', 'white');
+					$('li#crime').css('background-color', 'white');
+					$('li#noise').css('background-color', 'white');
+					$('li#big_one').css('background-color', 'white');
 				});
 
 				console.log(returnedData);
