@@ -200,7 +200,7 @@
 				var crime_rating = score(CRIME_10, CRIME_TOTAL);
 				var crime_color = coloring(crime_rating);
 				
-				document.getElementById("crime_circle").className = "c100 p" + 10*parseInt(crime_rating) + " small " + crime_color;
+				document.getElementById("crime_circle").className = "c100 p" + 10*parseInt(crime_rating) + " " + crime_color;
 
 				document.getElementById("crimeJS").innerHTML = crime_rating;
 
@@ -209,7 +209,7 @@
 				var noise_rating = score(NOISE_10, NOISE_TOTAL);
 				var noise_color = coloring(noise_rating);
 
-				document.getElementById("noise_circle").className = "c100 p" + 10*parseInt(noise_rating) + " small " + noise_color;
+				document.getElementById("noise_circle").className = "c100 p" + 10*parseInt(noise_rating) + " " + noise_color;
 
 				document.getElementById("noiseJS").innerHTML = noise_rating;
 
@@ -218,7 +218,7 @@
 				var hotline_rating = score(HOTLINE_10, HOTLINE_TOTAL);
 				var hotline_color = coloring(hotline_rating);
 
-				document.getElementById("hotline_circle").className = "c100 p" + 10*parseInt(hotline_rating) + " small " + hotline_color;
+				document.getElementById("hotline_circle").className = "c100 p" + 10*parseInt(hotline_rating) + " " + hotline_color;
 
 				document.getElementById("hotlineJS").innerHTML = hotline_rating;
 
@@ -227,14 +227,14 @@
 				var violation_rating = score(VIOLATIONS_10, VIOLATIONS_TOTAL);
 				var violation_color = coloring(violation_rating);
 
-				document.getElementById("viola_circle").className = "c100 p" + 10*parseInt(violation_rating) + " small " + violation_color;
+				document.getElementById("viola_circle").className = "c100 p" + 10*parseInt(violation_rating) + " " + violation_color;
 
 				document.getElementById("violaJS").innerHTML = violation_rating;
 
 				var Total_Rating = (parseInt(crime_rating) + parseInt(noise_rating) + parseInt(hotline_rating) + parseInt(violation_rating))/4;
 				var Total_color = coloring(Total_Rating);
 
-				document.getElementById("total_circle").className = "c100 p" + 10*parseInt(Total_Rating) + " small " + Total_color;
+				document.getElementById("total_circle").className = "c100 p" + 10*parseInt(Total_Rating) + " big " + Total_color;
 
 				document.getElementById("totalJS").innerHTML = Total_Rating;
 
