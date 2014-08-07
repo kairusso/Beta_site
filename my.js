@@ -128,6 +128,12 @@
 		var NOISE_TOTAL = 0;
 		var HOTLINE_TOTAL = 0;
 
+		var spot = 0;
+
+		$('h1').click( function() {
+			$('body').css('background-image', "url('backgrounds')");
+		});
+
 		$("input#submit").click( function() {
 
 			var add = $("input#search").val().trim();
