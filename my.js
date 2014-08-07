@@ -164,12 +164,21 @@
 				var hotline = styleCrime(returnedData.hotline, 3);
 
 				$('#text_output').append(violations);
+<<<<<<< HEAD
 				
 				$('#violations').click( function() {
 					$('#charts').empty();
 					$('#text_output').empty();
 					$('#text_output').append(violations);
 					console.log("hi");
+=======
+				$('#text_output').css({'padding-left' : '15px', 'padding-top' : '15px'});
+				
+				$('#viol_circle').click( function() {
+					$('#charts').empty();
+					$('#text_output').empty();
+					$('#text_output').append(violations);
+>>>>>>> FETCH_HEAD
 					drawChartV(returnedData.list);
 
 					$('#violations').css('background-color', 'rgb(235, 235, 235)');
@@ -340,13 +349,41 @@
 		function setIcon(cat) {
 			var src = '';
 
-			if (cat === 'Trash') { src = 'trash.png'}
-			else if (cat === 'Overgrown Weeds') { src = 'weeds.png' }
-			else if (cat === 'Graffiti') { src = 'graff.png' }
-			else if (cat === 'Permit/Registration') { src = 'permitsreg.png' }
-			else if (cat === 'Repair/Maintenance') { src = 'repair.png' }
-			else if (cat === 'Safety/Fire Protection') { src = 'firesafety.png' }
-			else { src = 'other.png' }
+			if (cat === 'Trash') { src = 'VIOLATIONS/TRASH.png'}
+			else if (cat === 'Overgrown Weeds') { src = 'VIOLATIONS/WEEDS.png' }
+			else if (cat === 'Graffiti') { src = 'VIOLATIONS/GRAFFITI.png' }
+			else if (cat === 'Permit/Registration') { src = 'VIOLATIONS/REG_PERM.png' }
+			else if (cat === 'Repair/Maintenance') { src = 'VIOLATIONS/MR.png' }
+			else if (cat === 'Safety/Fire Protection') { src = 'VIOLATIONS/FIRE_SAFE.png' }
+			else if (cat === 'Street Light Outages') { src = 'HOTLINE/LIGHT.png' }
+			else if (cat === 'Dead Animal Pick up') { src = 'HOTLINE/DEAD_ANIMAL.png' }
+			else if (cat === 'Illegal Dumping/Trash') { src = 'HOTLINE/TRASH.png' }
+			else if (cat === 'Poor/Dangerous Conditions of Property') { src = 'HOTLINE/POOR_DAMAGED.png' }
+			else if (cat === 'Pest Activity') { src = 'HOTLINE/PEST.png' }
+			else if (cat === 'Pothole Repair') { src = 'HOTLINE/POTHOLE.png' }
+			else if (cat === 'Work w/out Permit') { src = 'HOTLINE/REG_PERM.png' }
+			else if (cat === 'Traffic Signal/Sign Repair') { src = 'HOTLINE/TRAFFIC_SIGN_REPAIR.png' }
+			else if (cat === 'Abandoned Vehicle') { src = 'HOTLINE/ABANDONED_VEH.png' }
+			else if (cat === 'Unsatisfactory Living Conditions') { src = 'HOTLINE/POOR_DAMAGED.png' }
+			else if (cat === 'Utilities Issues') { src = 'HOTLINE/UTILITY.png' }
+			else if (cat === 'Violence') { src = 'CRIME/VIOLENCE.png' }
+			else if (cat === 'Homicide') { src = 'CRIME/HOMICIDE.png' }
+			else if (cat === 'Weapons') { src = 'CRIME/WEAPONS.png' }
+			else if (cat === 'Harassement') { src = 'CRIME/HARASSEMENT.png' }
+			else if (cat === 'Property') { src = 'CRIME/PROPERTY.png' }
+			else if (cat === 'Larceny/Theft/B&E') { src = 'CRIME/LARCENY_THEFT.png' }
+			else if (cat === 'Robbery') { src = 'CRIME/ROBBERY.png' }
+			else if (cat === 'Drug') { src = 'CRIME/DRUGS.png' }
+			else if (cat === 'Prostitution') { src = 'CRIME/PROSTITION.png' }
+			else if (cat === 'Simple Assault') { src = 'CRIME/SIMPLE_ASSAULT.png' }
+			else if (cat === 'Public Drinking') { src = 'NOISE/PUB_DRINKING.png' }
+			else if (cat === 'Disorderly Conduct') { src = 'NOISE/DISORDERLY.png' }
+			else if (cat === 'Argue') { src = 'NOISE/ARGUE.png' }
+			else if (cat === 'Gathering') { src = 'NOISE/GATHERING.png' }
+			else if (cat === 'Work Hours-Loud Noise Complaints') { src = 'NOISE/WOR_HOURS.png' }
+			else if (cat === 'Loud Parties/Music/People') { src = 'NOISE/party.png' }
+			else if (cat === 'Public Events Noise Disturbances') { src = 'NOISE/PUBLIC_EVENT.png' }
+			else { src = 'VIOLATIONS/OTHER.png' }
 
 			return '<img id="icon" src="images/' + src + '"/>';
 		}
@@ -373,19 +410,23 @@
 		}
 
 		function coloring(Score_Color) {
-			if(Score_Color < 2) {
-				var temp =  "red";
+			if(Score_Color < 1.667) {
+				var temp =  "secondRed";
 
 
-			} else if (Score_Color < 4) {
+			} else if (Score_Color < 3.33) {
+				var temp = "red";
+
+
+			} else if (Score_Color < 5) {
 				var temp = "orange";
 
 
-			} else if (Score_Color < 6) {
+			} else if (Score_Color < 6.667) {
 				var temp =  "yellow";
 
 
-			} else if (Score_Color < 8) {
+			} else if (Score_Color < 8.33) {
 				var temp = "green";
 
 
