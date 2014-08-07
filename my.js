@@ -131,7 +131,7 @@
 		var spot = 0;
 
 		$('h1').click( function() {
-			$('body').css('background-image', "url('backgrounds')");
+			$('body').css('background-image', "url('25-Blurred-Backgrounds/25 Free High Resolution Blurred Backgrounds/Blurred Backgrounds (" + spot + "'))");
 		});
 
 		$("input#submit").click( function() {
