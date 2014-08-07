@@ -164,21 +164,11 @@
 				var hotline = styleCrime(returnedData.hotline, 3);
 
 				$('#text_output').append(violations);
-<<<<<<< HEAD
 				
 				$('#violations').click( function() {
 					$('#charts').empty();
 					$('#text_output').empty();
 					$('#text_output').append(violations);
-					console.log("hi");
-=======
-				$('#text_output').css({'padding-left' : '15px', 'padding-top' : '15px'});
-				
-				$('#viol_circle').click( function() {
-					$('#charts').empty();
-					$('#text_output').empty();
-					$('#text_output').append(violations);
->>>>>>> FETCH_HEAD
 					drawChartV(returnedData.list);
 
 					$('#violations').css('background-color', 'rgb(235, 235, 235)');
@@ -291,7 +281,7 @@
 		var string = '';
 		
 			$.each(list, function() {
-				string = string + '<p id="listed">' + $(this).attr('cat') + ' (' + $(this).attr('freq') + ')</p>';
+				string = string + '<p id="listed">' + setIcon($(this).attr('cat')) + $(this).attr('cat') + ' (' + $(this).attr('freq') + ')</p>';
 
 				if(type === 1) { CRIME_TOTAL += parseInt($(this).attr('rat')); }
 				else if(type === 2) { NOISE_TOTAL += parseInt($(this).attr('rat')); }
