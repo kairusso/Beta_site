@@ -159,13 +159,14 @@
 				var noise = styleCrime(returnedData.noise, 2);
 				var hotline = styleCrime(returnedData.hotline, 3);
 
-				$('#output').append(violations);
-				$('#output').css({'padding-left' : '15px', 'padding-top' : '15px'});
+				$('#text').append(violations);
+				$('#text').css({'padding-left' : '15px', 'padding-top' : '15px'});
 				
-				$('#viol_circle').click( function() {
+				$('#viola_circle').click( function() {
 					$('#charts').empty();
 					$('#output').empty();
 					$('#output').append(violations);
+					console.log("hi");
 					drawChartV(returnedData.list);
 				});
 				
