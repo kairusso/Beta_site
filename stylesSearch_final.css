@@ -1,5 +1,6 @@
 body  	{
 	font-family: 'Lato', sans-serif;
+  background-image: url('25 Free High Resolution Blurred Backgrounds/Blurred Backgrounds (7).jpg');
 }
 
 li.smaller {
@@ -14,6 +15,9 @@ border-top-right-radius: 500px;
 height: 90px;
 padding-left: 15px;
 padding-top: 15px;
+border-top: 2px solid #777;
+border-left: 2px solid #777;
+border-right: 2px solid #777;
 }
 
 ul {
@@ -30,6 +34,7 @@ padding-left: 10px;
 padding-top: 15px;
 border: 1px solid;
 border-radius: 500px;
+border: 2px solid #777;
 }
 
 div#output {
@@ -38,14 +43,18 @@ background-color: rgb(235, 235, 235);
 margin-top: 145px;
 margin-left: 139px;
 /* margin: auto; */
-width: 932px;
+width: 944px;
 border-bottom-right-radius: 90px;
 border-bottom-left-radius: 90px;
+border-right: 1px solid silver;
+border-left: 1px solid silver;
 }
 
 .page-header {
   margin: 0px;
-  padding: 0px; }
+  padding: 0px;
+  background-color: rgb(194, 194, 194);
+   }
   .page-header h1 {
     margin: 5px 5px 5px 5px;
     padding-left: 30px; }
@@ -70,7 +79,7 @@ border-bottom: 2px solid gray;
 }
 
 div#text_output {
-width: 330px;
+width: 350px;
 padding-top: 150px;
 margin-left: -155px;
 padding-bottom: 50px;
@@ -80,7 +89,7 @@ padding-top: 150px;
 
 div#charts {
 float: left;
-margin-top: 50px;
+margin-top: 55px;
 height: 410px;
 }
 
@@ -220,10 +229,19 @@ margin-right: 15px;
 /* ----------------------- *//* ----------------------- *//* ----------------------- *//* ----------------------- */
 
 
+.container_search {
+    width: 933px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+
+}
+
 .search
 {
              
-    width: 950px;
+    width: 933px;
     overflow: hidden; /* Clear floats */
   
 }
@@ -237,7 +255,7 @@ margin-right: 15px;
     height: 35px;
     width: -moz-calc(80% - 90px);
     width: -webkit-calc(80% - 90px);
-    width: 860px;
+    width: 850px;
     border: 1px solid #BABABA;
     font: normal 13px 'trebuchet MS', arial, helvetica;
     background: #f1f1f1;
@@ -254,7 +272,7 @@ margin-right: 15px;
     border-color: #999999 ;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 
                 0 1px 0 rgba(255, 255, 255, 0.3) inset;
-    width: 90px;
+    width: 83px;
     height: 35px;
     cursor: pointer;
     font: bold 14px Arial, Helvetica;
