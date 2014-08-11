@@ -28,8 +28,18 @@
 
 	<div class="page-header">
 		<div class="row">
-			<h1 class="col-md-6">SPOTit</h1>
-			<a class="col-md-1 navbar-right" href="http://www.w3schools.com/">Methodology</a>
+			<h1 class="col-md-2">SPOTit</h1>
+
+			<div class="container_search col-md-4">	
+				<div class="search">
+
+					<input id="search" type="text" size="30" placeholder="Address">
+
+					<input id="submit" type="submit" value="search">
+				</div>
+			</div>
+
+			<a class="col-md-1 navbar-right" href="http://www.w3schools.com/">Method</a>
 			<a class="col-md-1 navbar-right" href="http://www.w3schools.com/">About</a>
 		</div>
 	</div>
@@ -45,20 +55,13 @@
 			<div><div><div><div><div></div></div></div></div></div>
 		</div>
 
-		<div class="container_search">	
-			<div class="search">
-
-				<input id="search" type="text" size="30" placeholder="Address">
-
-				<input id="submit" type="submit" value="search">
-			</div>
-		</div>
+		
 		<div class="container_Results">	
 			<div id="results_scoring">
 				<ul>
 					<li class="active" id="big_one">
 						<div class="results_scoring_individual_big">
-							<div id="total_circle" class="c100 p0 big">
+							<div id="total_circle" class="c100 p100 big secondRed">
 								<span id="totalJS">Total</p></span>
 								<div class="slice">
 									<div class="bar"></div>
@@ -69,7 +72,7 @@
 					</li>
 						<li class="smaller" id="owner">
 							<div class="results_scoring_individual">
-								<div id="owner_circle" class="c100 p0">
+								<div id="owner_circle" class="c100 p100 red">
 									<span id="ownerJS">Owner</p></span>
 									<div class="slice">
 										<div class="bar"></div>
@@ -80,7 +83,7 @@
 						</li>
 						<li class="smaller" id="crime">
 							<div class="results_scoring_individual">
-							<div id="crime_circle" class="c100 p0">
+							<div id="crime_circle" class="c100 p100 orange">
 								<span id="crimeJS">Crime</p></span>
 								<div class="slice">
 									<div class="bar"></div>
@@ -91,7 +94,7 @@
 					</li>
 						<li class="smaller" id="violations">
 							<div class="results_scoring_individual">
-							<div id="viola_circle" class="c100 p0">
+							<div id="viola_circle" class="c100 p100 yellow">
 								<span id="violaJS">Violations</p></span>
 								<div class="slice">
 									<div class="bar"></div>
@@ -102,8 +105,8 @@
 					</li>
 						<li class="smaller" id="hotline">
 							<div class="results_scoring_individual">
-							<div id="hotline_circle" class="c100 p0">
-								<span id="hotlineJS">Hotline</p></span>
+							<div id="hotline_circle" class="c100 p100 green">
+								<span id="hotlineJS">Hotline</span>
 								<div class="slice">
 									<div class="bar"></div>
 									<div class="fill"></div>
@@ -113,8 +116,8 @@
 					</li>
 						<li class="smaller" id="noise">
 							<div class="results_scoring_individual">
-							<div id="noise_circle" class="c100 p0">
-								<span id="noiseJS">Hotline</p></span>
+							<div id="noise_circle" class="c100 p100 secondGreen">
+								<span id="noiseJS">Noise</p></span>
 								<div class="slice">
 									<div class="bar"></div>
 									<div class="fill"></div>

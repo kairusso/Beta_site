@@ -18,6 +18,7 @@ padding-top: 15px;
 border-top: 2px solid #777;
 border-left: 2px solid #777;
 border-right: 2px solid #777;
+background-color: #eee;
 }
 
 ul {
@@ -39,7 +40,7 @@ border: 2px solid #777;
 
 div#output {
 /* border: 1px solid; */
-background-color: rgb(235, 235, 235);
+background-color: #ccc;
 margin-top: 145px;
 margin-left: 139px;
 /* margin: auto; */
@@ -51,6 +52,8 @@ border-left: 1px solid silver;
 }
 
 .page-header {
+  width: 100%;
+  min-width: 900px;
   margin: 0px;
   padding: 0px;
   background-color: rgb(194, 194, 194);
@@ -230,7 +233,7 @@ margin-right: 15px;
 
 
 .container_search {
-    width: 933px;
+    width: 680px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -241,7 +244,7 @@ margin-right: 15px;
 .search
 {
              
-    width: 933px;
+    width: 680px;
     overflow: hidden; /* Clear floats */
   
 }
@@ -255,7 +258,7 @@ margin-right: 15px;
     height: 35px;
     width: -moz-calc(80% - 90px);
     width: -webkit-calc(80% - 90px);
-    width: 850px;
+    width: 600px;
     border: 1px solid #BABABA;
     font: normal 13px 'trebuchet MS', arial, helvetica;
     background: #f1f1f1;
@@ -272,7 +275,7 @@ margin-right: 15px;
     border-color: #999999 ;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 
                 0 1px 0 rgba(255, 255, 255, 0.3) inset;
-    width: 83px;
+    width: 80px;
     height: 35px;
     cursor: pointer;
     font: bold 14px Arial, Helvetica;
@@ -340,6 +343,7 @@ border-right: 1px solid rgb(175, 175, 175);
 
 
 .square{
+  z-index: 65;
   margin:auto;
   position:absolute;
   top:0;left:0;right:0;bottom:0;
@@ -380,6 +384,7 @@ border-right: 1px solid rgb(175, 175, 175);
   }
 }
 .square div{
+  z-index: 65;
   position:absolute;
   background-color:yellow;
   box-shadow: 0 0 10px black;
@@ -396,6 +401,7 @@ border-right: 1px solid rgb(175, 175, 175);
   animation: s1 2s cubic-bezier(1,.45,.45,1) infinite; 
 }
 .square div + div, .square div + div div{
+  z-index: 65;
   position:absolute;
   background-color:teal;
   height:100%;
@@ -404,6 +410,7 @@ border-right: 1px solid rgb(175, 175, 175);
   right:-6px;
 }
 .two{
+  z-index: 65;
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
   transform: rotate(90deg);

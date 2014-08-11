@@ -130,9 +130,7 @@
 
 		var spot = 0;
 
-		$('h1').click( function() {
-			$('body').css('background-image', "url('25-Blurred-Backgrounds/25 Free High Resolution Blurred Backgrounds/Blurred Backgrounds (" + spot + "'))");
-		});
+		
 
 		$("input#submit").click( function() {
 
@@ -169,6 +167,8 @@
 				var noise = styleCrime(returnedData.noise, 2);
 				var hotline = styleCrime(returnedData.hotline, 3);
 
+				var textTemp;
+
 				$('#text_output').append(violations);
 				
 				$('#violations').click( function() {
@@ -177,11 +177,18 @@
 					$('#text_output').append(violations);
 					drawChartV(returnedData.list);
 
-					$('#violations').css('background-color', 'rgb(235, 235, 235)');
-					$('li#big_one').css('background-color', 'white');
-					$('li#crime').css('background-color', 'white');
-					$('li#noise').css('background-color', 'white');
-					$('li#hotline').css('background-color', 'white');
+					$('#violations').css('background-color', '#ccc');
+					$('li#big_one').css('background-color', '#eee');
+					$('li#crime').css('background-color', '#eee');
+					$('li#noise').css('background-color', '#eee');
+					$('li#hotline').css('background-color', '#eee');
+				});
+
+				$('#violaJS').hover( function() {
+					textTemp = $('#violaJS').text();
+					$('#violaJS').text('Violations');
+				}, function(){
+    				$('#violaJS').text(textTemp);
 				});
 				
 				$('#crime').click( function() {
@@ -190,10 +197,18 @@
 					$('#text_output').append(crime);
 					drawChartOther(returnedData.crime);
 
-					$('#crime').css('background-color', 'rgb(235, 235, 235)');
-					$('li#big_one').css('background-color', 'white');
-					$('#violations').css('background-color', 'white');
-					$('li#noise').css('background-color', 'white');
+					$('#crime').css('background-color', '#ccc');
+					$('li#big_one').css('background-color', '#eee');
+					$('#violations').css('background-color', '#eee');
+					$('li#noise').css('background-color', '#eee');
+					$('li#hotline').css('background-color', '#eee');
+				});
+
+				$('#crimeJS').hover( function() {
+					textTemp = $('#crimeJS').text();
+					$('#crimeJS').text('Crime');
+				}, function(){
+    				$('#crimeJS').text(textTemp);
 				});
 				
 				$('#noise').click( function() {
@@ -202,11 +217,18 @@
 					$('#text_output').append(noise);
 					drawChartOther(returnedData.noise);
 
-					$('#noise').css('background-color', 'rgb(235, 235, 235)');
-					$('#violations').css('background-color', 'white');
-					$('li#crime').css('background-color', 'white');
-					$('li#hotline').css('background-color', 'white');
-					$('li#big_one').css('background-color', 'white');
+					$('#noise').css('background-color', '#ccc');
+					$('#violations').css('background-color', '#eee');
+					$('li#crime').css('background-color', '#eee');
+					$('li#hotline').css('background-color', '#eee');
+					$('li#big_one').css('background-color', '#eee');
+				});
+
+				$('#noiseJS').hover( function() {
+					textTemp = $('#noiseJS').text();
+					$('#noiseJS').text('Noise');
+				}, function(){
+    				$('#noiseJS').text(textTemp);
 				});
 				
 				$('#hotline').click( function() {
@@ -215,12 +237,28 @@
 					$('#text_output').append(hotline);
 					drawChartOther(returnedData.hotline);
 
-					$('#hotline').css('background-color', 'rgb(235, 235, 235)');
-					$('#violations').css('background-color', 'white');
-					$('li#crime').css('background-color', 'white');
-					$('li#noise').css('background-color', 'white');
-					$('li#big_one').css('background-color', 'white');
+					$('#hotline').css('background-color', '#ccc');
+					$('#violations').css('background-color', '#eee');
+					$('li#crime').css('background-color', '#eee');
+					$('li#noise').css('background-color', '#eee');
+					$('li#big_one').css('background-color', '#eee');
 				});
+
+				$('#hotlineJS').hover( function() {
+					textTemp = $('#hotlineJS').text();
+					$('#hotlineJS').text('Hotline');
+				}, function(){
+    				$('#hotlineJS').text(textTemp);
+				});
+
+				$('#totalJS').hover( function() {
+					textTemp = $('#totalJS').text();
+					$('#totalJS').text('Total');
+				}, function(){
+    				$('#totalJS').text(textTemp);
+				});
+
+
 
 				console.log(returnedData);
 
