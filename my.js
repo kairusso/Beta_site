@@ -182,9 +182,13 @@
   		var address = "";
  	 	var query = window.location.search.substring(1);
  	 	var vars = query.split("=");
-  		var secondSplit = vars[1].split("%");
-  		var street = secondSplit[1].replace(/[0-9]/g, '');
-  		var address = secondSplit[0] + " " + street;
+  		var secondSplit = vars[1].split("%20");
+  		var street = "";
+  		for (var i=1; i<secondSplit.length; i++) {
+  			if(secondSplit[i] === '') {}
+  			else { street = street + " " + secondSplit[i].replace(/[0-9]/g, ''); }
+  		}
+  		var address = secondSplit[0] + street;
     	return address;
 		} ();
 
