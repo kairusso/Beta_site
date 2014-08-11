@@ -113,7 +113,12 @@
         	  	return count;
       }
 
-	$(document).ready( function() {
+
+
+     $(document).ready( function() {
+
+		
+	
 
 		$('#big_one').css('background-color', 'rgb(235, 235, 235)');
 
@@ -123,14 +128,6 @@
     		}
 		});
 
-		var VIOLATIONS_TOTAL = 0;
-		var CRIME_TOTAL = 0;
-		var NOISE_TOTAL = 0;
-		var HOTLINE_TOTAL = 0;
-
-		var spot = 0;
-
-		
 
 		$("input#submit").click( function() {
 
@@ -143,7 +140,7 @@
 			console.log(add);
 
 			if (add === '', isNaN(parts[0])) {
-				alert("Please fill all Boxes");
+				alert("Please fill the box correctly");
 
 			$('div.header').children().each( function() {
 				$(this).val('');
@@ -151,13 +148,55 @@
 		}
 		else {
 
+
+			var url = "http://localhost:8888/search_final.html?parameter=" + add;
+			
+
+			window.open(url,"_self")
+
+			
+
+			.fail( function() {
+				console.log("Error retrieving server query");
+			});
+
+		}
+		});
+
+
+
+
+
+
+		var VIOLATIONS_TOTAL = 0;
+		var CRIME_TOTAL = 0;
+		var NOISE_TOTAL = 0;
+		var HOTLINE_TOTAL = 0;
+
+		var spot = 0;
+
+		
+		var getParams = function () {
+  		// This function is anonymous, is executed immediately and 
+  		// the return value is assigned to QueryString!
+  		var address = "";
+ 	 	var query = window.location.search.substring(1);
+ 	 	var vars = query.split("=");
+  		var secondSplit = vars[1].split("%");
+  		var street = secondSplit[1].replace(/[0-9]/g, '');
+  		var address = secondSplit[0] + " " + street;
+    	return address;
+		} ();
+
+		//log(getParams);
+
 			document.getElementsByClassName('square')[0].style.height = '12px';
 			document.getElementsByClassName('square')[0].style.width = '12px';
 
 			$.ajax({
 				url: "my.php", 
 				type: "POST",
-				data: {address: add},
+				data: {address: getParams},
 				dataType: "json"
 			})
 			.done( function( returnedData ) {
@@ -313,8 +352,7 @@
 				console.log("Error retrieving server query");
 			});
 
-		}
-	});
+		
 
 
 

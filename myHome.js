@@ -38,7 +38,6 @@
 			window.open(url,"_self")
 
 			
-			w.getElementById('search').innerHTML = add;
 
 			.fail( function() {
 				console.log("Error retrieving server query");
