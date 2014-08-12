@@ -450,7 +450,7 @@
 			else if (cat === 'Larceny/Theft/B&E') { src = 'CRIME/LARCENY_THEFT.png' }
 			else if (cat === 'Robbery') { src = 'CRIME/ROBBERY.png' }
 			else if (cat === 'Drug') { src = 'CRIME/DRUGS.png' }
-			else if (cat === 'Prostitution') { src = 'CRIME/PROSTITION.png' }
+			else if (cat === 'Prostitution') { src = 'CRIME/PROSTITUTION.png' }
 			else if (cat === 'Simple Assault') { src = 'CRIME/SIMPLE_ASSAULT.png' }
 			else if (cat === 'Public Drinking') { src = 'NOISE/PUB_DRINKING.png' }
 			else if (cat === 'Disorderly Conduct') { src = 'NOISE/DISORDERLY.png' }
