@@ -36,6 +36,9 @@ if(isset($_POST['address'])) {
 
 }
 
+$snum = 62;
+$sname = "calumet";
+
 $query = "street = '$sname' AND (stno = '$snum' OR (stno <= '$snum' AND sthigh >= '$snum'))";
 
 
@@ -234,15 +237,17 @@ function fire($lat, $lng) {
 	$query3 = "within_circle(geocoded_location, $lat, $lng, 215) AND open_dt>='$today-01-01'";
 	$params3 = array("\$where" => $query3);
 	$response3 = $socrata2->get("/resource/awu8-dc52.json", $params3);
+
 	
 	$crimeCategoryArray = array();
+	$crimeCategoryArrayByYear = array();
 	
 	$noiseCategoryArray = array();
 	
 	$hotlineCategoryArray = array();
 	
 	foreach($response2 as $item) {
-		$temp = relabelCrime($item['incident_type_description']);
+		$temp = relabelCrime($item['incident_type_description'], $item['fromdate']);
 		
 		if($temp == null) {  }
 		elseif ($temp->cat == "Noise/Disturbance") {
@@ -252,6 +257,8 @@ function fire($lat, $lng) {
 				if($cat->cat == $temp->proper) {
 					$cat->incFreq();
 					$cat->addToRat($temp->rat);
+					array_push($cat->dateArray, $temp->date);
+					array_push($cat->timeArray, $temp->time);
 					$test = false;
 				}
 			}
@@ -267,6 +274,8 @@ function fire($lat, $lng) {
 				if($cat->cat == $temp->cat) {
 					$cat->incFreq();
 					$cat->addToRat($temp->rat);
+					array_push($cat->dateArray, $temp->date);
+					array_push($cat->timeArray, $temp->time);
 					$test = false;
 				}
 			}
@@ -279,7 +288,7 @@ function fire($lat, $lng) {
 	}
 	
 	foreach($response3 as $item) {
-		$temp = relabelNoise($item['case_title']);
+		$temp = relabelNoise($item['case_title'], $item['open_dt']);
 		
 		if($temp == null) { }
 		elseif ($temp->cat == "Noise/Disturbance") {
@@ -289,6 +298,8 @@ function fire($lat, $lng) {
 				if($cat->cat == $temp->proper) {
 					$cat->incFreq();
 					$cat->addToRat($temp->rat);
+					array_push($cat->dateArray, $temp->date);
+					array_push($cat->timeArray, $temp->time);
 					$test = false;
 				}
 			}
@@ -304,6 +315,8 @@ function fire($lat, $lng) {
 				if($cat->cat == $temp->cat) {
 					$cat->incFreq();
 					$cat->addToRat($temp->rat);
+					array_push($cat->dateArray, $temp->date);
+					array_push($cat->timeArray, $temp->time);
 					$test = false;
 				}
 			}
@@ -322,7 +335,7 @@ function fire($lat, $lng) {
 
 
 
-function relabelCrime($string) {
+function relabelCrime($string, $date) {
 	$con = mysqli_connect("localhost", "root", "root", "DOIT");
 
 	$query = "SELECT * FROM crimes WHERE
@@ -334,19 +347,21 @@ function relabelCrime($string) {
 			$proper = $row['proper'];
 			$cat = $row['category'];
 			$rat = $row['value'];
+			$pieces = explode('T', $date);
+
 
 			if (is_null($cat) ||
 				is_null($rat)) {
 				return null;
 			}
 			else { 
-				return new crimeIncident(1, $proper, $cat, $rat); }
+				return new crimeIncident(1, $proper, $cat, $rat, $pieces[0], $pieces[1]); }
 	}
 
 	mysqli_close($con);
 }
 
-function relabelNoise($string) {
+function relabelNoise($string, $date) {
 	$con = mysqli_connect("localhost", "root", "root", "DOIT");
 
 	$query = "SELECT * FROM hotline WHERE
@@ -358,13 +373,14 @@ function relabelNoise($string) {
 			$proper = $row['proper'];
 			$cat = $row['category'];
 			$rat = $row['value'];
+			$pieces = explode('T', $date);
 
 			if (is_null($cat) ||
 				is_null($rat)) {
 				return null;
 			}
 			else { 
-				return new crimeIncident(1, $proper, $cat, $rat); }
+				return new crimeIncident(1, $proper, $cat, $rat, $pieces[0], $pieces[1]); }
 	}
 
 	mysqli_close($con);
@@ -377,16 +393,24 @@ class crimeIncident {
 	public $proper;
 	public $cat;
 	public $rat;
+	public $date;
+	public $time;
+	public $dateArray;
+	public $timeArray;
 
-	public function __construct($freq, $proper, $cat, $rat) {
-		$this->freq = $freq;
-		$this->proper = $proper;
-		$this->cat  = $cat;
-		$this->rat  = $rat;
+	public function __construct($freq, $proper, $cat, $rat, $date, $time) {
+		$this->freq        = $freq;
+		$this->proper      = $proper;
+		$this->cat         = $cat;
+		$this->rat         = $rat;
+		$this->date        = $date;
+		$this->time        = $time;
+		$this->dateArray   = array();
+		$this->timeArray   = array();
 	}
 
 	public function __toString() {
-		return $this->freq . ' ' . $this->proper . ' ' . $this->cat . ' ' . $this->rat;
+		return $this->freq . ' ' . $this->proper . ' ' . $this->cat . ' ' . $this->rat . ' ' . $this->dateAndTime;
 	}
 
 	//increase the frequency by 1
