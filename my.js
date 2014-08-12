@@ -1,5 +1,15 @@
 	google.load('visualization', '1.0', {'packages':['corechart']});
 
+	function drawLineChart(myData) {
+		var data = new google.visualization.DataTable();
+
+		data.addColumn('date', 'Month');
+		data.addColumn('number', 'Frequency');
+
+		var chart = new google.visualization.LineChart(document.getElementById('charts'));
+        chart.draw(data);
+	}
+
 	function drawChartV(myData) {
 
         // Create the data table.
@@ -241,7 +251,7 @@
 					$('#charts').empty();
 					$('#text_output').empty();
 					$('#text_output').append(crime);
-					drawChartOther(returnedData.crime);
+					console.log(format(returnedData.crime));
 
 					$('#crime').css('background-color', '#ccc');
 					$('li#big_one').css('background-color', '#eee');
@@ -309,6 +319,7 @@
 
 
 				console.log(returnedData);
+				//console.log(addto("2014-01-02", []));
 
 				document.getElementsByClassName('square')[0].style.height = '0px';
 				document.getElementsByClassName('square')[0].style.width = '0px';
@@ -518,4 +529,5 @@
 			} 
 			return temp;
 		}
+
 	});
