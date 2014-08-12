@@ -226,12 +226,12 @@ function fire($lat, $lng) {
 
 	$socrata2 = new Socrata("http://data.cityofboston.gov/api");
 	
-	$query2 = "within_circle(location, $lat, $lng, 215) AND year=$today-1";
+	$query2 = "within_circle(location, $lat, $lng, 215) AND year>$today-1";
 	$params2 = array("\$where" => $query2);
 	$response2 = $socrata2->get("/resource/7cdf-6fgx.json", $params2);
 	
 	
-	$query3 = "within_circle(geocoded_location, $lat, $lng, 215) AND open_dt>'$today-01-01'";
+	$query3 = "within_circle(geocoded_location, $lat, $lng, 215) AND open_dt>='$today-01-01'";
 	$params3 = array("\$where" => $query3);
 	$response3 = $socrata2->get("/resource/awu8-dc52.json", $params3);
 	
