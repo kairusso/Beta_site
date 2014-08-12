@@ -173,6 +173,11 @@
 		var NOISE_TOTAL = 0;
 		var HOTLINE_TOTAL = 0;
 
+		var VIOLA_RATING;
+		var CRIME_RATING;
+		var NOISE_RATING;
+		var HOT_RATING;
+
 		var spot = 0;
 
 		
@@ -227,7 +232,7 @@
 
 				$('#violaJS').hover( function() {
 					textTemp = $('#violaJS').text();
-					$('#violaJS').text('Violations');
+					$('#violaJS').text(VIOLA_RATING);
 				}, function(){
     				$('#violaJS').text(textTemp);
 				});
@@ -247,7 +252,7 @@
 
 				$('#crimeJS').hover( function() {
 					textTemp = $('#crimeJS').text();
-					$('#crimeJS').text('Crime');
+					$('#crimeJS').text(CRIME_RATING);
 				}, function(){
     				$('#crimeJS').text(textTemp);
 				});
@@ -267,7 +272,7 @@
 
 				$('#noiseJS').hover( function() {
 					textTemp = $('#noiseJS').text();
-					$('#noiseJS').text('Noise');
+					$('#noiseJS').text(NOISE_RATING);
 				}, function(){
     				$('#noiseJS').text(textTemp);
 				});
@@ -287,7 +292,7 @@
 
 				$('#hotlineJS').hover( function() {
 					textTemp = $('#hotlineJS').text();
-					$('#hotlineJS').text('Hotline');
+					$('#hotlineJS').text(HOT_RATING);
 				}, function(){
     				$('#hotlineJS').text(textTemp);
 				});
@@ -315,7 +320,7 @@
 				
 				document.getElementById("crime_circle").className = "c100 p" + 10*parseInt(crime_rating) + " " + crime_color;
 
-				document.getElementById("crimeJS").innerHTML = crime_rating;
+				CRIME_RATING = crime_rating;
 
 				
 				var NOISE_10 = [95,127,213,285,356,434,531,644,781,2750];
@@ -324,7 +329,7 @@
 
 				document.getElementById("noise_circle").className = "c100 p" + 10*parseInt(noise_rating) + " " + noise_color;
 
-				document.getElementById("noiseJS").innerHTML = noise_rating;
+				NOISE_RATING = noise_rating;
 
 				
 				var HOTLINE_10 = [0,1200,1750,2150,2640,3050,3375,4550,6000,10000];
@@ -333,7 +338,7 @@
 
 				document.getElementById("hotline_circle").className = "c100 p" + 10*parseInt(hotline_rating) + " " + hotline_color;
 
-				document.getElementById("hotlineJS").innerHTML = hotline_rating;
+				HOT_RATING = hotline_rating;
 
 
 				var VIOLATIONS_10 = [100,200,350,450,550,740,975,1410,2225,23475];
@@ -342,7 +347,7 @@
 
 				document.getElementById("viola_circle").className = "c100 p" + 10*parseInt(violation_rating) + " " + violation_color;
 
-				document.getElementById("violaJS").innerHTML = violation_rating;
+				VIOLA_RATING = violation_rating;
 
 				var Total_Rating = (parseInt(crime_rating) + parseInt(noise_rating) + parseInt(hotline_rating) + parseInt(violation_rating))/4;
 				var Total_color = coloring(Total_Rating);
