@@ -211,8 +211,6 @@
 				var hotline = styleCrime(returnedData.hotline, 3);
 
 				var textTemp;
-
-				$('#text_output').append(violations);
 				
 				$('#violations').click( function() {
 					$('#charts').empty();
@@ -300,6 +298,8 @@
 				}, function(){
     				$('#totalJS').text(textTemp);
 				});
+
+				$('#violations').trigger("click");
 
 
 

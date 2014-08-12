@@ -36,9 +36,6 @@ if(isset($_POST['address'])) {
 
 }
 
-$snum = 62;
-$sname = "calumet";
-
 $query = "street = '$sname' AND (stno = '$snum' OR (stno <= '$snum' AND sthigh >= '$snum'))";
 
 
@@ -225,11 +222,11 @@ parseJson($response);
  
 function fire($lat, $lng) {
 
-	$today = date("Y");
+	$today = date("Y") - 1;
 
 	$socrata2 = new Socrata("http://data.cityofboston.gov/api");
 	
-	$query2 = "within_circle(location, $lat, $lng, 215) AND year>$today-1";
+	$query2 = "within_circle(location, $lat, $lng, 215) AND year>=$today";
 	$params2 = array("\$where" => $query2);
 	$response2 = $socrata2->get("/resource/7cdf-6fgx.json", $params2);
 	
