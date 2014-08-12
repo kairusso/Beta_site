@@ -1,7 +1,5 @@
 	google.load('visualization', '1.0', {'packages':['corechart']});
 
-	
-
 	function drawChartV(myData) {
 
         // Create the data table.
@@ -26,6 +24,7 @@
         	title: 'Violations',
             width:500,
             height:400,
+            fontName: 'Lato',
              isStacked: true,
              backgroundColor: "rgb(235, 235, 235)",
          };
@@ -95,6 +94,7 @@
         	title: 'Violations',
             width:500,
             height:400,
+            fontName: 'Lato',
              orientation:'horizontal',
              legend:'none',
              backgroundColor: "rgb(235, 235, 235)",
