@@ -101,7 +101,7 @@
 		else {
 
 
-			var url = "http://localhost:8888/search_final.html?parameter=" + add + "&%&" + sliderHotline + "/" + sliderViolations + "/" + sliderNoise + "/" + sliderCrime + "/" + sliderOwner ;
+			var url = "http://localhost:8888/search_final.html?parameter=" + add + "&%&" + sliderOwner + "/" + sliderCrime + "/" + sliderViolations + "/" + sliderHotline + "/" + sliderNoise ;
 			
 
 			window.open(url,"_self")
