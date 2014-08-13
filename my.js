@@ -23,7 +23,9 @@
             width:500,
             height:400,
             fontName: 'Lato',
-             backgroundColor: "rgb(235, 235, 235)"
+             backgroundColor: "#ccc",
+             legend:'none',
+             hAxis: {baseline: 3}
 		};
 
 		$.each(myData, function() {
@@ -34,8 +36,10 @@
 						  $(this).attr('time').substring(5, 7).replace(/^0+/, ''), 1), $(this).attr('freq')]
 				]);
 		});
+
 		var chart = new google.visualization.LineChart(document.getElementById('line'));
         chart.draw(data, options);
+    }
 
     }
 
@@ -65,7 +69,7 @@
             height:400,
             fontName: 'Lato',
              isStacked: true,
-             backgroundColor: "rgb(235, 235, 235)",
+             backgroundColor: "#ccc",
          };
 
         // Instantiate and draw our chart, passing in some options.
@@ -136,7 +140,7 @@
             fontName: 'Lato',
              orientation:'horizontal',
              legend:'none',
-             backgroundColor: "rgb(235, 235, 235)",
+             backgroundColor: "#ccc",
          };
 
         // Instantiate and draw our chart, passing in some options.
