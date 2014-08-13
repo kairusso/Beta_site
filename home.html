@@ -11,6 +11,12 @@
 	<!---Require JQUERY-->
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+  	
+  	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  	
+  	<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
 	<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
@@ -40,19 +46,51 @@
 	<div class="containerMAIN">
 
 		
-		<div class="container_Results">	
-			
-			<div class="container_search col-md-4">	
+		<div class="container_search">	
 				<div class="search">
 
-					<input id="search" type="text" size="30" placeholder="Address">
+					<input id="search" type="text" size="30" placeholder="Address: E.g. 52 Calumet">
 
 					<input id="submit" type="submit" value="search">
 				</div>
-			</div>
 
+			
 
 		</div>
+
+		<div class="sliderBox">
+			<label for="amountO" style="color:#fff">Owner:</label>
+  			<input type="text" id="amountO" readonly size="3" style="border:0; color:#000; font-weight:bold;">
+ 
+			<div id="sliderOwner"></div>
+		</div>
+
+		<div class="sliderBox">
+			<label for="amountC" style="color:#fff">Crime:</label>
+  			<input type="text" id="amountC" readonly size="3" style="border:0; color:#000; font-weight:bold;">
+ 
+			<div id="sliderCrime"></div>
+		</div>
+
+		<div class="sliderBox">
+			<label for="amountV" style="color:#fff">Violations:</label>
+  			<input type="text" id="amountV" readonly size="3" style="border:0; color:#000; font-weight:bold;">
+ 
+			<div id="sliderViolations"></div></div>
+
+		
+
+		<div class="sliderBox">
+			<label for="amountH" style="color:#fff">Hotline:</label>
+  			<input type="text" id="amountH" readonly size="3" style="border:0; color:#000; font-weight:bold;">
+
+			<div id="sliderHotline"></div></div>
+
+		<div class="sliderBox">
+			<label for="amountN" style="color:#fff">Noise:</label>
+  			<input type="text" id="amountN" readonly size="3" style="border:0; color:#000; font-weight:bold;">
+
+			<div id="sliderNoise"></div></div>
 
 	</div>
 
