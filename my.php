@@ -228,14 +228,15 @@ function fire($lat, $lng) {
 
 	$date = $year.'-'.$month.'-'.$day;
 
+	echo $year;
 
 	$socrata2 = new Socrata("http://data.cityofboston.gov/api");
 	
-	$query2 = "within_circle(location, $lat, $lng, 215) AND fromdate>=$date";
+	$query2 = "within_circle(location, '$lat', '$lng', 215) AND year>=$year";
 	$params2 = array("\$where" => $query2);
-	$response2 = $socrata2->get("/resource/7cdf-6fgx.json", $params2);
+	//$response2 = $socrata2->get("/resource/7cdf-6fgx.json", $params2);
 	
-	$query3 = "within_circle(geocoded_location, $lat, $lng, 215) AND open_dt>=$date";
+	$query3 = "within_circle(geocoded_location, '$lat', '$lng', 215) AND open_dt>='$date'";
 	$params3 = array("\$where" => $query3);
 	$response3 = $socrata2->get("/resource/awu8-dc52.json", $params3);
 
