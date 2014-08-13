@@ -36,9 +36,6 @@ if(isset($_POST['address'])) {
 
 }
 
-$snum = 62;
-$sname = "calumet";
-
 $query = "street = '$sname' AND (stno = '$snum' OR (stno <= '$snum' AND sthigh >= '$snum'))";
 
 
