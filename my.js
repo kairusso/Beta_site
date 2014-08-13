@@ -7,7 +7,7 @@
 		data.addColumn('number', 'Frequency');
 
 
-		})
+		}
 
 		console.log(result);
 		//var chart = new google.visualization.LineChart(document.getElementById('charts'));
