@@ -37,6 +37,8 @@
 		var chart = new google.visualization.LineChart(document.getElementById('line'));
         chart.draw(data, options);
 
+    }
+
 	function drawChartV(myData) {
 
         // Create the data table.

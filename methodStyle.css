@@ -1,8 +1,7 @@
-body  	{
-	font-family: 'Lato', sans-serif;
+body    {
+  font-family: 'Lato', sans-serif;
   background-image: url('25 Free High Resolution Blurred Backgrounds/Blurred Backgrounds (7).jpg');
 }
-
 
 
 .page-header {
@@ -26,19 +25,18 @@ body  	{
 
 
 
-
-
 /* ----------------------- *//* ----------------------- *//* ----------------------- *//* ----------------------- */
 /* ----------------------- *//* ----------------------- *//* ----------------------- *//* ----------------------- */
 /* ----------------------- *//* ----------------------- *//* ----------------------- *//* ----------------------- */
 /* ----------------------- *//* ----------------------- *//* ----------------------- *//* ----------------------- */
 
-  .WelcomeBox {
+  .containerMAIN {
     width: 800px;
     display: block;
     margin-left: auto;
     margin-right: auto;
     margin-top: 25px;
+    margin-bottom: 25px;
     background-color: #ddd;
     opacity: 0.7;
     border-radius: 5px;
@@ -47,27 +45,15 @@ body  	{
     font-size: 16px;
   }
 
-  .containerSearchSliders {
-    width: 800px;
+    #colorChart {
+      background-color: white;
+      border-radius: 5px;
+      width: 400px;
+      /*display: block;
+      margin-left: auto;
+      margin-right: auto;*/
 
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 25px;
-
-  }
-
-  .sliderBox {
-    width: 800px;
-    height: 35px;
-    padding-top: 10px;
-  }
-
-  #sliderOwner, #sliderCrime, #sliderViolations, #sliderNoise, #sliderHotline {
-    float: right;
-    width: 600px;
-  }
-
+    }
 
 
 
@@ -79,8 +65,7 @@ body  	{
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 10px;
-    margin-bottom: 20px;
+    margin-top: 6px;
 
 }
 
@@ -106,7 +91,7 @@ body  	{
     font: normal 13px 'trebuchet MS', arial, helvetica;
     background: #f1f1f1;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) inset, 0 1px 0 rgba(255, 255, 255, 1);   
-	font-size:20px;
+  font-size:20px;
 }
 
 #submit
@@ -143,8 +128,6 @@ body  	{
 
 
 /* ----------------------- *//* ----------------------- *//* ----------------------- *//* ----------------------- */
-
-
 
 /* ----------------------- *//* ----------------------- *//* ----------------------- *//* ----------------------- */
 /* ----------------------- *//* ----------------------- *//* ----------------------- *//* ----------------------- */
@@ -233,12 +216,17 @@ body  	{
 }
 
 @keyframes spin {
-	from { transform: rotate(0deg); }
-	to { transform: rotate(360deg); }
-	
-	/*animation-name: spin; 
-	animation-duration: 3s;
-	animation-iteration-count: infinite; 
-	animation-timing-function: linear;
-	*/
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+  
+  /*animation-name: spin; 
+  animation-duration: 3s;
+  animation-iteration-count: infinite; 
+  animation-timing-function: linear;
+  */
+}
+
+.row {
+margin-right: 0px;
+margin-left: 0px;
 }

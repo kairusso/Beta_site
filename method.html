@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" charset="utf-8"/>
+	<!---Latest compiled and minified CSS Boostrap-->
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<!---Link my stylesheet -->
+	<link rel="stylesheet" type="text/css" href="methodStyle.css">
+	<link rel="stylesheet" href="circle.css">
+
+	<!---Require JQUERY-->
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+  	
+  	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  	
+  	<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+	<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+
+	<script type="text/javascript">
+
+
+	</script>
+
+	<!---Require javascripts-->
+	<script src="myAbout.js"></script>
+
+</head>
+<body>
+
+	<div class="page-header">
+		<div class="row">
+			<h1 class="col-md-2">SPOTit</h1>
+
+			<div class="container_search col-md-4">	
+				<div class="search">
+
+					<input id="search" type="text" size="30" placeholder="Address">
+
+					<input id="submit" type="submit" value="search">
+				</div>
+			</div>
+
+			<a class="col-md-1 navbar-right" href="http://localhost:8888/method.html">Method</a>
+			<a class="col-md-1 navbar-right" href="http://localhost:8888/about.html">About</a>
+		</div>
+	</div>
+
+	<div class="containerMAIN">
+		
+		<p class="aboutM">HOW IT WORKS</p>
+ 
+		<p class="aboutM">The total rating is an average score of the following categories:</p>
+
+		<ul>
+		<li>Owner/Landlord responsible for the upkeep</li>
+		<li>Crime Reports</li>
+		<li>Violations</li>
+		<li>Service Requests from the Mayer’s 24 Hour Hotline</li>
+		<li>Noise Disturbances</li>
+		</ul>
+ 
+ 		<p>We created a probability distribution function of all properties in Boston by assigning values to individual reports/incidents under each of the 4 categories. These values were based on the severity of the incident while taking into account the cost of the fine associated with any violation.</p>
+ 
+		<p>E.g. if you property ranks above 74% of all other addresses in relation to crime, then your crime score will be 7.4.</p>
+ 
+		<p>All scores are displayed using a scale of 1-10, with 1 being the lowest and 10 being the highest and most satisfactory score. The scores also correlated to a color scheme with scores ranging as follows<p>
+
+		<div id="colorChart">
+		<ul>
+		<li style="color:#FF4850; font-weight:bold;">0-1.6   = dark red</li>
+		<li style="color:#FF7E6C; font-weight:bold;">1.6-3.3 = red</li>
+		<li style="color:#ff9713; font-weight:bold;">3.3-5   = orange</li>
+		<li style="color:#FFF828; font-weight:bold;">5-6.6   = yellow</li>
+		<li style="color:#5fd400; font-weight:bold;">6.6-8.3 = green</li>
+		<li style="color:#61E898; font-weight:bold;">8.3-10  = dark green</li>
+		</ul>
+		</div>
+ 
+		<p>Furthermore, the violation score is a property specific score of an entire building, rather than a single apartment unit. The crime, noise and hotline scores are a reflection of incidents within a 250-meter radius of a property searched.</p>
+ 
+ 
+		<p>CUSTOM PREFERENCE FEATURE</p>
+
+		<p>Choosing to use the customized preference feature upon entry of the website will allow you to modify the average rating. Your ranking will be based on the weight of importance you assign to each of the 4 categories.</p>
+ 
+		<p>-Just reload the main page to use the feature of you missed it the first time.</p>
+
+
+	</div>
+
+		
+	</body>
+	</html>
