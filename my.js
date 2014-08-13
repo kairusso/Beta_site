@@ -24,8 +24,7 @@
             height:400,
             fontName: 'Lato',
              backgroundColor: "#ccc",
-             legend:'none',
-             hAxis: {baseline: 3}
+             legend:'none'
 		};
 
 		$.each(myData, function() {
@@ -39,7 +38,6 @@
 
 		var chart = new google.visualization.LineChart(document.getElementById('line'));
         chart.draw(data, options);
-    }
 
     }
 
