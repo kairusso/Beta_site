@@ -3,15 +3,40 @@
 	function drawLineChart(myData) {
 		var data = new google.visualization.DataTable();
 
+		myData.sort(function(a, b) {
+			var ayear  = a.time.substring(0, 4);
+			var amonth = a.time.substring(5,7).replace(/^0+/, '');
+			var byear  = b.time.substring(0, 4);
+			var bmonth = b.time.substring(5,7).replace(/^0+/, '');
+
+			if (ayear === byear) {
+				return amonth - bmonth;
+			}
+			else return ayear - byear;
+		});
+
 		data.addColumn('date', 'Month');
 		data.addColumn('number', 'Frequency');
 
+		var options = {
+			title: 'Line',
+            width:500,
+            height:400,
+            fontName: 'Lato',
+             backgroundColor: "rgb(235, 235, 235)"
+		};
 
-		})
+		$.each(myData, function() {
+			console.log($(this).attr('time').substring(0,4));
+				console.log($(this).attr('time').substring(5,7).replace(/^0+/, ''));
+			data.addRows([
+				[new Date($(this).attr('time').substring(0, 4),
+						  $(this).attr('time').substring(5, 7).replace(/^0+/, ''), 1), $(this).attr('freq')]
+				]);
+		});
 
-		console.log(result);
-		//var chart = new google.visualization.LineChart(document.getElementById('charts'));
-        //chart.draw(data);
+		var chart = new google.visualization.LineChart(document.getElementById('line'));
+        chart.draw(data, options);
 	}
 
 	function drawChartV(myData) {
@@ -44,7 +69,7 @@
          };
 
         // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.BarChart(document.getElementById('charts'));
+        var chart = new google.visualization.BarChart(document.getElementById('bar'));
         chart.draw(data, options);
       }
 
@@ -115,7 +140,7 @@
          };
 
         // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.BarChart(document.getElementById('charts'));
+        var chart = new google.visualization.BarChart(document.getElementById('bar'));
         chart.draw(data, options);
       }
 
@@ -245,7 +270,8 @@
 				var textTemp;
 				
 				$('#violations').click( function() {
-					$('#charts').empty();
+					$('#line').empty();
+					$('#bar').empty();
 					$('#text_output').empty();
 					$('#text_output').append(violations);
 					drawChartV(returnedData.list);
@@ -265,11 +291,12 @@
 				});
 				
 				$('#crime').click( function() {
-					$('#charts').empty();
+					$('#line').empty();
+					$('#bar').empty();
 					$('#text_output').empty();
 					$('#text_output').append(crime);
 					drawChartOther(returnedData.crime);
-					drawLineChart(returnedData.crime);
+					drawLineChart(returnedData.crimeDates);
 
 					$('#crime').css('background-color', '#ccc');
 					$('li#big_one').css('background-color', '#eee');
@@ -286,10 +313,12 @@
 				});
 				
 				$('#noise').click( function() {
-					$('#charts').empty();
+					$('#line').empty();
+					$('#bar').empty();
 					$('#text_output').empty();
 					$('#text_output').append(noise);
 					drawChartOther(returnedData.noise);
+					drawLineChart(returnedData.noiseDates);
 
 					$('#noise').css('background-color', '#ccc');
 					$('#violations').css('background-color', '#eee');
@@ -306,10 +335,12 @@
 				});
 				
 				$('#hotline').click( function() {
-					$('#charts').empty();
+					$('#line').empty();
+					$('#bar').empty();
 					$('#text_output').empty();
 					$('#text_output').append(hotline);
 					drawChartOther(returnedData.hotline);
+					drawLineChart(returnedData.hotlineDates);
 
 					$('#hotline').css('background-color', '#ccc');
 					$('#violations').css('background-color', '#eee');
