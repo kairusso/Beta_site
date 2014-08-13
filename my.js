@@ -192,6 +192,12 @@
 		var NOISE_RATING;
 		var HOT_RATING;
 
+		var VIOLA_WEIGHT;
+		var CRIME_WEIGHT;
+		var NOISE_WEIGHT;
+		var HOT_WEIGHT;
+		var OWNER_WEIGHT;
+
 		var spot = 0;
 
 		
@@ -201,14 +207,21 @@
   		var address = "";
  	 	var query = window.location.search.substring(1);
  	 	var vars = query.split("=");
-  		var secondSplit = vars[1].split("%20");
+ 	 	var secondSplit = vars[1].split("&%&");
+  		var thirdSplit = secondSplit[0].split("%20");
   		var street = "";
-  		for (var i=1; i<secondSplit.length; i++) {
-  			if(secondSplit[i] === '') {}
-  			else { street = street + " " + secondSplit[i].replace(/[0-9]/g, ''); }
+  		for (var i=1; i<thirdSplit.length; i++) {
+  			if(thirdSplit[i] === '') {}
+  			else { street = street + " " + thirdSplit[i].replace(/[0-9]/g, ''); }
   		}
-  		var address = secondSplit[0] + street;
-    	return address;
+  		var address = thirdSplit[0] + street;
+    	var weights = secondSplit[1].split("/");
+    	VIOLA_WEIGHT = weights[1];
+		CRIME_WEIGHT = weights[3];
+		NOISE_WEIGHT = weights[2];
+		HOT_WEIGHT = weights[0];
+		OWNER_WEIGHT = weights[4];
+		return address;
 		} ();
 
 		//log(getParams);
@@ -364,7 +377,16 @@
 
 				VIOLA_RATING = violation_rating;
 
-				var Total_Rating = (parseInt(crime_rating) + parseInt(noise_rating) + parseInt(hotline_rating) + parseInt(violation_rating))/4;
+				var Total_Weight = parseInt(VIOLA_WEIGHT) + parseInt(CRIME_WEIGHT) + parseInt(NOISE_WEIGHT) + parseInt(HOT_WEIGHT); 
+				//+ parseInt(OWNER_WEIGHT);
+
+				//console.log(VIOLA_WEIGHT);
+
+				var Total_Rating = ((parseInt(crime_rating)*parseInt(CRIME_WEIGHT)) + (parseInt(noise_rating)*parseInt(NOISE_WEIGHT)) + 
+					(parseInt(hotline_rating)*parseInt(HOT_WEIGHT)) + (parseInt(violation_rating)*parseInt(VIOLA_WEIGHT)))/(parseInt(Total_Weight));
+
+				Total_Rating = Total_Rating.toFixed(1);
+
 				var Total_color = coloring(Total_Rating);
 
 				document.getElementById("total_circle").className = "c100 p" + 10*parseInt(Total_Rating) + " big " + Total_color;

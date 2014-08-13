@@ -170,8 +170,14 @@ function parseJson($response) {
 	$tripleArray = fire($lat, $lng);
 	
 	$result['crime'] = $tripleArray[0];
-	$result['noise'] = $tripleArray[1];
-	$result['hotline'] = $tripleArray[2];
+	$result['crimeDates'] = $tripleArray[1];
+	$result['crimeTimes'] = $tripleArray[2];
+	$result['noise'] = $tripleArray[3];
+	$result['noiseDates'] = $tripleArray[4];
+	$result['noiseTimes'] = $tripleArray[5];
+	$result['hotline'] = $tripleArray[6];
+	$result['hotlineDates'] = $tripleArray[7];
+	$result['hotlineTimes'] = $tripleArray[8];
 	
 	//foreach($noiseCategoryArray as $item) echo $item->__toString;
 	
@@ -236,10 +242,16 @@ function fire($lat, $lng) {
 
 	
 	$crimeCategoryArray = array();
+	$crimeDateArray = array();
+	$crimeTimeArray = array();
 	
 	$noiseCategoryArray = array();
+	$noiseDateArray = array();
+	$noiseTimeArray = array();
 	
 	$hotlineCategoryArray = array();
+	$hotlineDateArray = array();
+	$hotlineTimeArray = array();
 	
 	foreach($response2 as $item) {
 		$temp = relabelCrime($item['incident_type_description'], $item['fromdate']);
@@ -255,7 +267,7 @@ function fire($lat, $lng) {
 					$test = false;
 					$test2 = true;
 					$test3 = true;
-					foreach($cat->dateArray as $dateTime) {
+					foreach($noiseDateArray as $dateTime) {
 						if($dateTime->time == $temp->date) {
 							$dateTime->incFreq();
 							$test2 = false;
@@ -263,9 +275,9 @@ function fire($lat, $lng) {
 					}
 					if($test2) {
 						$tempDate = new timeDate(1, $temp->date);
-						array_push($cat->dateArray,  $tempDate);
+						array_push($noiseDateArray,  $tempDate);
 					}
-					foreach($cat->timeArray as $dateTime) {
+					foreach($noiseTimeArray as $dateTime) {
 						if($dateTime->time == $temp->time) {
 							$dateTime->incFreq();
 							$test3 = false;
@@ -273,7 +285,7 @@ function fire($lat, $lng) {
 					}
 					if($test3) {
 						$tempTime = new timeDate(1, $temp->time);
-						array_push($cat->timeArray,  $tempTime);
+						array_push($noiseTimeArray,  $tempTime);
 					}
 					
 				}
@@ -293,7 +305,7 @@ function fire($lat, $lng) {
 					$test = false;
 					$test2 = true;
 					$test3 = true;
-					foreach($cat->dateArray as $dateTime) {
+					foreach($crimeDateArray as $dateTime) {
 						if($dateTime->time == $temp->date) {
 							$dateTime->incFreq();
 							$test2 = false;
@@ -301,9 +313,9 @@ function fire($lat, $lng) {
 					}
 					if($test2) {
 						$tempDate = new timeDate(1, $temp->date);
-						array_push($cat->dateArray,  $tempDate);
+						array_push($crimeDateArray,  $tempDate);
 					}
-					foreach($cat->timeArray as $dateTime) {
+					foreach($crimeTimeArray as $dateTime) {
 						if($dateTime->time == $temp->time) {
 							$dateTime->incFreq();
 							$test3 = false;
@@ -311,7 +323,7 @@ function fire($lat, $lng) {
 					}
 					if($test3) {
 						$tempTime = new timeDate(1, $temp->time);
-						array_push($cat->timeArray,  $tempTime);
+						array_push($crimeTimeArray,  $tempTime);
 					}
 				}
 			}
@@ -338,7 +350,7 @@ function fire($lat, $lng) {
 
 					$test2 = true;
 					$test3 = true;
-					foreach($cat->dateArray as $dateTime) {
+					foreach($noiseDateArray as $dateTime) {
 						if($dateTime->time == $temp->date) {
 							$dateTime->incFreq();
 							$test2 = false;
@@ -346,10 +358,10 @@ function fire($lat, $lng) {
 					}
 					if($test2) {
 						$tempDate = new timeDate(1, $temp->date);
-						array_push($cat->dateArray,  $tempDate);
+						array_push($noiseDateArray,  $tempDate);
 					}
 
-					foreach($cat->timeArray as $dateTime) {
+					foreach($noiseTimeArray as $dateTime) {
 						if($dateTime->time == $temp->time) {
 							$dateTime->incFreq();
 							$test3 = false;
@@ -357,7 +369,7 @@ function fire($lat, $lng) {
 					}
 					if($test3) {
 						$tempTime = new timeDate(1, $temp->time);
-						array_push($cat->timeArray,  $tempTime);
+						array_push($noiseTimeArray,  $tempTime);
 					}
 				}
 			}
@@ -376,7 +388,7 @@ function fire($lat, $lng) {
 					$test = false;
 					$test2 = true;
 					$test3 = true;
-					foreach($cat->dateArray as $dateTime) {
+					foreach($hotlineDateArray as $dateTime) {
 						if($dateTime->time == $temp->date) {
 							$dateTime->incFreq();
 							$test2 = false;
@@ -384,9 +396,9 @@ function fire($lat, $lng) {
 					}
 					if($test2) {
 						$tempDate = new timeDate(1, $temp->date);
-						array_push($cat->dateArray,  $tempDate);
+						array_push($hotlineDateArray,  $tempDate);
 					}
-					foreach($cat->timeArray as $dateTime) {
+					foreach($hotlineTimeArray as $dateTime) {
 						if($dateTime->time == $temp->time) {
 							$dateTime->incFreq();
 							$test3 = false;
@@ -394,7 +406,7 @@ function fire($lat, $lng) {
 					}
 					if($test3) {
 						$tempTime = new timeDate(1, $temp->time);
-						array_push($cat->timeArray,  $tempTime);
+						array_push($hotlineTimeArray,  $tempTime);
 					}
 				}
 			}
@@ -405,7 +417,8 @@ function fire($lat, $lng) {
 		}
 	}
 	
-	$tripleArray = array($crimeCategoryArray, $noiseCategoryArray, $hotlineCategoryArray);
+	$tripleArray = array($crimeCategoryArray, $crimeDateArray, $crimeTimeArray, $noiseCategoryArray, $noiseDateArray, $noiseTimeArray, 
+		$hotlineCategoryArray, $hotlineDateArray, $hotlineTimeArray);
 	
 	return $tripleArray;
 }
@@ -476,8 +489,6 @@ class crimeIncident {
 	public $rat;
 	public $date;
 	public $time;
-	public $dateArray;
-	public $timeArray;
 
 	public function __construct($freq, $proper, $cat, $rat, $date, $time) {
 		$this->freq        = $freq;
@@ -486,8 +497,6 @@ class crimeIncident {
 		$this->rat         = $rat;
 		$this->date        = $date;
 		$this->time        = $time;
-		$this->dateArray   = array();
-		$this->timeArray   = array();
 	}
 
 	public function __toString() {

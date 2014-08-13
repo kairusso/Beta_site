@@ -35,7 +35,7 @@ body  	{
 
   .containerMAIN {
     width: 800px;
-    height: 500px;
+    height: 100px;
 
     display: block;
     margin-left: auto;
@@ -44,6 +44,16 @@ body  	{
 
   }
 
+  .sliderBox {
+    width: 800px;
+    height: 35px;
+    padding-top: 10px;
+  }
+
+  #sliderOwner, #sliderCrime, #sliderViolations, #sliderNoise, #sliderHotline {
+    float: right;
+    width: 600px;
+  }
 
 
 
@@ -57,6 +67,7 @@ body  	{
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
+    margin-bottom: 20px;
 
 }
 
