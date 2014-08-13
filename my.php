@@ -36,6 +36,9 @@ if(isset($_POST['address'])) {
 
 }
 
+$snum = 62;
+$sname = "calumet";
+
 $query = "street = '$sname' AND (stno = '$snum' OR (stno <= '$snum' AND sthigh >= '$snum'))";
 
 
@@ -222,7 +225,7 @@ parseJson($response);
  
 function fire($lat, $lng) {
 
-	$today = date("Y") - 1;
+	$today = date("Y")-1;
 
 	$socrata2 = new Socrata("http://data.cityofboston.gov/api");
 	
@@ -231,13 +234,12 @@ function fire($lat, $lng) {
 	$response2 = $socrata2->get("/resource/7cdf-6fgx.json", $params2);
 	
 	
-	$query3 = "within_circle(geocoded_location, $lat, $lng, 215) AND open_dt>='$today-01-01'";
+	$query3 = "within_circle(geocoded_location, $lat, $lng, 215)";
 	$params3 = array("\$where" => $query3);
 	$response3 = $socrata2->get("/resource/awu8-dc52.json", $params3);
 
 	
 	$crimeCategoryArray = array();
-	$crimeCategoryArrayByYear = array();
 	
 	$noiseCategoryArray = array();
 	
@@ -254,9 +256,30 @@ function fire($lat, $lng) {
 				if($cat->cat == $temp->proper) {
 					$cat->incFreq();
 					$cat->addToRat($temp->rat);
-					array_push($cat->dateArray, $temp->date);
-					array_push($cat->timeArray, $temp->time);
 					$test = false;
+					$test2 = true;
+					$test3 = true;
+					foreach($cat->dateArray as $dateTime) {
+						if($dateTime->time == $temp->date) {
+							$dateTime->incFreq();
+							$test2 = false;
+						}
+					}
+					if($test2) {
+						$tempDate = new timeDate(1, $temp->date);
+						array_push($cat->dateArray,  $tempDate);
+					}
+					foreach($cat->timeArray as $dateTime) {
+						if($dateTime->time == $temp->time) {
+							$dateTime->incFreq();
+							$test3 = false;
+						}
+					}
+					if($test3) {
+						$tempTime = new timeDate(1, $temp->time);
+						array_push($cat->timeArray,  $tempTime);
+					}
+					
 				}
 			}
 			if($test) { 
@@ -271,9 +294,29 @@ function fire($lat, $lng) {
 				if($cat->cat == $temp->cat) {
 					$cat->incFreq();
 					$cat->addToRat($temp->rat);
-					array_push($cat->dateArray, $temp->date);
-					array_push($cat->timeArray, $temp->time);
 					$test = false;
+					$test2 = true;
+					$test3 = true;
+					foreach($cat->dateArray as $dateTime) {
+						if($dateTime->time == $temp->date) {
+							$dateTime->incFreq();
+							$test2 = false;
+						}
+					}
+					if($test2) {
+						$tempDate = new timeDate(1, $temp->date);
+						array_push($cat->dateArray,  $tempDate);
+					}
+					foreach($cat->timeArray as $dateTime) {
+						if($dateTime->time == $temp->time) {
+							$dateTime->incFreq();
+							$test3 = false;
+						}
+					}
+					if($test3) {
+						$tempTime = new timeDate(1, $temp->time);
+						array_push($cat->timeArray,  $tempTime);
+					}
 				}
 			}
 			if($test) {
@@ -295,9 +338,31 @@ function fire($lat, $lng) {
 				if($cat->cat == $temp->proper) {
 					$cat->incFreq();
 					$cat->addToRat($temp->rat);
-					array_push($cat->dateArray, $temp->date);
-					array_push($cat->timeArray, $temp->time);
 					$test = false;
+
+					$test2 = true;
+					$test3 = true;
+					foreach($cat->dateArray as $dateTime) {
+						if($dateTime->time == $temp->date) {
+							$dateTime->incFreq();
+							$test2 = false;
+						}
+					}
+					if($test2) {
+						$tempDate = new timeDate(1, $temp->date);
+						array_push($cat->dateArray,  $tempDate);
+					}
+
+					foreach($cat->timeArray as $dateTime) {
+						if($dateTime->time == $temp->time) {
+							$dateTime->incFreq();
+							$test3 = false;
+						}
+					}
+					if($test3) {
+						$tempTime = new timeDate(1, $temp->time);
+						array_push($cat->timeArray,  $tempTime);
+					}
 				}
 			}
 			if($test) { 
@@ -312,9 +377,29 @@ function fire($lat, $lng) {
 				if($cat->cat == $temp->cat) {
 					$cat->incFreq();
 					$cat->addToRat($temp->rat);
-					array_push($cat->dateArray, $temp->date);
-					array_push($cat->timeArray, $temp->time);
 					$test = false;
+					$test2 = true;
+					$test3 = true;
+					foreach($cat->dateArray as $dateTime) {
+						if($dateTime->time == $temp->date) {
+							$dateTime->incFreq();
+							$test2 = false;
+						}
+					}
+					if($test2) {
+						$tempDate = new timeDate(1, $temp->date);
+						array_push($cat->dateArray,  $tempDate);
+					}
+					foreach($cat->timeArray as $dateTime) {
+						if($dateTime->time == $temp->time) {
+							$dateTime->incFreq();
+							$test3 = false;
+						}
+					}
+					if($test3) {
+						$tempTime = new timeDate(1, $temp->time);
+						array_push($cat->timeArray,  $tempTime);
+					}
 				}
 			}
 			if($test) { 
@@ -345,14 +430,15 @@ function relabelCrime($string, $date) {
 			$cat = $row['category'];
 			$rat = $row['value'];
 			$pieces = explode('T', $date);
-
+			$restD = substr($pieces[0], 0, 4) . "-" . substr($pieces[0], 5, 2);
+			$restT = substr($pieces[1], 0, 2);
 
 			if (is_null($cat) ||
 				is_null($rat)) {
 				return null;
 			}
 			else { 
-				return new crimeIncident(1, $proper, $cat, $rat, $pieces[0], $pieces[1]); }
+				return new crimeIncident(1, $proper, $cat, $rat, $restD, $restT); }
 	}
 
 	mysqli_close($con);
@@ -371,13 +457,15 @@ function relabelNoise($string, $date) {
 			$cat = $row['category'];
 			$rat = $row['value'];
 			$pieces = explode('T', $date);
+			$restD = substr($pieces[0], 0, 4) . "-" . substr($pieces[0], 5, 2); // returns "d"
+			$restT = substr($pieces[1], 0, 2);
 
 			if (is_null($cat) ||
 				is_null($rat)) {
 				return null;
 			}
 			else { 
-				return new crimeIncident(1, $proper, $cat, $rat, $pieces[0], $pieces[1]); }
+				return new crimeIncident(1, $proper, $cat, $rat, $restD, $restT); }
 	}
 
 	mysqli_close($con);
@@ -417,6 +505,21 @@ class crimeIncident {
 	
 	public function addToRat($temp) {
 		$this->rat = $this->rat + $temp;
+	}
+}
+
+class timeDate {
+	public $freq;
+	public $time;
+
+	public function __construct($freq, $time) {
+		$this->freq = $freq;
+		$this->time = $time;
+	}
+
+
+	public function incFreq() {
+		$this->freq += 1;
 	}
 }
 
