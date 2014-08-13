@@ -6,8 +6,12 @@
 		data.addColumn('date', 'Month');
 		data.addColumn('number', 'Frequency');
 
-		var chart = new google.visualization.LineChart(document.getElementById('charts'));
-        chart.draw(data);
+
+		})
+
+		console.log(result);
+		//var chart = new google.visualization.LineChart(document.getElementById('charts'));
+        //chart.draw(data);
 	}
 
 	function drawChartV(myData) {
@@ -251,6 +255,8 @@
 					$('#charts').empty();
 					$('#text_output').empty();
 					$('#text_output').append(crime);
+					drawChartOther(returnedData.crime);
+					drawLineChart(returnedData.crime);
 
 					$('#crime').css('background-color', '#ccc');
 					$('li#big_one').css('background-color', '#eee');
