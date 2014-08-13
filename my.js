@@ -251,7 +251,6 @@
 					$('#charts').empty();
 					$('#text_output').empty();
 					$('#text_output').append(crime);
-					console.log(format(returnedData.crime));
 
 					$('#crime').css('background-color', '#ccc');
 					$('li#big_one').css('background-color', '#eee');
@@ -319,7 +318,6 @@
 
 
 				console.log(returnedData);
-				//console.log(addto("2014-01-02", []));
 
 				document.getElementsByClassName('square')[0].style.height = '0px';
 				document.getElementsByClassName('square')[0].style.width = '0px';
