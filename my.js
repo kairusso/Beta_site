@@ -34,10 +34,8 @@
 						  $(this).attr('time').substring(5, 7).replace(/^0+/, ''), 1), $(this).attr('freq')]
 				]);
 		});
-
 		var chart = new google.visualization.LineChart(document.getElementById('line'));
         chart.draw(data, options);
-	}
 
 	function drawChartV(myData) {
 
@@ -154,7 +152,34 @@
 
 
 
-     $(document).ready( function() {
+     
+
+
+
+
+
+
+		var VIOLATIONS_TOTAL = 0;
+		var CRIME_TOTAL = 0;
+		var NOISE_TOTAL = 0;
+		var HOTLINE_TOTAL = 0;
+
+		var VIOLA_RATING;
+		var CRIME_RATING;
+		var NOISE_RATING;
+		var HOT_RATING;
+
+		var VIOLA_WEIGHT;
+		var CRIME_WEIGHT;
+		var NOISE_WEIGHT;
+		var HOT_WEIGHT;
+		var OWNER_WEIGHT;
+
+		var spot = 0;
+
+
+
+		$(document).ready( function() {
 
 		
 	
@@ -187,9 +212,13 @@
 		}
 		else {
 
-
-			var url = "http://localhost:8888/search_final.html?parameter=" + add;
-			
+			if(!(typeof OWNER_WEIGHT === 'undefined' || typeof CRIME_WEIGHT === 'undefined' || typeof VIOLA_WEIGHT === 'undefined' ||
+				typeof HOT_WEIGHT === 'undefined' || typeof NOISE_WEIGHT === 'undefined')) {
+				var url = "http://localhost:8888/search_final.html?parameter=" + add + "&%&" + OWNER_WEIGHT + "/" + CRIME_WEIGHT + "/" + 
+				VIOLA_WEIGHT + "/" + HOT_WEIGHT + "/" + NOISE_WEIGHT ;
+			} else {
+				var url = "http://localhost:8888/search_final.html?parameter=" + add + "&%&" + "1/1/1/1/1"
+			}
 
 			window.open(url,"_self")
 
@@ -201,29 +230,6 @@
 
 		}
 		});
-
-
-
-
-
-
-		var VIOLATIONS_TOTAL = 0;
-		var CRIME_TOTAL = 0;
-		var NOISE_TOTAL = 0;
-		var HOTLINE_TOTAL = 0;
-
-		var VIOLA_RATING;
-		var CRIME_RATING;
-		var NOISE_RATING;
-		var HOT_RATING;
-
-		var VIOLA_WEIGHT;
-		var CRIME_WEIGHT;
-		var NOISE_WEIGHT;
-		var HOT_WEIGHT;
-		var OWNER_WEIGHT;
-
-		var spot = 0;
 
 		
 		var getParams = function () {
@@ -241,11 +247,11 @@
   		}
   		var address = thirdSplit[0] + street;
     	var weights = secondSplit[1].split("/");
-    	VIOLA_WEIGHT = weights[1];
-		CRIME_WEIGHT = weights[3];
-		NOISE_WEIGHT = weights[2];
-		HOT_WEIGHT = weights[0];
-		OWNER_WEIGHT = weights[4];
+    	VIOLA_WEIGHT = weights[2];
+		CRIME_WEIGHT = weights[1];
+		NOISE_WEIGHT = weights[4];
+		HOT_WEIGHT = weights[3];
+		OWNER_WEIGHT = weights[0];
 		return address;
 		} ();
 
