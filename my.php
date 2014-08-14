@@ -179,8 +179,6 @@ function parseJson($response) {
 	$result['hotlineDates'] = $tripleArray[7];
 	$result['hotlineTimes'] = $tripleArray[8];
 	
-	//foreach($noiseCategoryArray as $item) echo $item->__toString;
-	
 	echo json_encode($result);
 }
 
