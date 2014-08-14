@@ -265,12 +265,14 @@
 			document.getElementsByClassName('square')[0].style.width = '12px';
 
 			$.ajax({
-				url: "my.php", 
+				url: "my_hosting.php", 
 				type: "POST",
 				data: {address: getParams},
 				dataType: "json"
 			})
 			.done( function( returnedData ) {
+
+				$('#info-box').append('<p id="address">Showing results for:   <strong>' + returnedData.address + '</strong></p>');
 			
 				var violations = styleViol(returnedData.list, returnedData.address);
 				var crime = styleCrime(returnedData.crime, 1);

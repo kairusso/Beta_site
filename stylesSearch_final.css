@@ -75,24 +75,23 @@ height: 40px;
 }
 
 h2#year {
-margin-top: 0px;
+margin-top: 15px;
 margin-right: 15px;
-padding-left: 30px;
+margin-bottom: 0px;
 border-bottom: 2px solid gray;
+font-size: 20px;
+color: rgb(187, 102, 102);
 }
 
 div#text_output {
 width: 350px;
-padding-top: 150px;
+padding-top: 40px;
+padding-bottom: 40px;
 margin-left: -155px;
-padding-bottom: 50px;
-padding-left: 50px;
-padding-top: 150px;
 }
 
 div#charts {
 float: left;
-margin-top: 55px;
 padding-bottom: 30px;
 }
 
@@ -163,6 +162,12 @@ margin-right: 15px;
 	margin-right: auto;
 	margin-top: 10px;
 	
+}
+
+div#info-box {
+height: 40px;
+background-color: rgb(231, 154, 154);
+margin-top: 70px;
 }
 
 #results_address_owner {
