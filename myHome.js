@@ -1,67 +1,69 @@
-  	$(function() {
-    	$( "#sliderOwner" ).slider({
-      		range: "min",
-      		value: 1,
-      		min: 1,
-      		max: 100,
-      		slide: function( event, ui ) {
-        		$( "#amountO" ).val( ui.value );
-      		}
-    	});
-    	$( "#amountO" ).val($( "#sliderOwner" ).slider( "value" ) );
-  	});
 
-  	$(function() {
-    	$( "#sliderCrime" ).slider({
-      		range: "min",
-      		value: 1,
-      		min: 1,
-      		max: 100,
-      		slide: function( event, ui ) {
-        		$( "#amountC" ).val( ui.value );
-      		}
-    	});
-    	$( "#amountC" ).val($( "#sliderCrime" ).slider( "value" ) );
-  	});
 
-  	$(function() {
-    	$( "#sliderNoise" ).slider({
-      		range: "min",
-      		value: 1,
-      		min: 1,
-      		max: 100,
-      		slide: function( event, ui ) {
-        		$( "#amountN" ).val( ui.value );
-      		}
-    	});
-    	$( "#amountN" ).val($( "#sliderNoise" ).slider( "value" ) );
-  	});
+    $(function() {
+    $( "#sliderOwner" ).slider({
+      value:50,
+      min: 0,
+      max: 100,
+      step: 5,
+      slide: function( event, ui ) {
+        $( "#amountO" ).val( ui.value );
+      }
+    });
+    $( "#amountO" ).val($( "#sliderOwner" ).slider( "value" ) );
+  });
 
-  	$(function() {
-    	$( "#sliderViolations" ).slider({
-      		range: "min",
-      		value: 1,
-      		min: 1,
-      		max: 100,
-      		slide: function( event, ui ) {
-        		$( "#amountV" ).val( ui.value );
-      		}
-    	});
-    	$( "#amountV" ).val($( "#sliderViolations" ).slider( "value" ) );
-  	});
+    $(function() {
+    $( "#sliderCrime" ).slider({
+      value:50,
+      min: 0,
+      max: 100,
+      step: 5,
+      slide: function( event, ui ) {
+        $( "#amountC" ).val( ui.value );
+      }
+    });
+    $( "#amountC" ).val($( "#sliderCrime" ).slider( "value" ) );
+  });
 
-  	$(function() {
-    	$( "#sliderHotline" ).slider({
-      		range: "min",
-      		value: 1,
-      		min: 1,
-      		max: 100,
-      		slide: function( event, ui ) {
-        		$( "#amountH" ).val( ui.value );
-      		}
-    	});
-    	$( "#amountH" ).val($( "#sliderHotline" ).slider( "value" ) );
-  	});
+    $(function() {
+    $( "#sliderNoise" ).slider({
+      value:50,
+      min: 0,
+      max: 100,
+      step: 5,
+      slide: function( event, ui ) {
+        $( "#amountN" ).val( ui.value );
+      }
+    });
+    $( "#amountN" ).val($( "#sliderNoise" ).slider( "value" ) );
+  });
+
+    $(function() {
+    $( "#sliderViolations" ).slider({
+      value:50,
+      min: 0,
+      max: 100,
+      step: 5,
+      slide: function( event, ui ) {
+        $( "#amountV" ).val( ui.value );
+      }
+    });
+    $( "#amountV" ).val($( "#sliderViolations" ).slider( "value" ) );
+  });
+
+    $(function() {
+    $( "#sliderHotline" ).slider({
+      value:50,
+      min: 0,
+      max: 100,
+      step: 5,
+      slide: function( event, ui ) {
+        $( "#amountH" ).val( ui.value );
+      }
+    });
+    $( "#amountH" ).val($( "#sliderHotline" ).slider( "value" ) );
+  });
 
 	$(document).ready( function() {
 
