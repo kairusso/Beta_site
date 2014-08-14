@@ -218,7 +218,7 @@
 
 			if(!(typeof OWNER_WEIGHT === 'undefined' || typeof CRIME_WEIGHT === 'undefined' || typeof VIOLA_WEIGHT === 'undefined' ||
 				typeof HOT_WEIGHT === 'undefined' || typeof NOISE_WEIGHT === 'undefined')) {
-				var url = "http://localhost:8888/search_final.html?parameter=" + add + "&%&" + OWNER_WEIGHT + "/" + CRIME_WEIGHT + "/" + 
+				var url = "/search_final.html?parameter=" + add + "&%&" + OWNER_WEIGHT + "/" + CRIME_WEIGHT + "/" + 
 				VIOLA_WEIGHT + "/" + HOT_WEIGHT + "/" + NOISE_WEIGHT ;
 			} else {
 				var url = "/search_final.html?parameter=" + add + "&%&" + "1/1/1/1/1"
