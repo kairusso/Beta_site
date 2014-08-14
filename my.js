@@ -221,7 +221,7 @@
 				var url = "http://localhost:8888/search_final.html?parameter=" + add + "&%&" + OWNER_WEIGHT + "/" + CRIME_WEIGHT + "/" + 
 				VIOLA_WEIGHT + "/" + HOT_WEIGHT + "/" + NOISE_WEIGHT ;
 			} else {
-				var url = "http://localhost:8888/search_final.html?parameter=" + add + "&%&" + "1/1/1/1/1"
+				var url = "/search_final.html?parameter=" + add + "&%&" + "1/1/1/1/1"
 			}
 
 			window.open(url,"_self")
