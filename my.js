@@ -557,7 +557,7 @@
             else if(totalCount < VIOLATIONS_10[9]) {
                 for(i = 1; i <= 9; i++) {
                     if(totalCount < VIOLATIONS_10[i]) {
-                        VIOLA_SCORE = (10-i) + ((totalCount-VIOLATIONS_10[i-1])/((VIOLATIONS_10[i]-VIOLATIONS_10[i-1])));
+                        VIOLA_SCORE = (10-i) + ((VIOLATIONS_10[i]-totalCount)/((VIOLATIONS_10[i]-VIOLATIONS_10[i-1])));
                         break;
                     }
                     

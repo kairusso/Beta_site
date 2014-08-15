@@ -18,13 +18,19 @@ body    {
     display: block;
     border-left: 1px solid;
     height: 49px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold; 
+    color: #444;}
+  .page-header-a:hover {
+    border-bottom: 3px solid gray;
+    color: #444;
+    background-color: #61E898;
     text-decoration: none; }
-  .page-header a:hover {
-    border-bottom: 3px solid gray; }
 
 
   .logo-link {
-    color: #777;
+    color: #444;
     text-decoration: none;
   }
 
