@@ -20,7 +20,7 @@
 
 		var options = {
 			title: 'Line',
-            width:500,
+            width:800,
             height:400,
             fontName: 'Lato',
              backgroundColor: "#ccc",
@@ -28,8 +28,6 @@
 		};
 
 		$.each(myData, function() {
-			console.log($(this).attr('time').substring(0,4));
-				console.log($(this).attr('time').substring(5,7).replace(/^0+/, ''));
 			data.addRows([
 				[new Date($(this).attr('time').substring(0, 4),
 						  $(this).attr('time').substring(5, 7).replace(/^0+/, ''), 1), $(this).attr('freq')]
@@ -154,15 +152,6 @@
         	  	return count;
       }
 
-
-
-     
-
-
-
-
-
-
 		var VIOLATIONS_TOTAL = 0;
 		var CRIME_TOTAL = 0;
 		var NOISE_TOTAL = 0;
@@ -286,6 +275,7 @@
 					$('#bar').empty();
 					$('#text_output').empty();
 					$('#text_output').append(violations);
+					$('#bar_output').empty();
 					drawChartV(returnedData.list);
 
 					$('#violations').css('background-color', '#ccc');
@@ -295,18 +285,23 @@
 					$('li#hotline').css('background-color', '#eee');
 				});
 
+				console.log('first');
+
 				$('#violaJS').hover( function() {
 					textTemp = $('#violaJS').text();
 					$('#violaJS').text(VIOLA_RATING);
 				}, function(){
     				$('#violaJS').text(textTemp);
 				});
+				console.log('done');
 				
 				$('#crime').click( function() {
 					$('#line').empty();
 					$('#bar').empty();
 					$('#text_output').empty();
-					$('#text_output').append(crime);
+					$('#text_output').append(crime.string);
+					$('#bar_output').empty();
+					$('#bar_output').append(crime.bars);
 					drawChartOther(returnedData.crime);
 					drawLineChart(returnedData.crimeDates);
 
@@ -328,7 +323,9 @@
 					$('#line').empty();
 					$('#bar').empty();
 					$('#text_output').empty();
-					$('#text_output').append(noise);
+					$('#text_output').append(noise.string);
+					$('#bar_output').empty();
+					$('#bar_output').append(noise.bars);
 					drawChartOther(returnedData.noise);
 					drawLineChart(returnedData.noiseDates);
 
@@ -350,7 +347,9 @@
 					$('#line').empty();
 					$('#bar').empty();
 					$('#text_output').empty();
-					$('#text_output').append(hotline);
+					$('#text_output').append(hotline.string);
+					$('#bar_output').empty();
+					$('#bar_output').append(hotline.bars);
 					drawChartOther(returnedData.hotline);
 					drawLineChart(returnedData.hotlineDates);
 
@@ -379,7 +378,7 @@
 
 
 
-				console.log(returnedData);
+				//console.log(returnedData);
 
 				document.getElementsByClassName('square')[0].style.height = '0px';
 				document.getElementsByClassName('square')[0].style.width = '0px';
@@ -448,18 +447,33 @@
 		
 
 		function styleCrime(list, type) {
-		
+
+			list.sort( function(a, b) {
+				return b.freq - a.freq;
+			});
+					
 		var string = '';
-		
+		var bars = '';
+		var high = list[0].freq;
+
+		//save the highest frequency, this helps in scaling the bars
+		//console.log(list);
+
 			$.each(list, function() {
-				string = string + '<p id="listed">' + setIcon($(this).attr('cat')) + $(this).attr('cat') + ' (' + $(this).attr('freq') + ')</p>';
+				string = string + '<p id="listed">' + setIcon($(this).attr('cat')) + $(this).attr('cat') + '</p>';
+
+				bars += '<div class="bar_wrap"><div id="a_bar" style="width:' + ($(this).attr('freq')/high)*100 + '%">' + '(' + $(this).attr('freq') + ')' + '</div></div>';
 
 				if(type === 1) { CRIME_TOTAL += parseInt($(this).attr('rat')); }
 				else if(type === 2) { NOISE_TOTAL += parseInt($(this).attr('rat')); }
 				else { HOTLINE_TOTAL += parseInt($(this).attr('rat')); }
 			}); 
-			
-			return string;
+
+		var result = [];
+		result.string = string;
+		result.bars = bars;
+
+		return result;
 		}
 
 		function styleViol(list, address) {
