@@ -3,10 +3,23 @@ require_once("socrata.php");
 $socrata = new Socrata("http://data.cityofboston.gov/api");
 
 if(isset($_POST['address'])) {
+	
 	$suffixTakeOut = array("ST", "Street", "AV", "Ave", "Avenue", "RD", "Road", "TE", "Terrace", "PL", "Place", 
 	"SQ", "Square", "CT", "Court", "PK", "Park", "HW", "Highway", "DR", "Drive", "Wy", "Way", "BL", "Boulevard", 
 	"PW", "Parkway", "CI", "Circle", "LA", "Lane", "CC", "Crescent", "GR", "Green", "PZ", "Plaza", "RO", "Row", 
 	"Wh", "Wharf", "LN", "Ts", "Terrace", "Xt", "BR", "bridge");
+
+	$stateTakeOut = array("MA", "mass", "massachusetts");
+
+	$neighbourhoodTakeOut = array("Charlestown","Waterfront","South Boston","South Boston Waterfront","Dorchester","Allston","Brighton",
+		"East Boston","Hyde Park","Jamaica Plain","West Roxbury","Downtown","Financial District","Roslindale","Beacon Hill","Roxbury",
+		"Mattapan", "Greater Mattapan", "South End", "Fenway", "Kenmore", "Audubon Circle", "Longwood", "Back Bay", "Mission Hill","boston");
+
+	$zipForAddress = array("02135","02134","02215","02467","02445","02111","02446","02114","02116","02115","02132","02131","02130",
+		"02127","02136","02126","02137","02124","02125","02122","02121","02119","02118","02090","02199","02120","02112","02210","02110",
+		"02109","02108","02133","02113","02201","02129","02128","2135","2134","2215","2467","2445","2111","2446","2114","2116","2115",
+		"2132","2131","2130","2127","2136","2126","2137","2124","2125","2122","2121","2119","2118","2090","2199","2120","2112","2210","2110",
+		"2109","2108","2133","2113","2201","2129","2128");
 	
 	$address = $_POST['address'];
 	$pieces = explode(' ', $address);
