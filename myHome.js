@@ -85,35 +85,38 @@
       var sliderCrime = $( "#amountC" ).val();
       var sliderOwner = $( "#amountO" ).val();
 
-			var add = $("input#search").val().trim();
+			var add = $("input#searchA").val().trim();
+      var zip = $("input#searchZ").val().trim();
 			add = add.replace(',', '');
 			add = add.replace('.', '');
+      zip = zip.replace(',', '');
+      zip = zip.replace('.', '');
+
 			
 			var parts = add.split(" ");
 			
 			console.log(add);
 
-			if (add === '', isNaN(parts[0])) {
-				alert("Please fill the box correctly");
+      if (zip === '' || isNaN(zip)) {
+        alert("Please fill the ZipCode Box correctly");
+            
+      } else {
+			   if (add === '' || isNaN(parts[0])) {
+				    alert("Please fill the Address Box correctly");
 
-			$('div.header').children().each( function() {
-				$(this).val('');
-			});
-		}
-		else {
+			     $('div.header').children().each( function() {
+				      $(this).val('');
+			     });
+		    } else {
 
 
-			var url = "/search_final.html?parameter=" + add + "&%&" + sliderOwner + "/" + sliderCrime + "/" + sliderViolations + "/" + sliderHotline + "/" + sliderNoise ;
+			   var url = "/search_final.html?parameter=" + add + "&%&" +  zip;
 			
 
-			window.open(url,"_self")
+			   window.open(url,"_self")
 
-			
+     } 
 
-			.fail( function() {
-				console.log("Error retrieving server query");
-			});
-
-		}
+   }
 		});
 	});

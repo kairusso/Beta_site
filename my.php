@@ -2,7 +2,7 @@
 require_once("socrata.php");
 $socrata = new Socrata("http://data.cityofboston.gov/api");
 
-if(isset($_POST['address'])) {
+if(isset($_POST['address'],$_POST['zip'])) {
 	
 	$suffixTakeOut = array("ST", "Street", "AV", "Ave", "Avenue", "RD", "Road", "TE", "Terrace", "PL", "Place", 
 	"SQ", "Square", "CT", "Court", "PK", "Park", "HW", "Highway", "DR", "Drive", "Wy", "Way", "BL", "Boulevard", 
@@ -22,14 +22,17 @@ if(isset($_POST['address'])) {
 		"2109","2108","2133","2113","2201","2129","2128");
 	
 	$address = $_POST['address'];
+	$zip = $_POST['zip'];
 	$pieces = explode(' ', $address);
 	
 	$streetName = '';
 	$suffixNotThere = true;
+	$areaNotThere= true;
+
 	
 	for($i = 2; $i < count($pieces); $i++) {
 		foreach($suffixTakeOut as $item) {
-			if(strcasecmp($var1, $var2) == 0) {
+			if(strcasecmp($item, $pieces[$i]) == 0) {
 				$suffixNotThere = false;
 				$streetName = $pieces[1];
 				for($j = 2; $j < $i; $j++) $streetName = $streetName . ' ' . $pieces[$j];
@@ -37,6 +40,18 @@ if(isset($_POST['address'])) {
 		}
 	}
 	if($suffixNotThere) {
+		for($i = 2; $i < count($pieces); $i++) {
+			foreach($neighbourhoodTakeOut as $item) {
+				if(strcasecmp($item, $pieces[$i]) == 0) {
+					$areaNotThere = false;
+					$streetName = $pieces[1];
+					for($j = 2; $j < $i; $j++) $streetName = $streetName . ' ' . $pieces[$j];
+			}
+		}
+	}
+
+
+	if($suffixNotThere AND $areaNotThere)
 		$streetName = $pieces[1];
 		for($j = 2; $j < count($pieces); $j++) {
 			$streetName = $streetName . ' ' . $pieces[$j];

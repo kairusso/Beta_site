@@ -162,11 +162,10 @@
 		var NOISE_RATING;
 		var HOT_RATING;
 
-		var VIOLA_WEIGHT;
-		var CRIME_WEIGHT;
-		var NOISE_WEIGHT;
-		var HOT_WEIGHT;
-		var OWNER_WEIGHT;
+		var VIOLA_WEIGHT = 1; 
+		var CRIME_WEIGHT = 1;
+		var NOISE_WEIGHT = 1;
+		var HOT_WEIGHT = 1; 
 
 		var spot = 0;
 
@@ -188,40 +187,41 @@
 
 		$("input#submit").click( function() {
 
-			var add = $("input#search").val().trim();
+			var add = $("input#searchA").val().trim();
+      		var zip = $("input#searchZ").val().trim();
 			add = add.replace(',', '');
 			add = add.replace('.', '');
+      		zip = zip.replace(',', '');
+      		zip = zip.replace('.', '');
+
 			
 			var parts = add.split(" ");
 			
 			console.log(add);
 
-			if (add === '', isNaN(parts[0])) {
-				alert("Please fill the box correctly");
+      		if (zip === '', isNaN(zip)) {
+        alert("Please fill the ZipCode Box correctly");
+            
+      } else {
+			   if (add === '', isNaN(parts[0])) {
+				    alert("Please fill the Address Box correctly");
 
-			$('div.header').children().each( function() {
-				$(this).val('');
-			});
-		}
-		else {
+			     $('div.header').children().each( function() {
+				      $(this).val('');
+			     });
+		    } else {
 
-			if(!(typeof OWNER_WEIGHT === 'undefined' || typeof CRIME_WEIGHT === 'undefined' || typeof VIOLA_WEIGHT === 'undefined' ||
-				typeof HOT_WEIGHT === 'undefined' || typeof NOISE_WEIGHT === 'undefined')) {
-				var url = "/search_final.html?parameter=" + add + "&%&" + OWNER_WEIGHT + "/" + CRIME_WEIGHT + "/" + 
-				VIOLA_WEIGHT + "/" + HOT_WEIGHT + "/" + NOISE_WEIGHT ;
-			} else {
-				var url = "/search_final.html?parameter=" + add + "&%&" + "1/1/1/1/1"
-			}
 
-			window.open(url,"_self")
-
+			   var url = "/search_final.html?parameter=" + add + "&%&" +  zip;
 			
 
-			.fail( function() {
-				console.log("Error retrieving server query");
-			});
+			   window.open(url,"_self")
 
-		}
+     } 
+
+   }
+
+		
 		});
 
 		
@@ -239,13 +239,9 @@
   			else { street = street + " " + thirdSplit[i].replace(/[0-9]/g, ''); }
   		}
   		var address = thirdSplit[0] + street;
-    	var weights = secondSplit[1].split("/");
-    	VIOLA_WEIGHT = weights[2];
-		CRIME_WEIGHT = weights[1];
-		NOISE_WEIGHT = weights[4];
-		HOT_WEIGHT = weights[3];
-		OWNER_WEIGHT = weights[0];
-		return address;
+    	var zip = secondSplit[1];
+    	var passToPhp = [address, zip];
+		return passToPhp;
 		} ();
 
 		//log(getParams);
@@ -253,10 +249,15 @@
 			document.getElementsByClassName('square')[0].style.height = '12px';
 			document.getElementsByClassName('square')[0].style.width = '12px';
 
+			var passToPhp = getParams;
+
+			var address1 = passToPhp[0];
+			var zip1 = passToPhp[1];
+
 			$.ajax({
-				url: "my_hosting.php", 
+				url: "my.php", 
 				type: "POST",
-				data: {address: getParams},
+				data: {address: address1, zip: zip1},
 				dataType: "json"
 			})
 			.done( function( returnedData ) {
