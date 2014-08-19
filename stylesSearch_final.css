@@ -302,21 +302,33 @@ margin-bottom: 5px;
   
 }
 
-#search, 
+#searchA, #searchZ,  
 #submit {
     float: left;
 }
 
-#search {
+#searchA {
     height: 35px;
     width: -moz-calc(80% - 90px);
     width: -webkit-calc(80% - 90px);
-    width: 600px;
+    width: 500px;
     border: 1px solid #BABABA;
     font: normal 13px 'trebuchet MS', arial, helvetica;
     background: #f1f1f1;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) inset, 0 1px 0 rgba(255, 255, 255, 1);   
 	font-size:20px;
+}
+
+#searchZ {
+    height: 35px;
+    width: -moz-calc(80% - 90px);
+    width: -webkit-calc(80% - 90px);
+    width: 85px;
+    border: 1px solid #BABABA;
+    font: normal 13px 'trebuchet MS', arial, helvetica;
+    background: #f1f1f1;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) inset, 0 1px 0 rgba(255, 255, 255, 1);   
+  font-size:20px;
 }
 
 #submit
