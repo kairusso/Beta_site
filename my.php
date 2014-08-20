@@ -68,12 +68,12 @@ if(isset($_POST['address'], $_POST['zip'])) {
 
 
 }
-
-//$snum = 1130;
-//$sname = "commonwealth";
-//$zipViola = "02134";
-//$zipMySQL = "2134";
-
+/*
+$snum = 1130;
+$sname = "commonwealth";
+$zipViola = "02134";
+$zipMySQL = "2134";
+*/
 
 
 $conMain = mysqli_connect("10.241.110.44", "studenthousing", "B3tterLiving!", "studenthousing");
@@ -118,7 +118,7 @@ if ( $stmt = mysqli_query( $conMain, $query ) ) {
 $queryByParcel = "SELECT * FROM buildingbyfines WHERE
 			  ParcelId = '$PARCEL_ID'";
 
-if ( $stmt = mysqli_query( $conMain, $queryIdOwner ) ) {
+if ( $stmt = mysqli_query( $conMain, $queryByParcel ) ) {
 
 			global $ROOMS;
 
@@ -151,14 +151,12 @@ $OWNER_ARRAY = array();
 
 if ( $stmt = mysqli_query( $conMain, $queryByOwner ) ) {
 
-			
+			global $OWNER_ARRAY;
 
-			$row = mysqli_fetch_array( $stmt );
+			while($row = mysqli_fetch_array( $stmt )) { 
+				
 
-			foreach($row as $item) { 
-				global $OWNER_ARRAY;
-
-				$tempOwner = new ownerObject($item['ParcelId'], "", $item['FineAVG']);
+				$tempOwner = new ownerObject($row['ParcelId'], "", $row['FineAVG']);
 				array_push($OWNER_ARRAY,  $tempOwner);
 
 			}
@@ -313,7 +311,7 @@ function parseJson($response) {
 	$lat = $cell['latitude'];
 	$lng = $cell['longitude'];
 
-	global $LATITUDE, $LONGITUDE;
+	global $LATITUDE, $LONGITUDE, $OWNER_ARRAY;
 
 	$tripleArray = fire($LATITUDE, $LONGITUDE);
 	//$tripleArray = fire($lat, $lng);
@@ -327,6 +325,7 @@ function parseJson($response) {
 	$result['hotline'] = $tripleArray[6];
 	$result['hotlineDates'] = $tripleArray[7];
 	$result['hotlineTimes'] = $tripleArray[8];
+	$result['owner'] = $OWNER_ARRAY;
 	
 	echo json_encode($result);
 }
