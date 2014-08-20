@@ -395,6 +395,10 @@ function relabel($string, $value) {
 			if($value == "N/A") $rat = $row['rating'];
 			else $rat = $value;
 
+			global $ROOMS;
+
+			$rat = $rat/$ROOMS;
+
 			if (is_null($proper) ||
 				is_null($cat) ||
 				is_null($rat)) {

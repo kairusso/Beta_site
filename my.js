@@ -493,6 +493,9 @@
 				document.getElementsByClassName('square')[0].style.height = '0px';
 				document.getElementsByClassName('square')[0].style.width = '0px';
 
+
+				
+
 				
 				var CRIME_10 = [180,234,367,575,706,854,978,1118,1355,8000];
 				var crime_rating = score(CRIME_10, CRIME_TOTAL);
@@ -521,7 +524,7 @@
 				HOT_RATING = hotline_rating;
 
 
-				var VIOLATIONS_10 = [100,200,350,450,550,740,975,1410,2225,23475];
+				var VIOLATIONS_10 = [7,12,22,26,50,75,125,250,575,10000];
 				var violation_rating = score(VIOLATIONS_10, VIOLATIONS_TOTAL);
 				var violation_color = coloring(violation_rating);
 
