@@ -156,11 +156,12 @@ $OWNER_ARRAY = array();
 if ( $stmt = mysqli_query( $conMain, $queryByOwner ) ) {
 
 			global $OWNER_ARRAY;
+			global $OWNER;
 
 			while($row = mysqli_fetch_array( $stmt )) { 
 				
 
-				$tempOwner = new ownerObject($row['ParcelId'], "", $row['FineAVG']);
+				$tempOwner = new ownerObject($row['ParcelId'], "", $row['FineAVG'], $OWNER);
 				array_push($OWNER_ARRAY,  $tempOwner);
 
 			}
@@ -283,11 +284,13 @@ class ownerObject {
 	public $parcel;
 	public $add;
 	public $fineAVG;
+	public $owner;
 
-	public function __construct($parcel, $add, $FineAVG) {
+	public function __construct($parcel, $add, $FineAVG, $owner) {
 		$this->parcel = $parcel;
 		$this->add = $add;
 		$this->fineAVG = $FineAVG;
+		$this->owner = $owner;
 	}
 }
 
