@@ -3,7 +3,7 @@
 
 		acc += '<h2 id="owner_name">' + data[0].owner + '</h2>';
 
-		var VIOLATIONS_10 = [100,200,350,450,550,740,975,1410,2225,23475];
+		var VIOLATIONS_10 = [7,12,22,26,50,75,125,250,575,10000];
 		var violation_ratingO = 0;
 
 		$.each(data, function() {
@@ -517,7 +517,7 @@
 
 				$('#big_one').trigger("click");
 
-				var VIOLATIONS_10 = [100,200,350,450,550,740,975,1410,2225,23475];
+				var VIOLATIONS_10 = [7,12,22,26,50,75,125,250,575,10000];
 				var violation_ratingO = 0;
 				var counterO = 0;
 				var totalO = 0;
@@ -525,14 +525,14 @@
 
 				$.each(returnedData.owner, function() {
 					violation_ratingO = score(VIOLATIONS_10, $(this).attr('fineAVG'));
-					totalO += violation_ratingO;
-					counterO++;
+					totalO = parseInt(totalO) + violation_ratingO;
+					counterO = parseInt(counterO) + 1;
 					
 				});
 
-				totalO = totalO/counterO;
-				totalO = totalO.toFixed(1);
-				var owner_color = coloring(totalO);
+				totalO = parseInt(totalO)/parseInt(counterO);
+				totalO = parseInt(totalO).toFixed(1);
+				var owner_color = coloring(parseInt(totalO));
 				document.getElementById("owner_circle").className = "c100 p" + 10*parseInt(totalO) + " " + owner_color;
 
 
@@ -573,12 +573,7 @@
 
 				HOT_RATING = hotline_rating;
 
-
-<<<<<<< HEAD
-				//var VIOLATIONS_10 = [100,200,350,450,550,740,975,1410,2225,23475];
-=======
-				var VIOLATIONS_10 = [7,12,22,26,50,75,125,250,575,10000];
->>>>>>> FETCH_HEAD
+				//var VIOLATIONS_10 = [7,12,22,26,50,75,125,250,575,10000];
 				var violation_rating = score(VIOLATIONS_10, VIOLATIONS_TOTAL);
 				var violation_color = coloring(violation_rating);
 

@@ -12,7 +12,6 @@ if(isset($_POST['address'], $_POST['zip'])) {
 	"Wh", "Wharf", "Ts", "Xt", "Ext", "Brg", "BR", "bridge");
 
 	/*   	DO NOT UNCOMMENT !!!!!!!!!!!!!!!!!
->>>>>>> FETCH_HEAD
 	$suffixPutIn = array("St", "St", "Ave", "Ave", "Ave", "Rd", "Rd", "Ter", "Ter", "Ter", "Pl", "Pl", 
 	"Sq", "Sq", "Ct", "Ct", "Park", "Park", "Hwy", "Hwy", "Dr", "Dr", "Way", "Way", "Blvd", "Blvd", "Blvd", 
 	"Pkwy", "Pkwy","Pkwy", "Cir", "Cir", "Cir", "Ln", "Ln", "Ln","Cres", "Cres", "Cres", "Grn", "Grn", "Grn","Plz" "Plz", "Plz", "Row", "Row", 
