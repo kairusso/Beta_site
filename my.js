@@ -467,6 +467,9 @@
 
 			})
 			.fail( function() {
+				document.getElementsByClassName('square')[0].style.height = '0px';
+				document.getElementsByClassName('square')[0].style.width = '0px';
+				alert("Address does not exist in our Boston Database, please try again...");
 				console.log("Error retrieving server query");
 			});
 
