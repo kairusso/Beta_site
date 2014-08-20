@@ -1,43 +1,89 @@
 	google.load('visualization', '1.0', {'packages':['corechart']});
 
-	function chartJSLine(data) {
-		console.log(data);
-
-		data.sort(function(a, b) {
-			var ayear  = a.time.substring(0, 4);
-			var amonth = a.time.substring(5,7).replace(/^0+/, '');
-			var byear  = b.time.substring(0, 4);
-			var bmonth = b.time.substring(5,7).replace(/^0+/, '');
-
-			if (ayear === byear) {
-				return amonth - bmonth;
-			}
-			else return ayear - byear;
-		});
+	function drawChart(data, sorter, parser, id) {
+		data.sort(sorter);
 
 		if (data.length < 2) {
 			$('#charts').append('<h2 id="graph_fail_alert">Not enough data to draw a graph!</h2>');
 			return false;
 		}
 
+		var chartData = parser(data);
+
+		$('#charts').append('<canvas id="' + id + '"></canvas>');
+
+		var ctx = document.getElementById(id).getContext("2d");
+		ctx.canvas.width = 800;
+		ctx.canvas.height = 400;
+
+		var myChart = new Chart(ctx).Line(chartData, {
+			bezierCurve : false,
+			scaleFontFamily: "'Lato', sans-serif",
+		});
+	}
+
+	function parseTime(data) {
+
+		var labelList = [];
+		var rows = [];
+		current = 0;
+
+		for (i = 0; i < 24; i++) {
+			labelList.push(i);
+		}
+
+		var place = 0;
+
+		$.each(data, function() {
+			while (place != $(this).attr('time')) {
+				rows.push(0);
+				place++;
+			}
+
+			rows.push($(this).attr('freq'));
+			place++;
+		})
+
+		while (rows.length < 24) {
+			rows.push(0);
+		}
+
+		for (i = 0; i < 24; i++) {
+			labelList[i] = makeTime(labelList[i]);
+		}
+
+		var lineChartData = {
+			labels : labelList,
+
+			datasets : [{ data : rows,
+						  fillColor: "rgba(95, 166, 255,0.3)"
+						  }]
+		}
+
+		return lineChartData;
+	}
+
+	function parseDates(data) {
+
 		var labelList = [];
 		var rows = [];
 
-		var current = new Date().getMonth();
+		var curMonth = new Date().getMonth();
+		var curYear = new Date().getYear();
 
 		$.each(data, function () {
 
-			while($(this).attr('time').substring(5,7).replace(/^0+/, '')-1 != current) {
+			while($(this).attr('time').substring(5,7).replace(/^0+/, '')-1 != curMonth) {
 				rows.push(0);
-				labelList.push(numToMonth(current));
-				current = (current + 1) % 12;
-				console.log(current);
+				labelList.push(numToMonth(curMonth));
+				curMonth = (curMonth + 1) % 12;
+
 			}
 
-			labelList.push(numToMonth($(this).attr('time').substring(5,7).replace(/^0+/, '')-1));
+			labelList.push(numToMonth($(this).attr('time').substring(5,7).replace(/^0+/, '')-1) + " '" + $(this).attr('time').substring(2,4));
 			rows.push($(this).attr('freq'));
-			current = (current + 1) % 12;
-			console.log(current);
+			curMonth = (curMonth + 1) % 12;
+			console.log(curMonth);
 		});
 
 		var lineChartData = {
@@ -48,16 +94,30 @@
 						  }]
 		}
 
-		$('#charts').append('<canvas id="line"></canvas>');
+		return lineChartData;
 
-		var ctx = document.getElementById("line").getContext("2d");
-		ctx.canvas.width = 800;
-		ctx.canvas.height = 400;
+	}
 
-		var myChart = new Chart(ctx).Line(lineChartData, {
-			bezierCurve : false,
-			scaleFontFamily: "'Lato', sans-serif",
-		});
+	function sortTimes(a, b) {
+		return a.time - b.time;
+	}
+
+	function sortDates(a, b) {
+		var ayear  = a.time.substring(0, 4);
+		var amonth = a.time.substring(5,7).replace(/^0+/, '');
+		var byear  = b.time.substring(0, 4);
+		var bmonth = b.time.substring(5,7).replace(/^0+/, '');
+
+		if (ayear === byear) {
+			return amonth - bmonth;
+		}
+		else return ayear - byear;
+	}
+
+	function makeTime(num) {
+		if (num === 0) { return '12am'; }
+		else if (num > 12) { return (num % 12) + 'pm'; } 
+		else { return num + 'am'; }
 	}
 
 	function numToMonth(num) {
@@ -90,81 +150,6 @@
 	    }
 	}
 
-	function drawChartV(myData) {
-
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-
-        data.addColumn('string', 'Year');
-        data.addColumn('number', 'Cleanliness');
-        data.addColumn('number', 'Fire/Safety');
-        data.addColumn('number', 'Graffiti');
-        data.addColumn('number', 'Other');
-        data.addColumn('number', 'Permits/Regulations');
-        data.addColumn('number', 'Repair');
-        data.addColumn('number', 'Trash');
-        data.addColumn('number', 'Weeds');
-
-        $.each(myData, function() {
-        	data.addRows([makeRow($(this))]);
-        });
-
-        // Set chart options
-        var options = {
-        	title: 'Violations',
-            width:500,
-            height:400,
-            fontName: 'Lato',
-             isStacked: true,
-             backgroundColor: "#ccc",
-         };
-
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.BarChart(document.getElementById('bar'));
-        chart.draw(data, options);
-      }
-
-      function makeRow(data) {
-      	var year = data.attr('name');
-      	var clean;
-      	var fire;
-      	var graf;
-      	var other;
-      	var permit;
-      	var repair;
-      	var trash;
-      	var weeds;
-
-      	$.each(data.attr('loInc'), function() {
-      		if ($(this).attr('cat') === "Permit/Registration") {
-      			permit = $(this).attr('freq');
-      		}
-      		else if ($(this).attr('cat') === "Trash") {
-      			trash = $(this).attr('freq');
-      		}
-      		else if ($(this).attr('cat') === "Overgrown Weeds") {
-      			weeds = $(this).attr('freq');
-      		}
-      		else if ($(this).attr('cat') === "Graffiti") {
-      			graf = $(this).attr('freq');
-      		}
-      		else if ($(this).attr('cat') === "Safety/Fire Protection") {
-      			fire = $(this).attr('freq');
-      		}
-      		else if ($(this).attr('cat') === "Repair/Maintenance") {
-      			repair = $(this).attr('freq');
-      		}
-      		else if ($(this).attr('cat') === "Cleanliness") {
-      			clean = $(this).attr('freq');
-      		}
-      		else if ($(this).attr('cat') === "Other") {
-      			other = $(this).attr('freq');
-      		}
-      	});
-
-      	return [year, clean, fire, graf, other, permit, repair, trash, weeds];
-      }
-
       function getFreqs(data) {
         	  	var count = 0;
         	  	$.each(data, function() {
@@ -193,9 +178,6 @@
 
 
 		$(document).ready( function() {
-
-		
-	
 
 		$('#big_one').css('background-color', 'rgb(235, 235, 235)');
 
@@ -295,9 +277,8 @@
 				var textTemp;
 
 				$('#big_one').click( function() {
+					$('#charts').empty();
 					$('#main_output').empty();
-					$('#bar').empty();
-					$('#line').empty();
 					$('#main_output').append('<p class="col-md-2">Other Stats</p>');
 
 					$('#main_output').append(
@@ -319,10 +300,16 @@
 					$('li#hotline').css('background-color', '#eee');
 
 				});
+
+				$('#totalJS').hover( function() {
+					textTemp = $('#totalJS').text();
+					$('#totalJS').text('Total');
+				}, function(){
+    				$('#totalJS').text(textTemp);
+				});
 				
 				$('#violations').click( function() {
 					$('#charts').empty();
-					$('#line').remove();
 					$('#main_output').empty();
 					$('#main_output').append(violations);
 					//$('#bar').append('<p>Code Violations by Month</p>');
@@ -344,12 +331,13 @@
 				
 				$('#crime').click( function() {
 					$('#charts').empty();
-					$('#line').remove();
 					$('#main_output').empty();
-					$('#main_output').append('<p>Displaying all crime incidents within 250 meters of your address in the last year</p>');
+					$('#main_output').append('<p id="main_title">Displaying all crime incidents within 250 meters of your address in the last year</p>');
 					$('#main_output').append(crime);
 					$('#charts').append('<h2 id="chart_title">Crime Violations by Month</h2>');
-					chartJSLine(returnedData.crimeDates);
+					drawChart(returnedData.crimeDates, sortDates, parseDates, 'date_line');
+					$('#charts').append('<h2 id="chart_title">Crime Violations by Time of Day</h2>');
+					drawChart(returnedData.crimeTimes, sortTimes, parseTime, 'time_line');
 
 					$('#crime').css('background-color', '#ccc');
 					$('li#big_one').css('background-color', '#eee');
@@ -367,12 +355,13 @@
 				
 				$('#noise').click( function() {
 					$('#charts').empty();
-					$('#line').remove();
 					$('#main_output').empty();
-					$('#main_output').append('<p>Displaying all noise incidents within 250 meters of your address in the last year</p>');
+					$('#main_output').append('<p id="main_title">Displaying all noise incidents within 250 meters of your address in the last year</p>');
 					$('#main_output').append(noise);
-					$('#charts').append('<h2 id="chart_title">Noise Violations by Month</h2>');
-					chartJSLine(returnedData.noiseDates);
+					$('#charts').append('<h2 id="chart_title">Crime Violations by Month</h2>');
+					drawChart(returnedData.noiseDates, sortDates, parseDates, 'date_line');
+					$('#charts').append('<h2 id="chart_title">Crime Violations by Time of Day</h2>');
+					drawChart(returnedData.noiseTimes, sortTimes, parseTime, 'time_line');
 
 					$('#noise').css('background-color', '#ccc');
 					$('#violations').css('background-color', '#eee');
@@ -390,12 +379,13 @@
 				
 				$('#hotline').click( function() {
 					$('#charts').empty();
-					$('#line').remove();
 					$('#main_output').empty();
-					$('#main_output').append('<p>Displaying all hotline incidents within 250 meters of your address in the last year</p>');
+					$('#main_output').append('<p id="main_title">Displaying all hotline incidents within 250 meters of your address in the last year</p>');
 					$('#main_output').append(hotline);
-					$('#charts').append('<h2 id="chart_title">Hotline Incidents by Month</h2>');
-					chartJSLine(returnedData.hotlineDates);
+					$('#charts').append('<h2 id="chart_title">Crime Violations by Month</h2>');
+					drawChart(returnedData.hotlineDates, sortDates, parseDates, 'date_line');
+					$('#charts').append('<h2 id="chart_title">Crime Violations by Time of Day</h2>');
+					drawChart(returnedData.hotlineTimes, sortTimes, parseTime, 'time_line');
 
 					$('#hotline').css('background-color', '#ccc');
 					$('#violations').css('background-color', '#eee');
@@ -409,13 +399,6 @@
 					$('#hotlineJS').text(HOT_RATING);
 				}, function(){
     				$('#hotlineJS').text(textTemp);
-				});
-
-				$('#totalJS').hover( function() {
-					textTemp = $('#totalJS').text();
-					$('#totalJS').text('Total');
-				}, function(){
-    				$('#totalJS').text(textTemp);
 				});
 
 				$('#big_one').trigger("click");

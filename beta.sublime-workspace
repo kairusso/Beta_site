@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"b",
+				"b"
+			],
+			[
+				"freq",
+				"freq"
+			],
+			[
+				"add",
+				"addRows"
+			],
+			[
+				"cont",
+				"container_Results"
+			],
+			[
+				"li",
+				"li"
+			],
+			[
 				"VIOLATIONS",
 				"VIOLATIONS_BY_CAT"
 			],
@@ -272,10 +292,6 @@
 				"miamiFL"
 			],
 			[
-				"add",
-				"Address"
-			],
-			[
 				"font",
 				"font-family"
 			],
@@ -315,6 +331,38 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "search_final.html",
+			"settings":
+			{
+				"buffer_size": 4304,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "stylesSearch_final.css",
+			"settings":
+			{
+				"buffer_size": 9572,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "my.js",
+			"settings":
+			{
+				"buffer_size": 21119,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "my.php",
+			"settings":
+			{
+				"buffer_size": 12529,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -348,6 +396,17 @@
 	},
 	"file_history":
 	[
+		"/Users/charlesperrone/Desktop/DOIT_BIG/Beta_site/my.php",
+		"/Users/charlesperrone/Desktop/DOIT_BIG/Beta_site/my.js",
+		"/Users/charlesperrone/Desktop/DOIT_BIG/Beta_site/my_hosting.php",
+		"/Users/charlesperrone/Desktop/DOIT_BIG/Beta_site/init_database_hosting.php",
+		"/Users/charlesperrone/Desktop/DOIT_BIG/Beta_site/beta.sublime-workspace",
+		"/Users/charlesperrone/Desktop/DOIT_BIG copy/Beta_site/beta.sublime-workspace",
+		"/Users/charlesperrone/Desktop/DOIT_BIG/Beta_site/style.scss",
+		"/Users/charlesperrone/Desktop/DOIT_BIG/Beta_site/Search_final.html",
+		"/Users/charlesperrone/Desktop/DOIT_BIG/Beta_site/mystyle.scss.css",
+		"/Users/charlesperrone/Desktop/DOIT_BIG/Beta_site/stylesSearch_final.scss.css",
+		"/Users/charlesperrone/Desktop/DOIT_BIG/Beta_site/stylesSearch_final.sass.css",
 		"/Users/charlesperrone/Desktop/DOIT_BIG/Beta_site/my2.php",
 		"/Users/charlesperrone/Sites/SPOT_IT/DOIT_SITE.sublime-project",
 		"/Users/charlesperrone/Sites/DOIT_SIMPLE/WEBPAGE2/stylesSearch.css",
@@ -441,7 +500,7 @@
 	],
 	"find":
 	{
-		"height": 60.0
+		"height": 61.0
 	},
 	"find_in_files":
 	{
@@ -455,6 +514,42 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"dates",
+			"table",
+			"echo",
+			"sort",
+			"echo",
+			"crimeDates",
+			"total_incident",
+			"sort",
+			"drawLine",
+			"pick",
+			"background-color:",
+			"console.log(",
+			"sort",
+			"});\n",
+			"text_output",
+			"lat",
+			"mysql",
+			"text",
+			"charts",
+			"split",
+			"fire",
+			"socrata",
+			"drawChart",
+			"chart",
+			"output",
+			"text_output",
+			"text",
+			"results_scoring",
+			"container",
+			"float: left",
+			"charts",
+			"results",
+			"submit",
+			"search",
+			"text-output",
+			"text",
 			"all_results",
 			"address",
 			"incYear",
@@ -507,8 +602,117 @@
 	"groups":
 	[
 		{
+			"selected": 2,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "search_final.html",
+					"settings":
+					{
+						"buffer_size": 4304,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4210,
+								4210
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "stylesSearch_final.css",
+					"settings":
+					{
+						"buffer_size": 9572,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								602,
+								602
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "my.js",
+					"settings":
+					{
+						"buffer_size": 21119,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9947,
+								9947
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 4982.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "my.php",
+					"settings":
+					{
+						"buffer_size": 12529,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -576,6 +780,6 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 150.0,
+	"side_bar_width": 297.0,
 	"status_bar_visible": true
 }
