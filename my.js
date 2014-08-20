@@ -3,12 +3,41 @@
 
 		acc += '<h2 id="owner_name">' + data[0].owner + '</h2>';
 
+		var VIOLATIONS_10 = [100,200,350,450,550,740,975,1410,2225,23475];
+		var violation_ratingO = 0;
+
 		$.each(data, function() {
-			acc += '<p id="owner_node">' + $(this).attr('add') + ' ' + $(this).attr('fineAVG') + '</p>';
+
+			
+			
+			violation_ratingO = scoreO(VIOLATIONS_10, $(this).attr('fineAVG'));
+
+			acc += '<p id="owner_node">' + $(this).attr('add') + ' ' + violation_ratingO + '</p>';
 		});
 
 		$('#main_output').append('<div id="owner_wrap">' + acc + '</div>');
 	}
+
+	function scoreO(VIOLATIONS_10, totalCount) {
+
+			var VIOLA_SCORE = 10;
+
+			if(totalCount <= VIOLATIONS_10[0]) { VIOLA_SCORE = 10; }
+            else if(totalCount < VIOLATIONS_10[9]) {
+                for(i = 1; i <= 9; i++) {
+                    if(totalCount < VIOLATIONS_10[i]) {
+                        VIOLA_SCORE = (10-i) + ((VIOLATIONS_10[i]-totalCount)/((VIOLATIONS_10[i]-VIOLATIONS_10[i-1])));
+                        break;
+                    }
+                    
+                }
+                
+            } else {
+                VIOLA_SCORE = 0.0;
+            }
+
+			return VIOLA_SCORE = VIOLA_SCORE.toFixed(1);
+		}
 
 	function drawBigChart(crime, noise, hotline) {
 		console.log(crime);
@@ -380,6 +409,8 @@
 					$('li#hotline').css('background-color', '#eee');
 					$('li#owner').css('background-color', '#ccc');
 				});
+
+
 				
 				$('#violations').click( function() {
 					$('#charts').remove();
@@ -486,7 +517,26 @@
 
 				$('#big_one').trigger("click");
 
+				var VIOLATIONS_10 = [100,200,350,450,550,740,975,1410,2225,23475];
+				var violation_ratingO = 0;
+				var counterO = 0;
+				var totalO = 0;
 
+
+				$.each(returnedData.owner, function() {
+					violation_ratingO = score(VIOLATIONS_10, $(this).attr('fineAVG'));
+					totalO += violation_ratingO;
+					counterO++;
+					
+				});
+
+				totalO = totalO/counterO;
+				totalO = totalO.toFixed(1);
+				var owner_color = coloring(totalO);
+				document.getElementById("owner_circle").className = "c100 p" + 10*parseInt(totalO) + " " + owner_color;
+
+
+				console.log(totalO);
 
 				//console.log(returnedData);
 
@@ -521,7 +571,7 @@
 				HOT_RATING = hotline_rating;
 
 
-				var VIOLATIONS_10 = [100,200,350,450,550,740,975,1410,2225,23475];
+				//var VIOLATIONS_10 = [100,200,350,450,550,740,975,1410,2225,23475];
 				var violation_rating = score(VIOLATIONS_10, VIOLATIONS_TOTAL);
 				var violation_color = coloring(violation_rating);
 
