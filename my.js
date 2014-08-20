@@ -181,7 +181,13 @@
 
 		$('#big_one').css('background-color', 'rgb(235, 235, 235)');
 
-		$("input#search").keyup(function(event){
+		$("input#searchA").keyup(function(event){
+    		if(event.keyCode == 13){
+        		$("input#submit").click();
+    		}
+		});
+
+		$("input#searchZ").keyup(function(event){
     		if(event.keyCode == 13){
         		$("input#submit").click();
     		}
@@ -469,7 +475,7 @@
 			.fail( function() {
 				document.getElementsByClassName('square')[0].style.height = '0px';
 				document.getElementsByClassName('square')[0].style.width = '0px';
-				alert("Address does not exist in our Boston Database, please try again...");
+				alert("Address does not exist in our Boston Database, make sure the Zip is correct and please try again...");
 				console.log("Error retrieving server query");
 			});
 

@@ -2,7 +2,13 @@
 
 		
 
-		$("input#search").keyup(function(event){
+		$("input#searchA").keyup(function(event){
+    		if(event.keyCode == 13){
+        		$("input#submit").click();
+    		}
+		});
+
+		$("input#searchZ").keyup(function(event){
     		if(event.keyCode == 13){
         		$("input#submit").click();
     		}

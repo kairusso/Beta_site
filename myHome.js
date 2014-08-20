@@ -69,11 +69,17 @@
 
 		
 
-		$("input#search").keyup(function(event){
-    		if(event.keyCode == 13){
-        		$("input#submit").click();
-    		}
-		});
+		$("input#searchA").keyup(function(event){
+        if(event.keyCode == 13){
+            $("input#submit").click();
+        }
+    });
+
+    $("input#searchZ").keyup(function(event){
+        if(event.keyCode == 13){
+            $("input#submit").click();
+        }
+    });
 
 		
 
