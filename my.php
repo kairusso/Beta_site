@@ -10,7 +10,9 @@ if(isset($_POST['address'], $_POST['zip'])) {
 	"SQ", "Square", "CT", "Court", "PK", "Park", "HW", "Highway", "DR", "Drive", "Wy", "Way", "Blvd", "BL", "Boulevard", 
 	"Pkwy", "PW", "Parkway","Cir", "CI", "Circle", "Ln", "LA", "Lane", "Cres", "CC", "Crescent","Grn", "GR", "Green","Plz", "PZ", "Plaza", "RO", "Row", 
 	"Wh", "Wharf", "Ts", "Xt", "Ext", "Brg", "BR", "bridge");
-	/*
+
+	/*   	DO NOT UNCOMMENT !!!!!!!!!!!!!!!!!
+>>>>>>> FETCH_HEAD
 	$suffixPutIn = array("St", "St", "Ave", "Ave", "Ave", "Rd", "Rd", "Ter", "Ter", "Ter", "Pl", "Pl", 
 	"Sq", "Sq", "Ct", "Ct", "Park", "Park", "Hwy", "Hwy", "Dr", "Dr", "Way", "Way", "Blvd", "Blvd", "Blvd", 
 	"Pkwy", "Pkwy","Pkwy", "Cir", "Cir", "Cir", "Ln", "Ln", "Ln","Cres", "Cres", "Cres", "Grn", "Grn", "Grn","Plz" "Plz", "Plz", "Row", "Row", 
@@ -391,6 +393,10 @@ function relabel($string, $value) {
 
 			if($value == "N/A") $rat = $row['rating'];
 			else $rat = $value;
+
+			global $ROOMS;
+
+			$rat = $rat/$ROOMS;
 
 			if (is_null($proper) ||
 				is_null($cat) ||
