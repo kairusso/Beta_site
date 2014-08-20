@@ -70,10 +70,10 @@ if(isset($_POST['address'], $_POST['zip'])) {
 
 }
 */
-$snum = 1130;
-$sname = "commonwealth";
-$zipViola = "02134";
-$zipMySQL = "2134";
+//$snum = 1130;
+//$sname = "commonwealth";
+//$zipViola = "02134";
+//$zipMySQL = "2134";
 
 
 

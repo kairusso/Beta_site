@@ -1,11 +1,13 @@
 	function drawOwner(data) {
 		var acc = '';
 
+		acc += '<h2 id="owner_name">' + data[0].owner + '</h2>';
+
 		$.each(data, function() {
-			acc += '<p>' + $(this).attr('parcel') + '</p>';
+			acc += '<p id="owner_node">' + $(this).attr('add') + ' ' + $(this).attr('fineAVG') + '</p>';
 		});
 
-		$('#main_output').append(acc);
+		$('#main_output').append('<div id="owner_wrap">' + acc + '</div>');
 	}
 
 	function drawBigChart(crime, noise, hotline) {
