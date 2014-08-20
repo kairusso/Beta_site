@@ -2,7 +2,7 @@
 require_once("socrata.php");
 $socrata = new Socrata("http://data.cityofboston.gov/api");
 
-/*
+
 if(isset($_POST['address'], $_POST['zip'])) {
 	
 	
@@ -11,7 +11,7 @@ if(isset($_POST['address'], $_POST['zip'])) {
 	"Pkwy", "PW", "Parkway","Cir", "CI", "Circle", "Ln", "LA", "Lane", "Cres", "CC", "Crescent","Grn", "GR", "Green","Plz", "PZ", "Plaza", "RO", "Row", 
 	"Wh", "Wharf", "Ts", "Xt", "Ext", "Brg", "BR", "bridge");
 
-	/*$suffixPutIn = array("St", "St", "Ave", "Ave", "Ave", "Rd", "Rd", "Ter", "Ter", "Ter", "Pl", "Pl", 
+	$suffixPutIn = array("St", "St", "Ave", "Ave", "Ave", "Rd", "Rd", "Ter", "Ter", "Ter", "Pl", "Pl", 
 	"Sq", "Sq", "Ct", "Ct", "Park", "Park", "Hwy", "Hwy", "Dr", "Dr", "Way", "Way", "Blvd", "Blvd", "Blvd", 
 	"Pkwy", "Pkwy","Pkwy", "Cir", "Cir", "Cir", "Ln", "Ln", "Ln","Cres", "Cres", "Cres", "Grn", "Grn", "Grn","Plz" "Plz", "Plz", "Row", "Row", 
 	"Wharf", "Wharf", "Ts", "Ext", "Ext", "Brg", "BR", "bridge");
@@ -26,7 +26,7 @@ if(isset($_POST['address'], $_POST['zip'])) {
 		"02127","02136","02126","02137","02124","02125","02122","02121","02119","02118","02090","02199","02120","02112","02210","02110",
 		"02109","02108","02133","02113","02201","02129","02128","2135","2134","2215","2467","2445","2111","2446","2114","2116","2115",
 		"2132","2131","2130","2127","2136","2126","2137","2124","2125","2122","2121","2119","2118","2090","2199","2120","2112","2210","2110",
-		"2109","2108","2133","2113","2201","2129","2128");*//*
+		"2109","2108","2133","2113","2201","2129","2128");*/
 	
 	$address = $_POST['address'];
 	$zip = $_POST['zip'];
@@ -69,13 +69,13 @@ if(isset($_POST['address'], $_POST['zip'])) {
 
 
 }
+
+/*
+$snum = 1130;
+$sname = "commonwealth";
+$zipViola = "02134";
+$zipMySQL = "2134";
 */
-//$snum = 1130;
-//$sname = "commonwealth";
-//$zipViola = "02134";
-//$zipMySQL = "2134";
-
-
 
 $conMain = mysqli_connect("10.241.110.44", "studenthousing", "B3tterLiving!", "studenthousing");
 
