@@ -1,9 +1,9 @@
 	google.load('visualization', '1.0', {'packages':['corechart']});
 
-	function drawLineChart(myData) {
-		var data = new google.visualization.DataTable();
+	function chartJSLine(data) {
+		console.log(data);
 
-		myData.sort(function(a, b) {
+		data.sort(function(a, b) {
 			var ayear  = a.time.substring(0, 4);
 			var amonth = a.time.substring(5,7).replace(/^0+/, '');
 			var byear  = b.time.substring(0, 4);
@@ -15,29 +15,80 @@
 			else return ayear - byear;
 		});
 
-		data.addColumn('date', 'Month');
-		data.addColumn('number', 'Frequency');
+		if (data.length < 2) {
+			$('#charts').append('<h2 id="graph_fail_alert">Not enough data to draw a graph!</h2>');
+			return false;
+		}
 
-		var options = {
-			title: 'Line',
-            width:800,
-            height:400,
-            fontName: 'Lato',
-             backgroundColor: "#ccc",
-             legend:'none'
-		};
+		var labelList = [];
+		var rows = [];
 
-		$.each(myData, function() {
-			data.addRows([
-				[new Date($(this).attr('time').substring(0, 4),
-						  $(this).attr('time').substring(5, 7).replace(/^0+/, ''), 1), $(this).attr('freq')]
-				]);
+		var current = new Date().getMonth();
+
+		$.each(data, function () {
+
+			while($(this).attr('time').substring(5,7).replace(/^0+/, '')-1 != current) {
+				rows.push(0);
+				labelList.push(numToMonth(current));
+				current = (current + 1) % 12;
+				console.log(current);
+			}
+
+			labelList.push(numToMonth($(this).attr('time').substring(5,7).replace(/^0+/, '')-1));
+			rows.push($(this).attr('freq'));
+			current = (current + 1) % 12;
+			console.log(current);
 		});
 
-		var chart = new google.visualization.LineChart(document.getElementById('line'));
-        chart.draw(data, options);
+		var lineChartData = {
+			labels : labelList,
 
-    }
+			datasets : [{ data : rows,
+						  fillColor: "rgba(95, 166, 255,0.3)"
+						  }]
+		}
+
+		$('#charts').append('<canvas id="line"></canvas>');
+
+		var ctx = document.getElementById("line").getContext("2d");
+		ctx.canvas.width = 800;
+		ctx.canvas.height = 400;
+
+		var myChart = new Chart(ctx).Line(lineChartData, {
+			bezierCurve : false,
+			scaleFontFamily: "'Lato', sans-serif",
+		});
+	}
+
+	function numToMonth(num) {
+		if (num == 0) { 
+			return "Jan";
+		} else if (num == 1) {
+		 	return "Feb";
+		} else if (num == 2) {
+		    return "Mar";
+		} else if (num == 3) {
+		    return "Apr";
+		} else if (num == 4) {
+			return "May";
+		} else if (num == 5) {
+		    return "Jun";
+		} else if (num == 6) {
+			return "Jul";
+	    } else if (num == 7) {
+	        return "Aug";
+	    } else if (num == 8) {
+	        return "Sep";
+	    } else if (num == 9) {
+	        return "Oct";
+	    } else if (num == 10) {
+	        return "Nov";
+	    } else if (num == 11) {
+	        return "Dec";
+	    } else {
+	        return false;
+	    }
+	}
 
 	function drawChartV(myData) {
 
@@ -112,36 +163,6 @@
       	});
 
       	return [year, clean, fire, graf, other, permit, repair, trash, weeds];
-      }
-
-      function drawChartOther(myData) {
-
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-
-        data.addColumn('string', 'Crime Type');
-        data.addColumn('number', '# of violations');
-
-        $.each(myData, function() {
-        	data.addRows([
-        	  [$(this).attr('cat'), getFreqs($(this))]
-        	]);
-        });
-
-        // Set chart options
-        var options = {
-        	title: 'Violations',
-            width:500,
-            height:400,
-            fontName: 'Lato',
-             orientation:'horizontal',
-             legend:'none',
-             backgroundColor: "#ccc",
-         };
-
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.BarChart(document.getElementById('bar'));
-        chart.draw(data, options);
       }
 
       function getFreqs(data) {
@@ -262,6 +283,8 @@
 			})
 			.done( function( returnedData ) {
 
+				console.log(returnedData);
+
 				$('#info-box').append('<p id="address">Showing results for:   <strong>' + returnedData.address + '</strong></p>');
 			
 				var violations = styleViol(returnedData.list, returnedData.address);
@@ -270,14 +293,40 @@
 				var hotline = styleCrime(returnedData.hotline, 3);
 
 				var textTemp;
+
+				$('#big_one').click( function() {
+					$('#main_output').empty();
+					$('#bar').empty();
+					$('#line').empty();
+					$('#main_output').append('<p class="col-md-2">Other Stats</p>');
+
+					$('#main_output').append(
+						'<div class="col-md-3"><p id="total_title">Displaying the 5 most frequent incidents for each category</p>' +
+						'<table id="total_table">' + 
+							'<tr>' +
+								'<td class="total_cell"><p id="total_label">Violations</p>' + top5(returnedData.crime) + '</td>' +
+								'<td class="total_cell" id="b1"><p id="total_label">Crime</p>' + top5(returnedData.crime) + '</td>' +
+							'</tr>' + 
+							'<tr>' + 
+								'<td class="total_cell" id="b2"><p id="total_label">Hotline</p>' + top5(returnedData.hotline) + '</td>' +
+								'<td class="total_cell"><p id="total_label">Noise</p>' + top5(returnedData.noise) + '</td>' +
+							'</tr></table></div>');
+
+					$('#violations').css('background-color', '#eee');
+					$('li#big_one').css('background-color', '#ccc');
+					$('li#crime').css('background-color', '#eee');
+					$('li#noise').css('background-color', '#eee');
+					$('li#hotline').css('background-color', '#eee');
+
+				});
 				
 				$('#violations').click( function() {
-					$('#line').empty();
-					$('#bar').empty();
-					$('#text_output').empty();
-					$('#text_output').append(violations);
-					$('#bar_output').empty();
-					drawChartV(returnedData.list);
+					$('#charts').empty();
+					$('#line').remove();
+					$('#main_output').empty();
+					$('#main_output').append(violations);
+					//$('#bar').append('<p>Code Violations by Month</p>');
+					//chartJSLine(returnedData.crimeDates);
 
 					$('#violations').css('background-color', '#ccc');
 					$('li#big_one').css('background-color', '#eee');
@@ -286,25 +335,21 @@
 					$('li#hotline').css('background-color', '#eee');
 				});
 
-				console.log('first');
-
 				$('#violaJS').hover( function() {
 					textTemp = $('#violaJS').text();
 					$('#violaJS').text(VIOLA_RATING);
 				}, function(){
     				$('#violaJS').text(textTemp);
 				});
-				console.log('done');
 				
 				$('#crime').click( function() {
-					$('#line').empty();
-					$('#bar').empty();
-					$('#text_output').empty();
-					$('#text_output').append(crime.string);
-					$('#bar_output').empty();
-					$('#bar_output').append(crime.bars);
-					drawChartOther(returnedData.crime);
-					drawLineChart(returnedData.crimeDates);
+					$('#charts').empty();
+					$('#line').remove();
+					$('#main_output').empty();
+					$('#main_output').append('<p>Displaying all crime incidents within 250 meters of your address in the last year</p>');
+					$('#main_output').append(crime);
+					$('#charts').append('<h2 id="chart_title">Crime Violations by Month</h2>');
+					chartJSLine(returnedData.crimeDates);
 
 					$('#crime').css('background-color', '#ccc');
 					$('li#big_one').css('background-color', '#eee');
@@ -321,14 +366,13 @@
 				});
 				
 				$('#noise').click( function() {
-					$('#line').empty();
-					$('#bar').empty();
-					$('#text_output').empty();
-					$('#text_output').append(noise.string);
-					$('#bar_output').empty();
-					$('#bar_output').append(noise.bars);
-					drawChartOther(returnedData.noise);
-					drawLineChart(returnedData.noiseDates);
+					$('#charts').empty();
+					$('#line').remove();
+					$('#main_output').empty();
+					$('#main_output').append('<p>Displaying all noise incidents within 250 meters of your address in the last year</p>');
+					$('#main_output').append(noise);
+					$('#charts').append('<h2 id="chart_title">Noise Violations by Month</h2>');
+					chartJSLine(returnedData.noiseDates);
 
 					$('#noise').css('background-color', '#ccc');
 					$('#violations').css('background-color', '#eee');
@@ -345,14 +389,13 @@
 				});
 				
 				$('#hotline').click( function() {
-					$('#line').empty();
-					$('#bar').empty();
-					$('#text_output').empty();
-					$('#text_output').append(hotline.string);
-					$('#bar_output').empty();
-					$('#bar_output').append(hotline.bars);
-					drawChartOther(returnedData.hotline);
-					drawLineChart(returnedData.hotlineDates);
+					$('#charts').empty();
+					$('#line').remove();
+					$('#main_output').empty();
+					$('#main_output').append('<p>Displaying all hotline incidents within 250 meters of your address in the last year</p>');
+					$('#main_output').append(hotline);
+					$('#charts').append('<h2 id="chart_title">Hotline Incidents by Month</h2>');
+					chartJSLine(returnedData.hotlineDates);
 
 					$('#hotline').css('background-color', '#ccc');
 					$('#violations').css('background-color', '#eee');
@@ -375,7 +418,7 @@
     				$('#totalJS').text(textTemp);
 				});
 
-				$('#violations').trigger("click");
+				$('#big_one').trigger("click");
 
 
 
@@ -453,51 +496,73 @@
 				return b.freq - a.freq;
 			});
 					
-		var string = '';
-		var bars = '';
+		var string = '<table class="deep">';
 		var high = list[0].freq;
 
-		//save the highest frequency, this helps in scaling the bars
-		//console.log(list);
-
 			$.each(list, function() {
-				string = string + '<p id="listed">' + setIcon($(this).attr('cat')) + $(this).attr('cat') + '</p>';
-
-				bars += '<div class="bar_wrap"><div id="a_bar" style="width:' + ($(this).attr('freq')/high)*100 + '%">' + '(' + $(this).attr('freq') + ')' + '</div></div>';
+				string = string + '<tr><td id="label"><p id="listed">' + $(this).attr('cat') + setIcon($(this).attr('cat')) + '</p></td><td id="bars">' +
+				 '<div class="bar_wrap"><div id="a_bar" style="width:' + ($(this).attr('freq')/high)*100 + '%">' + 
+				 '<strong>(' + $(this).attr('freq') + ')</strong>' + '</div></div></td></tr>';
 
 				if(type === 1) { CRIME_TOTAL += parseInt($(this).attr('rat')); }
 				else if(type === 2) { NOISE_TOTAL += parseInt($(this).attr('rat')); }
 				else { HOTLINE_TOTAL += parseInt($(this).attr('rat')); }
 			}); 
 
-		var result = [];
-		result.string = string;
-		result.bars = bars;
-
-		return result;
+		return string + '</table>';
 		}
 
 		function styleViol(list, address) {
 			var count = list.length;
 			var string = '';
-
-			$('.address').empty();
-			$('.address').append(address);
+			var high = findHigh(list);
 
 			if (count === 0) {
 				return "No violations found at this adress";
 			}
+
 			else {	
 				
-			string = string + "<p>Found <strong>" + total(list) + '</strong> violations'+ '</p>';	
+			string = string + "<p>Found <strong>" + total(list) + '</strong> violations for the past 10 years'+ '</p>';	
 
 			$.each(list, function() {
-			string = string + '<h2 id="year">' + $(this).attr('name') + '</h2>' + pick($(this).attr('loInc'));
+			string = string + '<table class="deep"><tr><td id="year"><h2 id="year">' + $(this).attr('name') +
+			 '</h2></td><td></td></tr>';
+
+				$.each($(this).attr('loInc'), function() {
+
+					string = string + '<tr><td id="label"><p id="listed">' + $(this).attr('desc') + setIcon($(this).attr('cat')) +
+				 	'</p></td><td id="bars"><div class="bar_wrap"><div id="a_bar" style="width:' + ($(this).attr('freq')/high)*100 + '%"><strong>(' +
+				  	$(this).attr('freq') + ')</strong></div></div></td></tr>';
+
+					VIOLATIONS_TOTAL = VIOLATIONS_TOTAL + parseInt($(this).attr('rat'));
+				});
+
+			string = string + '</table>';
 			});
-			}
+
+			$('.address').empty();
+			$('.address').append(address);
 			
 			return string;
 		}
+	}
+
+	///search the year list for the highest frequency
+	//
+	function findHigh(list) {
+		var high = 0;
+
+		$.each(list, function() {
+			$.each($(this).attr('loInc'), function() {
+				if ($(this).attr('freq') > high) {
+					high = $(this).attr('freq');
+				}
+			});
+		});
+
+		return high;
+	}
 
 		function total(list) {
 			var total = 0;
@@ -509,17 +574,6 @@
 			});
 
 			return total;
-		}
-
-		function pick(list) {
-			var result = '';
-
-			$.each(list, function() {
-				result = result + '<p id="listed">' + setIcon($(this).attr('cat')) + $(this).attr('desc') + ' (' + $(this).attr('freq') + ')' + '</p>';
-				VIOLATIONS_TOTAL = VIOLATIONS_TOTAL + parseInt($(this).attr('rat'));
-			});
-
-			return result;
 		}
 
 		function setIcon(cat) {
@@ -612,6 +666,20 @@
 
 			} 
 			return temp;
+		}
+
+		function top5(data) {
+			data.sort( function(a, b) {
+				return b.freq - a.freq;
+			});
+			result = '';
+			data = data.slice(0, 5);
+
+			$.each(data, function() {
+				result += '<p id="total_incident">' + $(this).attr('cat') + setIcon($(this).attr('cat')) + $(this).attr('freq') + '</p>';
+			});
+
+			return result;
 		}
 
 	});
