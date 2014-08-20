@@ -1,4 +1,46 @@
-	google.load('visualization', '1.0', {'packages':['corechart']});
+	function drawOwner(data) {
+		var acc = '';
+
+		$.each(data, function() {
+			acc += '<p>' + $(this).attr('parcel') + '</p>';
+		});
+
+		$('#main_output').append(acc);
+	}
+
+	function drawBigChart(crime, noise, hotline) {
+		console.log(crime);
+		console.log(noise);
+		console.log(hotline);
+
+		var c = parseDates(crime.sort(sortDates));
+		var n = parseDates(noise.sort(sortDates));
+		var h = parseDates(hotline.sort(sortDates));
+
+		var chartData = {
+			labels : c['labels'],
+
+			datasets : [{ data : c['rows'],
+						  fillColor: "rgba(95, 166, 255,0.3)" },
+						{ data : n['rows'],
+						  fillColor: "rgba(0, 100, 255,0.3)" },
+						{ data : h['rows'],
+					      fillColor: "rgba(50, 166, 130,0.3)" }
+					   ]
+			}
+
+		$('#charts').append('<canvas id="line"></canvas>');
+
+		var ctx = document.getElementById('line').getContext("2d");
+		ctx.canvas.width = 800;
+		ctx.canvas.height = 400;
+
+		var myChart = new Chart(ctx).Line(chartData, {
+			bezierCurve : false,
+			scaleFontFamily: "'Lato', sans-serif",
+			legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].lineColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+		});
+	}
 
 	function drawChart(data, sorter, parser, id) {
 		data.sort(sorter);
@@ -8,7 +50,15 @@
 			return false;
 		}
 
-		var chartData = parser(data);
+		var result = parser(data);
+
+		var lineChartData = {
+			labels : result['labels'],
+
+			datasets : [{ data : result['rows'],
+						  fillColor: "rgba(95, 166, 255,0.3)"
+						  }]
+		}
 
 		$('#charts').append('<canvas id="' + id + '"></canvas>');
 
@@ -16,7 +66,7 @@
 		ctx.canvas.width = 800;
 		ctx.canvas.height = 400;
 
-		var myChart = new Chart(ctx).Line(chartData, {
+		var myChart = new Chart(ctx).Line(lineChartData, {
 			bezierCurve : false,
 			scaleFontFamily: "'Lato', sans-serif",
 		});
@@ -52,15 +102,10 @@
 			labelList[i] = makeTime(labelList[i]);
 		}
 
-		var lineChartData = {
-			labels : labelList,
-
-			datasets : [{ data : rows,
-						  fillColor: "rgba(95, 166, 255,0.3)"
-						  }]
-		}
-
-		return lineChartData;
+		var result = [];
+		result['labels'] = labelList;
+		result['rows'] = rows;
+		return result;
 	}
 
 	function parseDates(data) {
@@ -86,16 +131,10 @@
 			console.log(curMonth);
 		});
 
-		var lineChartData = {
-			labels : labelList,
-
-			datasets : [{ data : rows,
-						  fillColor: "rgba(95, 166, 255,0.3)"
-						  }]
-		}
-
-		return lineChartData;
-
+		var result = [];
+		result['labels'] = labelList;
+		result['rows'] = rows;
+		return result;
 	}
 
 	function sortTimes(a, b) {
@@ -280,6 +319,8 @@
 				var textTemp;
 
 				$('#big_one').click( function() {
+					$('#charts').remove();
+					$('#this_one').append('<div class="col-md-4 well" id="charts">');
 					$('#charts').empty();
 					$('#main_output').empty();
 					$('#main_output').append('<p class="col-md-2">Other Stats</p>');
@@ -296,11 +337,17 @@
 								'<td class="total_cell"><p id="total_label">Noise</p>' + top5(returnedData.noise) + '</td>' +
 							'</tr></table></div>');
 
+					$('#charts').append('<h2 id="chart_title">Crime, Noise and Hotline by Month</h2>');
+
+					drawBigChart(returnedData.crimeDates,
+								 returnedData.noiseDates,
+								 returnedData.hotlineDates);
 					$('#violations').css('background-color', '#eee');
 					$('li#big_one').css('background-color', '#ccc');
 					$('li#crime').css('background-color', '#eee');
 					$('li#noise').css('background-color', '#eee');
 					$('li#hotline').css('background-color', '#eee');
+					$('li#owner').css('background-color', '#eee');
 
 				});
 
@@ -310,9 +357,22 @@
 				}, function(){
     				$('#totalJS').text(textTemp);
 				});
+
+				$('#owner').click( function() {
+					$('#charts').remove();
+					$('#main_output').empty();
+					drawOwner(returnedData.owner);
+
+					$('#violations').css('background-color', '#eee');
+					$('li#big_one').css('background-color', '#eee');
+					$('li#crime').css('background-color', '#eee');
+					$('li#noise').css('background-color', '#eee');
+					$('li#hotline').css('background-color', '#eee');
+					$('li#owner').css('background-color', '#ccc');
+				});
 				
 				$('#violations').click( function() {
-					$('#charts').empty();
+					$('#charts').remove();
 					$('#main_output').empty();
 					$('#main_output').append(violations);
 					//$('#bar').append('<p>Code Violations by Month</p>');
@@ -323,6 +383,7 @@
 					$('li#crime').css('background-color', '#eee');
 					$('li#noise').css('background-color', '#eee');
 					$('li#hotline').css('background-color', '#eee');
+					$('li#owner').css('background-color', '#eee');
 				});
 
 				$('#violaJS').hover( function() {
@@ -333,6 +394,8 @@
 				});
 				
 				$('#crime').click( function() {
+					$('#charts').remove();
+					$('#this_one').append('<div class="col-md-4 well" id="charts">');
 					$('#charts').empty();
 					$('#main_output').empty();
 					$('#main_output').append('<p id="main_title">Displaying all crime incidents within 250 meters of your address in the last year</p>');
@@ -347,6 +410,7 @@
 					$('#violations').css('background-color', '#eee');
 					$('li#noise').css('background-color', '#eee');
 					$('li#hotline').css('background-color', '#eee');
+					$('li#owner').css('background-color', '#eee');
 				});
 
 				$('#crimeJS').hover( function() {
@@ -357,6 +421,8 @@
 				});
 				
 				$('#noise').click( function() {
+					$('#charts').remove();
+					$('#this_one').append('<div class="col-md-4 well" id="charts">');
 					$('#charts').empty();
 					$('#main_output').empty();
 					$('#main_output').append('<p id="main_title">Displaying all noise incidents within 250 meters of your address in the last year</p>');
@@ -371,6 +437,7 @@
 					$('li#crime').css('background-color', '#eee');
 					$('li#hotline').css('background-color', '#eee');
 					$('li#big_one').css('background-color', '#eee');
+					$('li#owner').css('background-color', '#eee');
 				});
 
 				$('#noiseJS').hover( function() {
@@ -381,6 +448,8 @@
 				});
 				
 				$('#hotline').click( function() {
+					$('#charts').remove();
+					$('#this_one').append('<div class="col-md-4 well" id="charts">');
 					$('#charts').empty();
 					$('#main_output').empty();
 					$('#main_output').append('<p id="main_title">Displaying all hotline incidents within 250 meters of your address in the last year</p>');
@@ -395,6 +464,7 @@
 					$('li#crime').css('background-color', '#eee');
 					$('li#noise').css('background-color', '#eee');
 					$('li#big_one').css('background-color', '#eee');
+					$('li#owner').css('background-color', '#eee');
 				});
 
 				$('#hotlineJS').hover( function() {
@@ -470,7 +540,6 @@
 				document.getElementsByClassName('square')[0].style.height = '0px';
 				document.getElementsByClassName('square')[0].style.width = '0px';
 				alert("Address does not exist in our Boston Database, please try again...");
-				console.log("Error retrieving server query");
 			});
 
 		
