@@ -30,7 +30,7 @@
 			
 			console.log(add);
 
-      if (zip === '' || isNaN(zip)) {
+      if ((zip.length != 4 && zip.length != 5) || isNaN(zip)) {
         alert("Please fill the ZipCode Box correctly");
             
       } else {

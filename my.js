@@ -202,17 +202,17 @@
 			
 			console.log(add);
 
-      		if (zip === '', isNaN(zip)) {
-        alert("Please fill the ZipCode Box correctly");
+      		if ((zip.length != 4 && zip.length != 5) || isNaN(zip)) {
+        		alert("Please fill the ZipCode Box correctly");
             
-      } else {
-			   if (add === '', isNaN(parts[0])) {
+      		} else {
+			   if (add === '' || isNaN(parts[0])) {
 				    alert("Please fill the Address Box correctly");
 
-			     $('div.header').children().each( function() {
-				      $(this).val('');
-			     });
-		    } else {
+			     	$('div.header').children().each( function() {
+				      	$(this).val('');
+			     	});
+		    	} else {
 
 
 			   var url = "/search_final.html?parameter=" + add + "&%&" +  zip;
@@ -256,6 +256,9 @@
 
 			var address1 = passToPhp[0];
 			var zip1 = passToPhp[1];
+
+			console.log(address1);
+			console.log(zip1);
 
 			$.ajax({
 				url: "my.php", 

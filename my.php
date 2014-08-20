@@ -2,12 +2,20 @@
 require_once("socrata.php");
 $socrata = new Socrata("http://data.cityofboston.gov/api");
 
-if(isset($_POST['address'],$_POST['zip'])) {
+
+
+if(isset($_POST['address'], $_POST['zip'])) {
 	
-	$suffixTakeOut = array("ST", "Street", "AV", "Ave", "Avenue", "RD", "Road", "TE", "Terrace", "PL", "Place", 
-	"SQ", "Square", "CT", "Court", "PK", "Park", "HW", "Highway", "DR", "Drive", "Wy", "Way", "BL", "Boulevard", 
-	"PW", "Parkway", "CI", "Circle", "LA", "Lane", "CC", "Crescent", "GR", "Green", "PZ", "Plaza", "RO", "Row", 
-	"Wh", "Wharf", "LN", "Ts", "Terrace", "Xt", "BR", "bridge");
+	
+	$suffixTakeOut = array("ST", "Street", "AV", "Ave", "Avenue", "RD", "Road", "Ter", "TE", "Terrace", "PL", "Place", 
+	"SQ", "Square", "CT", "Court", "PK", "Park", "HW", "Highway", "DR", "Drive", "Wy", "Way", "Blvd", "BL", "Boulevard", 
+	"Pkwy", "PW", "Parkway","Cir", "CI", "Circle", "Ln", "LA", "Lane", "Cres", "CC", "Crescent","Grn", "GR", "Green","Plz", "PZ", "Plaza", "RO", "Row", 
+	"Wh", "Wharf", "Ts", "Xt", "Ext", "Brg", "BR", "bridge");
+
+	/*$suffixPutIn = array("St", "St", "Ave", "Ave", "Ave", "Rd", "Rd", "Ter", "Ter", "Ter", "Pl", "Pl", 
+	"Sq", "Sq", "Ct", "Ct", "Park", "Park", "Hwy", "Hwy", "Dr", "Dr", "Way", "Way", "Blvd", "Blvd", "Blvd", 
+	"Pkwy", "Pkwy","Pkwy", "Cir", "Cir", "Cir", "Ln", "Ln", "Ln","Cres", "Cres", "Cres", "Grn", "Grn", "Grn","Plz" "Plz", "Plz", "Row", "Row", 
+	"Wharf", "Wharf", "Ts", "Ext", "Ext", "Brg", "BR", "bridge");
 
 	$stateTakeOut = array("MA", "mass", "massachusetts");
 
@@ -19,20 +27,20 @@ if(isset($_POST['address'],$_POST['zip'])) {
 		"02127","02136","02126","02137","02124","02125","02122","02121","02119","02118","02090","02199","02120","02112","02210","02110",
 		"02109","02108","02133","02113","02201","02129","02128","2135","2134","2215","2467","2445","2111","2446","2114","2116","2115",
 		"2132","2131","2130","2127","2136","2126","2137","2124","2125","2122","2121","2119","2118","2090","2199","2120","2112","2210","2110",
-		"2109","2108","2133","2113","2201","2129","2128");
+		"2109","2108","2133","2113","2201","2129","2128");*/
 	
 	$address = $_POST['address'];
 	$zip = $_POST['zip'];
 	$pieces = explode(' ', $address);
-	
+
+
+
 	$streetName = '';
 	$suffixNotThere = true;
-	$areaNotThere= true;
-
 	
 	for($i = 2; $i < count($pieces); $i++) {
 		foreach($suffixTakeOut as $item) {
-			if(strcasecmp($item, $pieces[$i]) == 0) {
+			if(strcasecmp($var1, $var2) == 0) {
 				$suffixNotThere = false;
 				$streetName = $pieces[1];
 				for($j = 2; $j < $i; $j++) $streetName = $streetName . ' ' . $pieces[$j];
@@ -40,31 +48,141 @@ if(isset($_POST['address'],$_POST['zip'])) {
 		}
 	}
 	if($suffixNotThere) {
-		for($i = 2; $i < count($pieces); $i++) {
-			foreach($neighbourhoodTakeOut as $item) {
-				if(strcasecmp($item, $pieces[$i]) == 0) {
-					$areaNotThere = false;
-					$streetName = $pieces[1];
-					for($j = 2; $j < $i; $j++) $streetName = $streetName . ' ' . $pieces[$j];
-			}
-		}
-	}
-
-
-	if($suffixNotThere AND $areaNotThere)
 		$streetName = $pieces[1];
 		for($j = 2; $j < count($pieces); $j++) {
 			$streetName = $streetName . ' ' . $pieces[$j];
 		}
 	}
-	
+
+	if(strlen($zip) == 5) {
+		$zipMySQL = substr($zip, 1, 4);
+	} else { $zipMySQL = $zip; }
+
+	if(strlen($zip) == 4) {
+		$zipViola = "0" . $zip;
+	} else { $zipViola = $zip; }
+
+
 	$snum = $pieces[0];
 	$sname = $streetName;
 
 
 }
 
-$query = "street = '$sname' AND (stno = '$snum' OR (stno <= '$snum' AND sthigh >= '$snum'))";
+//$snum = 1130;
+//$sname = "commonwealth";
+//$zipViola = "02134";
+//$zipMySQL = "2134";
+
+
+
+$conMain = mysqli_connect("10.241.110.44", "studenthousing", "B3tterLiving!", "studenthousing");
+
+//Go into the Master address list (seperated by ZIP) and extract the LAT, LONG and PARCEL ID for the address
+
+if($zipMySQL < 2118) {$query = "SELECT * FROM under2118 WHERE
+			  StreetName = '$sname' AND (StreetLow = '$snum' OR (StreetLow <= '$snum' AND StreetHigh >= '$snum')) AND ZipCode = '$zipMySQL'";}
+else if($zipMySQL < 2122) {$query = "SELECT * FROM under2122 WHERE
+			  StreetName = '$sname' AND (StreetLow = '$snum' OR (StreetLow <= '$snum' AND StreetHigh >= '$snum')) AND ZipCode = '$zipMySQL'";}
+else if($zipMySQL < 2126) {$query = "SELECT * FROM under2126 WHERE
+			  StreetName = '$sname' AND (StreetLow = '$snum' OR (StreetLow <= '$snum' AND StreetHigh >= '$snum')) AND ZipCode = '$zipMySQL'";}
+else if($zipMySQL < 2128) {$query = "SELECT * FROM under2128 WHERE
+			  StreetName = '$sname' AND (StreetLow = '$snum' OR (StreetLow <= '$snum' AND StreetHigh >= '$snum')) AND ZipCode = '$zipMySQL'";}
+else if($zipMySQL < 2131) {$query = "SELECT * FROM under2131 WHERE
+			  StreetName = '$sname' AND (StreetLow = '$snum' OR (StreetLow <= '$snum' AND StreetHigh >= '$snum')) AND ZipCode = '$zipMySQL'";}
+else if($zipMySQL < 2135) {$query = "SELECT * FROM under2135 WHERE
+			  StreetName = '$sname' AND (StreetLow = '$snum' OR (StreetLow <= '$snum' AND StreetHigh >= '$snum')) AND ZipCode = '$zipMySQL'";}
+else {$query = "SELECT * FROM over2135 WHERE
+			  StreetName = '$sname' AND (StreetLow = '$snum' OR (StreetLow <= '$snum' AND StreetHigh >= '$snum')) AND ZipCode = '$zipMySQL'";}
+
+$LATITUDE;
+$LONGITUDE;
+$PARCEL_ID;
+$OWNER;
+$ROOMS;
+
+if ( $stmt = mysqli_query( $conMain, $query ) ) {
+
+			global $LATITUDE, $LONGITUDE, $PARCEL_ID;
+
+			$row = mysqli_fetch_array( $stmt );
+			$LATITUDE = $row['LAT'];
+			$LONGITUDE = $row['LONG'];
+			$PARCEL_ID = $row['ParcelId'];
+
+
+}
+
+// Now that we have the PArcel ID go through our buildingbyfines data in order to see how many rooms the building has in order to weigh the avg
+
+$queryByParcel = "SELECT * FROM buildingbyfines WHERE
+			  ParcelId = '$PARCEL_ID'";
+
+if ( $stmt = mysqli_query( $conMain, $queryIdOwner ) ) {
+
+			global $ROOMS;
+
+			$row = mysqli_fetch_array( $stmt );
+			$ROOMS = $row['Rooms'];
+}
+
+
+// Now that we have the PArcel ID go into the database IDandOwner to get the owner of the Parcel
+
+$queryIdOwner = "SELECT * FROM idandowner WHERE
+			  Parcel_ID = '$PARCEL_ID'";
+
+
+if ( $stmt = mysqli_query( $conMain, $queryIdOwner ) ) {
+
+			global $OWNER;
+
+			$row = mysqli_fetch_array( $stmt );
+			$OWNER = $row['OWNER'];
+}
+
+// Now that we have the owner go through our buildingbyfines data in order to see how his other properties stack up
+
+$queryByOwner = "SELECT * FROM buildingbyfines WHERE
+			  Owner = '$OWNER'";
+
+$OWNER_ARRAY = array();
+
+
+if ( $stmt = mysqli_query( $conMain, $queryByOwner ) ) {
+
+			
+
+			$row = mysqli_fetch_array( $stmt );
+
+			foreach($row as $item) { 
+				global $OWNER_ARRAY;
+
+				$tempOwner = new ownerObject($item['ParcelId'], "", $item['FineAVG']);
+				array_push($OWNER_ARRAY,  $tempOwner);
+
+			}
+			
+
+} 
+
+class ownerObject {
+	public $parcel;
+	public $add;
+	public $fineAVG;
+
+	public function __construct($parcel, $add, $FineAVG) {
+		$this->parcel = $parcel;
+		$this->add = $add;
+		$this->fineAVG = $FineAVG;
+	}
+}
+
+mysqli_close($conMain);
+
+
+
+$query = "street = '$sname' AND (stno = '$snum' OR (stno <= '$snum' AND sthigh >= '$snum')) AND zip = '$zipViola'";
 
 
 $params = array("\$where" => $query);
@@ -195,7 +313,10 @@ function parseJson($response) {
 	$lat = $cell['latitude'];
 	$lng = $cell['longitude'];
 
-	$tripleArray = fire($lat, $lng);
+	global $LATITUDE, $LONGITUDE;
+
+	$tripleArray = fire($LATITUDE, $LONGITUDE);
+	//$tripleArray = fire($lat, $lng);
 	
 	$result['crime'] = $tripleArray[0];
 	$result['crimeDates'] = $tripleArray[1];
