@@ -3,7 +3,6 @@ require_once("socrata.php");
 $socrata = new Socrata("http://data.cityofboston.gov/api");
 
 
-
 if(isset($_POST['address'], $_POST['zip'])) {
 	
 	
@@ -62,6 +61,8 @@ if(isset($_POST['address'], $_POST['zip'])) {
 		$zipViola = "0" . $zip;
 	} else { $zipViola = $zip; }
 
+	
+
 
 	$snum = $pieces[0];
 	$sname = $streetName;
@@ -80,20 +81,23 @@ $conMain = mysqli_connect("10.241.110.44", "studenthousing", "B3tterLiving!", "s
 
 //Go into the Master address list (seperated by ZIP) and extract the LAT, LONG and PARCEL ID for the address
 
-if($zipMySQL < 2118) {$query = "SELECT * FROM under2118 WHERE
+
+
+	if($zipMySQL < 2118) {$query = "SELECT * FROM under2118 WHERE
 			  StreetName = '$sname' AND (StreetLow = '$snum' OR (StreetLow <= '$snum' AND StreetHigh >= '$snum')) AND ZipCode = '$zipMySQL'";}
-else if($zipMySQL < 2122) {$query = "SELECT * FROM under2122 WHERE
+	else if($zipMySQL < 2122) {$query = "SELECT * FROM under2122 WHERE
 			  StreetName = '$sname' AND (StreetLow = '$snum' OR (StreetLow <= '$snum' AND StreetHigh >= '$snum')) AND ZipCode = '$zipMySQL'";}
-else if($zipMySQL < 2126) {$query = "SELECT * FROM under2126 WHERE
+	else if($zipMySQL < 2126) {$query = "SELECT * FROM under2126 WHERE
 			  StreetName = '$sname' AND (StreetLow = '$snum' OR (StreetLow <= '$snum' AND StreetHigh >= '$snum')) AND ZipCode = '$zipMySQL'";}
-else if($zipMySQL < 2128) {$query = "SELECT * FROM under2128 WHERE
+	else if($zipMySQL < 2128) {$query = "SELECT * FROM under2128 WHERE
 			  StreetName = '$sname' AND (StreetLow = '$snum' OR (StreetLow <= '$snum' AND StreetHigh >= '$snum')) AND ZipCode = '$zipMySQL'";}
-else if($zipMySQL < 2131) {$query = "SELECT * FROM under2131 WHERE
+	else if($zipMySQL < 2131) {$query = "SELECT * FROM under2131 WHERE
 			  StreetName = '$sname' AND (StreetLow = '$snum' OR (StreetLow <= '$snum' AND StreetHigh >= '$snum')) AND ZipCode = '$zipMySQL'";}
-else if($zipMySQL < 2135) {$query = "SELECT * FROM under2135 WHERE
+	else if($zipMySQL < 2135) {$query = "SELECT * FROM under2135 WHERE
 			  StreetName = '$sname' AND (StreetLow = '$snum' OR (StreetLow <= '$snum' AND StreetHigh >= '$snum')) AND ZipCode = '$zipMySQL'";}
-else {$query = "SELECT * FROM over2135 WHERE
+	else {$query = "SELECT * FROM over2135 WHERE
 			  StreetName = '$sname' AND (StreetLow = '$snum' OR (StreetLow <= '$snum' AND StreetHigh >= '$snum')) AND ZipCode = '$zipMySQL'";}
+
 
 $LATITUDE;
 $LONGITUDE;
