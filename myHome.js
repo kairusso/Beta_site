@@ -2,10 +2,10 @@
 
     $(function() {
     $( "#sliderOwner" ).slider({
-      value:50,
+      value:5,
       min: 0,
-      max: 100,
-      step: 5,
+      max: 10,
+      step: 1,
       slide: function( event, ui ) {
         $( "#amountO" ).val( ui.value );
       }
