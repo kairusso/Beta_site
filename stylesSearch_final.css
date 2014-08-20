@@ -387,6 +387,13 @@ height: 35px;
 	font-size:20px;
 }
 
+p#total_title {
+width: 503px;
+font-size: 20px;
+border-bottom: 1px solid rgb(165, 165, 165);
+margin-left: 30px;
+}
+
 #searchZ {
     height: 35px;
     width: -moz-calc(80% - 90px);
@@ -440,7 +447,16 @@ height: 35px;
 /* ----------------------- *//* ----------------------- *//* ----------------------- *//* ----------------------- */
 
 
-
+p#main_title {
+font-size: 20px;
+width: 743px;
+float: left;
+text-align: center;
+margin-bottom: 35px;
+margin-left: 45px;
+border-bottom: 2px solid rgb(221, 221, 221);
+font-weight: 500;
+}
 
 .square{
   z-index: 65;

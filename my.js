@@ -512,7 +512,7 @@
 
 			else {	
 				
-			string = string + "<p>Found <strong>" + total(list) + '</strong> violations for the past 10 years'+ '</p>';	
+			string = string + '<p id="main_title">Found <strong>' + total(list) + '</strong> violations for the past 10 years'+ '</p>';	
 
 			$.each(list, function() {
 			string = string + '<table class="deep"><tr><td id="year"><h2 id="year">' + $(this).attr('name') +
