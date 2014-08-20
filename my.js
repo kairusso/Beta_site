@@ -220,7 +220,13 @@
 
 		$('#big_one').css('background-color', 'rgb(235, 235, 235)');
 
-		$("input#search").keyup(function(event){
+		$("input#searchA").keyup(function(event){
+    		if(event.keyCode == 13){
+        		$("input#submit").click();
+    		}
+		});
+
+		$("input#searchZ").keyup(function(event){
     		if(event.keyCode == 13){
         		$("input#submit").click();
     		}
@@ -295,6 +301,8 @@
 
 			var address1 = passToPhp[0];
 			var zip1 = passToPhp[1];
+
+
 
 			console.log(address1);
 			console.log(zip1);
