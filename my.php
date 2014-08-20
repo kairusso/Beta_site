@@ -260,7 +260,7 @@ class Incident {
 
 ///return a new Incident with the correct labels
 //
-function relabel($string) {
+function relabel($string, $value) {
 	$con = mysqli_connect("localhost", "root", "root", "DOIT");
 
 	$query = "SELECT * FROM violations WHERE
@@ -272,7 +272,9 @@ function relabel($string) {
 
 			$proper = $row['proper'];
 			$cat = $row['category'];
-			$rat = $row['rating'];
+
+			if($value == "N/A") $rat = $row['rating'];
+			else $rat = $value;
 
 			if (is_null($proper) ||
 				is_null($cat) ||
@@ -296,7 +298,7 @@ function parseJson($response) {
 
 		foreach ($result['list'] as $a) {
 			if ($a->name === $year) {
-				$a->addInc(relabel($item['description']));
+				$a->addInc(relabel($item['description'], $item['value']));
 				$placed = true;
 			}
 		}
