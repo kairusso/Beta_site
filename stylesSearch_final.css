@@ -83,19 +83,15 @@ cursor: pointer; cursor: hand;
 }
 
 div#output {
-/* border: 1px solid; */
+width: 900px;
+min-height: 200px;
 background-color: #ccc;
-margin-top: 145px;
-margin-left: 139px;
-/* margin: auto; */
-width: 944px;
-border-bottom-right-radius: 90px;
-border-bottom-left-radius: 90px;
-border-right: 1px solid silver;
-border-left: 1px solid silver;
+margin-left: 130px;
+margin-top: 72px;
+border-radius: 50px;
+border-left: 1px solid rgb(233, 233, 233);
+border-right: 1px solid rgb(233, 233, 233);
 }
-
-
 
 .page-header {
   width: 100%;
@@ -438,15 +434,6 @@ margin-left: 30px;
        border: 0;  /* Small centering fix for Firefox */
 }
 
-
-/* ----------------------- *//* ----------------------- *//* ----------------------- *//* ----------------------- */
-/* ----------------------- *//* ----------------------- *//* ----------------------- *//* ----------------------- */
-/* ----------------------- *//* ----------------------- *//* ----------------------- *//* ----------------------- */
-/* ----------------------- *//* ----------------------- *//* ----------------------- *//* ----------------------- */
-/* ----------------------- *//* ----------------------- *//* ----------------------- *//* ----------------------- */
-/* ----------------------- *//* ----------------------- *//* ----------------------- *//* ----------------------- */
-
-
 p#main_title {
 font-size: 20px;
 width: 743px;
@@ -544,9 +531,4 @@ font-weight: 500;
 	animation-iteration-count: infinite; 
 	animation-timing-function: linear;
 	*/
-}
-
-.row {
-margin-right: 0px;
-margin-left: 0px;
 }
