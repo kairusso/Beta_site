@@ -442,7 +442,7 @@ function parseJson($response) {
 		}
 
 		if (!$placed) {
-			array_push($result['list'], new Year($year, array(relabel($item['description']))));
+			array_push($result['list'], new Year($year, array(relabel($item['description'], $item['value']))));
 		}
 	}
 	
