@@ -279,6 +279,23 @@ foreach ($OWNER_ARRAY as $item) {
 
 }
 
+
+//Check for doubles 
+/*
+foreach ($OWNER_ARRAY as $item) {
+	global $OWNER_ARRAY;
+
+	for ($i = 0; $i < sizeof($OWNER_ARRAY); $i++) {
+		if($item->add === $OWNER_ARRAY[i]) {
+			unset($OWNER_ARRAY[i]);
+			$OWNER_ARRAY = array_values($OWNER_ARRAY);
+			var_dump($OWNER_ARRAY);
+		} 
+	}
+}
+*/
+
+
 class ownerObject {
 	public $parcel;
 	public $add;
@@ -378,7 +395,7 @@ class Incident {
 ///return a new Incident with the correct labels
 //
 function relabel($string, $value) {
-	$con = mysqli_connect("localhost", "root", "root", "DOIT");
+	$con = mysqli_connect("10.241.110.44", "studenthousing", "B3tterLiving!", "studenthousing");
 
 	$query = "SELECT * FROM violations WHERE
 			  short= '$string'";
@@ -702,7 +719,7 @@ function fire($lat, $lng) {
 
 
 function relabelCrime($string, $date) {
-	$con = mysqli_connect("localhost", "root", "root", "DOIT");
+	$con = mysqli_connect("10.241.110.44", "studenthousing", "B3tterLiving!", "studenthousing");
 
 	$query = "SELECT * FROM crimes WHERE
 			  name = '$string'";
@@ -729,7 +746,7 @@ function relabelCrime($string, $date) {
 }
 
 function relabelNoise($string, $date) {
-	$con = mysqli_connect("localhost", "root", "root", "DOIT");
+	$con = mysqli_connect("10.241.110.44", "studenthousing", "B3tterLiving!", "studenthousing");
 
 	$query = "SELECT * FROM hotline WHERE
 			  name= '$string'";

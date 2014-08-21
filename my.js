@@ -237,6 +237,7 @@
 		var CRIME_RATING;
 		var NOISE_RATING;
 		var HOT_RATING;
+		var OWNER_RATING;
 
 		var VIOLA_WEIGHT = 1; 
 		var CRIME_WEIGHT = 1;
@@ -515,6 +516,13 @@
     				$('#hotlineJS').text(textTemp);
 				});
 
+				$('#ownerJS').hover( function() {
+					textTemp = $('#ownerJS').text();
+					$('#ownerJS').text(OWNER_RATING);
+				}, function(){
+    				$('#ownerJS').text(textTemp);
+				});
+
 				$('#big_one').trigger("click");
 
 				var VIOLATIONS_10 = [7,12,22,26,50,75,125,250,575,10000];
@@ -525,18 +533,20 @@
 
 				$.each(returnedData.owner, function() {
 					violation_ratingO = score(VIOLATIONS_10, $(this).attr('fineAVG'));
-					totalO = parseInt(totalO) + violation_ratingO;
+					totalO = parseInt(totalO) + parseInt(violation_ratingO);
 					counterO = parseInt(counterO) + 1;
 					
 				});
 
-				totalO = parseInt(totalO)/parseInt(counterO);
+
+				if(counterO == 0) {totalO = 10;}
+				else {totalO = parseInt(totalO)/parseInt(counterO);
 				totalO = parseInt(totalO).toFixed(1);
-				var owner_color = coloring(parseInt(totalO));
+				var owner_color = coloring(parseInt(totalO));}
+
 				document.getElementById("owner_circle").className = "c100 p" + 10*parseInt(totalO) + " " + owner_color;
 
-
-				console.log(totalO);
+				OWNER_RATING = totalO;
 
 				//console.log(returnedData);
 
@@ -586,8 +596,11 @@
 
 				//console.log(VIOLA_WEIGHT);
 
-				var Total_Rating = ((parseInt(crime_rating)*parseInt(CRIME_WEIGHT)) + (parseInt(noise_rating)*parseInt(NOISE_WEIGHT)) + 
-					(parseInt(hotline_rating)*parseInt(HOT_WEIGHT)) + (parseInt(violation_rating)*parseInt(VIOLA_WEIGHT)))/(parseInt(Total_Weight));
+				var Total_Rating
+				if(counterO == 0) {
+					Total_Rating = (parseInt(crime_rating) + parseInt(noise_rating) + parseInt(hotline_rating) + parseInt(violation_rating))/(4);
+				} else { Total_Rating = (parseInt(crime_rating) + parseInt(noise_rating) + 
+					parseInt(hotline_rating) + parseInt(violation_rating) + parseInt(OWNER_RATING))/(5);}
 
 				Total_Rating = Total_Rating.toFixed(1);
 
