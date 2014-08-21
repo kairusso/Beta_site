@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" charset="utf-8"/>
+	<!---Latest compiled and minified CSS Boostrap-->
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<!---Link my stylesheet -->
+	<link rel="stylesheet" type="text/css" href="stylesSearch_final.css">
+	<link rel="stylesheet" href="circle.css">
+
+	<!---Require JQUERY-->
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+	<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+
+	<script src="Chart.js"></script>
+
+	<script type="text/javascript">
+
+	</script>
+
+	<!---Require javascripts-->
+	<script src="my.js"></script>
+
+</head>
+<body>
+
+	<div class="page-header">
+		<div class="row">
+			<h1 class="col-md-2"><a class="logo-link" href="/index.html">SPOTit</a></h1>
+
+			<div class="container_search col-md-4">	
+				<div class="search">
+
+					<input id="searchA" type="text" placeholder="Address">
+
+					<input id="searchZ" type="text" placeholder="ZipCode">
+
+					<input id="submit" type="submit" value="search">
+				</div>
+			</div>
+
+			<a class="col-md-1 navbar-right page-header-a" href="/contact.html">GETin<br><span style="color: white;">TOUCH</a>
+			<a class="col-md-1 navbar-right page-header-a" href="/method.html">HOWit<br><span style="color: white;">WORKS</span></a>
+			<a class="col-md-1 navbar-right page-header-a" href="/about.html">ABOUTthe<br><span style="color: white;">PROJECT</span></a>
+		</div>
+	</div>
+
+	<div class="containerMAIN">
+
+		<div class="square">
+			<div><div><div><div><div></div></div></div></div></div>
+			<div><div><div><div><div></div></div></div></div></div>
+		</div>
+		<div class="square two">
+			<div><div><div><div><div></div></div></div></div></div>
+			<div><div><div><div><div></div></div></div></div></div>
+		</div>
+
+		
+		<div class="container_Results">	
+			<div id="results_scoring">
+				<ul>
+					<li class="active" id="big_one">
+						<div class="results_scoring_individual_big">
+							<div id="total_circle" class="c100 p100 big secondRed">
+								<span id="totalJS">Total</p></span>
+								<div class="slice">
+									<div class="bar"></div>
+									<div class="fill"></div>
+								</div>
+							</div>
+						</div>
+					</li>
+						<li class="smaller" id="owner">
+							<div class="results_scoring_individual">
+								<div id="owner_circle" class="c100 p100 red">
+									<span id="ownerJS">Owner</p></span>
+									<div class="slice">
+										<div class="bar"></div>
+										<div class="fill"></div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="smaller" id="crime">
+							<div class="results_scoring_individual">
+							<div id="crime_circle" class="c100 p100 orange">
+								<span id="crimeJS">Crime</p></span>
+								<div class="slice">
+									<div class="bar"></div>
+									<div class="fill"></div>
+								</div>
+							</div>
+						</div>
+					</li>
+						<li class="smaller" id="violations">
+							<div class="results_scoring_individual">
+							<div id="viola_circle" class="c100 p100 yellow">
+								<span id="violaJS">Violations</p></span>
+								<div class="slice">
+									<div class="bar"></div>
+									<div class="fill"></div>
+								</div>
+							</div>
+						</div>
+					</li>
+						<li class="smaller" id="hotline">
+							<div class="results_scoring_individual">
+							<div id="hotline_circle" class="c100 p100 green">
+								<span id="hotlineJS">Hotline</span>
+								<div class="slice">
+									<div class="bar"></div>
+									<div class="fill"></div>
+								</div>
+							</div>
+						</div>
+					</li>
+						<li class="smaller" id="noise">
+							<div class="results_scoring_individual">
+							<div id="noise_circle" class="c100 p100 secondGreen">
+								<span id="noiseJS">Noise</p></span>
+								<div class="slice">
+									<div class="bar"></div>
+									<div class="fill"></div>
+								</div>
+							</div>
+						</div>
+					</li>
+					</ul>
+					<div id="output">
+						<div id="this_one" class="row">
+							<div id="info-box"></div>
+							<div id="main_output" class="row well">
+							</div>
+							<div class="col-md-4 well" id="charts">
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+		
+	</body>
+	</html>
