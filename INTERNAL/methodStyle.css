@@ -3,6 +3,9 @@ body    {
   background-image: url('25 Free High Resolution Blurred Backgrounds/Blurred Backgrounds (7).jpg');
 }
 
+.mapForClick {
+  cursor: pointer;
+}
 
 .page-header {
   width: 100%;

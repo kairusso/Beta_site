@@ -3,36 +3,90 @@ body    {
   background-image: url('Blurred Backgrounds (7).jpg');
 }
 
+.col-md-2 {
+
+  color: white;
+}
+table.deep {
+width: 800px;
+margin-left: auto;
+margin-right: auto;
+}
+
+p.col-md-2 {
+margin-left: -50px;
+}
+
+p#total_label {
+font-size: 20px;
+color: red;
+}
+
+td.total_cell {
+width: 310px;
+vertical-align: top;
+padding-left: 10px;
+padding-top: 10px;
+}
+
+td#b1 {
+border-left: 1px solid gray;
+border-bottom: 1px solid gray;
+}
+
+td#b2 {
+border-right: 1px solid gray;
+border-top: 1px solid gray;
+}
+
+td#label {
+text-align: right;
+padding-right: 15px;
+border-bottom: 1px solid rgb(209, 209, 209);
+}
+
+td#bars {
+width: 500px;
+border-bottom: 1px solid rgb(207, 207, 207);
+}
+
+
 
 .page-header {
-  width: 100%;
-  min-width: 900px;
-  margin: 0px;
-  padding: 0px;
-  background-color: rgb(194, 194, 194);
-   }
+width: 100%;
+min-width: 900px;
+margin: 0px;
+padding: 0px;
+background-color: rgb(65, 65, 65);
+}
   .page-header h1 {
     margin: 5px 5px 5px 5px;
     padding-left: 30px; }
   .page-header-a {
-    display: block;
-    border-left: 1px solid;
-    height: 49px;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold; 
-    color: #444;}
+display: block;
+border-left: 1px solid;
+padding-top: 9px;
+padding-left: 3px;
+text-align: center;
+height: 62px;
+width: 181px;
+text-decoration: none;
+font-size: 16px;
+font-weight: bold;
+color: #FFF;
+}
+
   .page-header-a:hover {
     border-bottom: 3px solid gray;
     color: #444;
     background-color: #61E898;
     text-decoration: none; }
 
-
-  .logo-link {
-    color: #444;
-    text-decoration: none;
-  }
+    .logo-link {
+color: #FFF;
+text-decoration: none;
+font-size: 46px;
+}
 
   .logo-link:hover {
     text-decoration: none;

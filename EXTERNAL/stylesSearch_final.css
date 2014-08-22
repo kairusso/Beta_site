@@ -3,6 +3,11 @@ body  	{
   background-image: url('Blurred Backgrounds (7).jpg');
 }
 
+
+.col-md-2 {
+
+  color: white;
+}
 table.deep {
 width: 800px;
 margin-left: auto;
