@@ -92,11 +92,11 @@
 			var parts = add.split(" ");
 
 			if ((zip.length != 4 && zip.length != 5) || isNaN(zip)) {
-				alert("Please fill the ZipCode Box correctly");
+				alert("Please fill the ZipCode Box correctly e.g. '02134'");
 
 			} else {
 				if (add === '' || isNaN(parts[0])) {
-					alert("Please fill the Address Box correctly");
+					alert("Please fill the Address Box correctly e.g. '1 City Hall'");
 
 					$('div.header').children().each( function() {
 						$(this).val('');
