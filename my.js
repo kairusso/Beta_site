@@ -22,7 +22,7 @@
 				rows.push(0);
 				curYear++;
 			}
-			
+
 			labelList.push($(this).attr('name'));
 			rows.push(count($(this).attr('loInc')));
 			curYear++;
@@ -157,6 +157,7 @@
 
   		$('#output').append('<div id="main_output" class="row well">');
   		$('#main_output').append(violations);
+  		$('#main_output').append('<h2 id="chart_title"># of Violations by Year</h3>');
   		drawChart(returnedData.list);
 
   	})

@@ -3,30 +3,6 @@ body  	{
   background-image: url('25 Free High Resolution Blurred Backgrounds/Blurred Backgrounds (7).jpg');
 }
 
-li.smaller {
-position: relative;
-display: block;
-border-left: 1px solid;
-border-right: 1px solid;
-border-top: 1px solid;
-margin-top: 55px;
-border-top-left-radius: 500px;
-border-top-right-radius: 500px;
-height: 90px;
-padding-left: 15px;
-padding-top: 15px;
-border-top: 2px solid #777;
-border-left: 2px solid #777;
-border-right: 2px solid #777;
-background-color: #eee;
-cursor: pointer; cursor: hand;
-}
-
-ul {
-  display: block;
-  list-style: none;
-}
-
 table.deep {
 width: 800px;
 margin-left: 10px;
@@ -160,12 +136,21 @@ float: left;
 padding-bottom: 30px;
 }
 
+.gray_titles {
+
+}
+
 h2#chart_title {
 color: gray;
 border-bottom: 1px solid rgb(189, 189, 189);
 width: 500px;
 padding-left: 5px;
 padding-bottom: 5px;
+text-align: center;
+margin-left: auto;
+margin-right: auto;
+margin-top: 34px;
+margin-bottom: 34px;
 }
 
 p#listed {
@@ -184,6 +169,10 @@ margin-right: 0px;
 	margin-top: 20px;
 }
 
+canvas#graph {
+margin-right: auto;
+margin-left: 47px;
+}
 
 /* ----------------------- *//* ----------------------- *//* ----------------------- *//* ----------------------- */
 /* ----------------------- *//* ----------------------- *//* ----------------------- *//* ----------------------- */
@@ -318,6 +307,7 @@ margin-left: 30px;
 
 .well {
   padding-bottom: 32px;
+  border: 3px solid #e3e3e3;
 }
 
 #submit
