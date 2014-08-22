@@ -166,7 +166,7 @@
 
   		$('#output').append('<div id="main_output" class="row well">');
   		$('#main_output').append(violations);
-  		$('#main_output').append('<h2 id="chart_title"># of Violations by Year</h3>');
+  		$('#main_output').append('<h2 class="gray_titles" id="chart_title"># of Violations by Year</h3>');
   		drawChart(returnedData.list);
 
   	})
@@ -188,7 +188,7 @@
 
   		else {	
 
-  			string = string + '<div id="address_header"><h3 id="address">' + address + '</h3><p id="main_title">Found <strong>' + total(list) + '</strong> violations for the past 10 years'+ '</p></div>';	
+  			string = string + '<div id="address_header"><h3 id="address">' + address + '</h3><p class="gray_titles" id="main_title">Found <strong>' + total(list) + '</strong> violations for the past 10 years'+ '</p></div>';	
 
   			$.each(list, function() {
   				string = string + '<table class="deep"><tr><td id="year"><h2 id="year">' + $(this).attr('name') +
