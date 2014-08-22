@@ -67,23 +67,28 @@ margin-right: auto;
 }
 
 .page-header {
-  width: 100%;
-  min-width: 900px;
-  margin: 0px;
-  padding: 0px;
-  background-color: rgb(194, 194, 194);
-   }
+width: 100%;
+min-width: 900px;
+margin: 0px;
+padding: 0px;
+background-color: rgb(65, 65, 65);
+}
   .page-header h1 {
     margin: 5px 5px 5px 5px;
     padding-left: 30px; }
-  .page-header-a  {
-    display: block;
-    border-left: 1px solid;
-    height: 49px;
-    text-decoration: none; 
-    font-size: 16px;
-    font-weight: bold;
-    color: #444;}
+  .page-header-a {
+display: block;
+border-left: 1px solid;
+padding-top: 9px;
+padding-left: 3px;
+text-align: center;
+height: 62px;
+width: 181px;
+text-decoration: none;
+font-size: 16px;
+font-weight: bold;
+color: #FFF;
+}
 
   .page-header-a:hover {
     border-bottom: 3px solid gray;
@@ -92,9 +97,10 @@ margin-right: auto;
     text-decoration: none; }
 
     .logo-link {
-    color: #444;
-    text-decoration: none;
-  }
+color: #FFF;
+text-decoration: none;
+font-size: 46px;
+}
 
   .logo-link:hover {
     text-decoration: none;
@@ -250,12 +256,11 @@ margin-bottom: 87px;
 
 
 .container_search {
-    width: 680px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 6px;
-
+width: 680px;
+display: block;
+margin-left: 118px;
+margin-right: auto;
+margin-top: 11px;
 }
 
 .search

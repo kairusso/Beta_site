@@ -1,11 +1,14 @@
+	//draw the chart based on returned data 
 	function drawChart(data) {
 
+		//sort the list of years in descending order
 		data.sort(function (a, b) {
 			return a.name - b.name;
 		});
 
 		console.log(data);
 
+		//if there is not enough data, don't post anything
 		if (data.length < 2) {
 			$('#main_output').append('<h2 id="graph_fail_alert">Not enough data to draw a graph!</h2>');
 			return false;
@@ -16,24 +19,29 @@
 		var curYear = new Date().getFullYear() - 10;
 		console.log(curYear);
 
+		//creates the data for the graph
 		$.each(data, function() {
+			//fill in the front of the list with empty data
 			while ($(this).attr('name') != curYear) {
 				labelList.push(curYear);
 				rows.push(0);
 				curYear++;
 			}
 
+			//add data
 			labelList.push($(this).attr('name'));
 			rows.push(count($(this).attr('loInc')));
 			curYear++;
 		});
 
+		//fill in the end of the list
 		while(labelList.length < 10) {
 			labelList.push(curYear);
 			rows.push(0);
 			curYear++;
 		}
 
+		//build chart line data
 		var lineChartData = {
 			labels : labelList,
 
@@ -42,18 +50,22 @@
 			}]
 		}
 
+		//create the chart div
 		$('#main_output').append('<canvas id="graph"></canvas>');
 
+		//chart settings
 		var ctx = document.getElementById('graph').getContext("2d");
 		ctx.canvas.width = 800;
 		ctx.canvas.height = 400;
 
+		//append chart to page
 		var myChart = new Chart(ctx).Line(lineChartData, {
 			bezierCurve : false,
 			scaleFontFamily: "'Lato', sans-serif",
 		});
 	}
 
+	//
 	function count(data) {
 		var result = 0;
 
@@ -66,6 +78,8 @@
 
 	$(document).ready( function() {
 
+
+		//handle user input
 		$("input#searchA").keyup(function(event){
 			if(event.keyCode == 13){
 				$("input#submit").click();
@@ -104,7 +118,7 @@
 				} else {
 
 
-					var url = "/search_final.html?parameter=" + add + "&%&" +  zip;
+					var url = "search_final.html?parameter=" + add + "&%&" +  zip;
 
 
 					window.open(url,"_self")
@@ -165,6 +179,7 @@
 
 
   		$('#output').append('<div id="main_output" class="row well">');
+  		//append violation data
   		$('#main_output').append(violations);
   		$('#main_output').append('<h2 class="gray_titles" id="chart_title">No. of Violations by Year</h3>');
   		drawChart(returnedData.list);
@@ -177,6 +192,7 @@
   		alert("Address does not exist in our Boston Database, please try again...");
   	});
 
+  	//create the violations table
   	function styleViol(list, address) {
   		var count = list.length;
   		var string = '';
@@ -224,6 +240,7 @@
 		return high;
 	}
 
+	//count the number of violations
 	function total(list) {
 		var total = 0;
 
@@ -236,6 +253,7 @@
 		return total;
 	}
 
+	//set the icon based on the category of the incident
 	function setIcon(cat) {
 		var src = '';
 
@@ -267,14 +285,14 @@
 		else if (cat === 'Prostitution') { src = 'CRIME/PROSTITUTION.png' }
 		else if (cat === 'Simple Assault') { src = 'CRIME/SIMPLE_ASSAULT.png' }
 		else if (cat === 'Public Drinking') { src = 'NOISE/PUB_DRINKING.png' }
-																														else if (cat === 'Disorderly Conduct') { src = 'NOISE/DISORDERLY.png' }
-												else if (cat === 'Argue') { src = 'NOISE/ARGUE.png' }
-															else if (cat === 'Gathering') { src = 'NOISE/GATHERING.png' }
-	else if (cat === 'Work Hours-Loud Noise Complaints') { src = 'NOISE/WOR_HOURS.png' }
-																											else if (cat === 'Loud Parties/Music/People') { src = 'NOISE/party.png' }
-																											else if (cat === 'Public Events Noise Disturbances') { src = 'NOISE/PUBLIC_EVENT.png' }
-																										else { src = 'VIOLATIONS/OTHER.png' }
+		else if (cat === 'Disorderly Conduct') { src = 'NOISE/DISORDERLY.png' }
+		else if (cat === 'Argue') { src = 'NOISE/ARGUE.png' }
+		else if (cat === 'Gathering') { src = 'NOISE/GATHERING.png' }
+		else if (cat === 'Work Hours-Loud Noise Complaints') { src = 'NOISE/WOR_HOURS.png' }
+		else if (cat === 'Loud Parties/Music/People') { src = 'NOISE/party.png' }
+		else if (cat === 'Public Events Noise Disturbances') { src = 'NOISE/PUBLIC_EVENT.png' }
+		else { src = 'VIOLATIONS/OTHER.png' }
 
-																																					return '<img id="icon" src="images/' + src + '"/>';
-																																			}
-																																		});
+		return '<img id="icon" src="images/' + src + '"/>';
+}
+});
