@@ -118,7 +118,7 @@
 				} else {
 
 
-					var url = "search_final.html?parameter=" + add + "&%&" +  zip;
+					var url = "index.html?parameter=" + add + "&%&" +  zip;
 
 
 					window.open(url,"_self")
@@ -171,7 +171,7 @@
   		var countTotal = total(returnedData.list);
 
   		$('#totalJS').hover( function() {
-					textTemp = $('#totalJS').text();
+					var textTemp = $('#totalJS').text();
 					$('#totalJS').text(countTotal);
 				}, function(){
     				$('#totalJS').text(textTemp);
