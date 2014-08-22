@@ -539,14 +539,16 @@
 				});
 
 
-				if(counterO == 0) {totalO = 10;}
+				if(counterO == 0) {totalO = 10;
+					OWNER_RATING = "NA"}
 				else {totalO = parseInt(totalO)/parseInt(counterO);
-				totalO = parseInt(totalO).toFixed(1);
-				var owner_color = coloring(parseInt(totalO));}
+					totalO = parseInt(totalO).toFixed(1);
+					var owner_color = coloring(parseInt(totalO));
+					OWNER_RATING = totalO;}
 
 				document.getElementById("owner_circle").className = "c100 p" + 10*parseInt(totalO) + " " + owner_color;
 
-				OWNER_RATING = totalO;
+				
 
 				//console.log(returnedData);
 
