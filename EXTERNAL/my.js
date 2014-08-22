@@ -166,7 +166,7 @@
 
   		$('#output').append('<div id="main_output" class="row well">');
   		$('#main_output').append(violations);
-  		$('#main_output').append('<h2 class="gray_titles" id="chart_title"># of Violations by Year</h3>');
+  		$('#main_output').append('<h2 class="gray_titles" id="chart_title">No. of Violations by Year</h3>');
   		drawChart(returnedData.list);
 
   	})

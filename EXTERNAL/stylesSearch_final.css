@@ -235,9 +235,9 @@ height: 35px;
 }
 
 .results_scoring {
-display: block;
 z-index: 2;
-margin-left: 460px;
+margin-left: 431px;
+margin-bottom: 87px;
 }
 
 
