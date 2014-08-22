@@ -174,6 +174,10 @@ foreach ($OWNER_ARRAY as $item) {
 
 	$address = "";
 
+	$testBoolean = true;
+
+
+	if($testBoolean) {
 	$queryThroughAllAddresses = "SELECT * FROM under2118 WHERE
 			  ParcelId = '$currentP'";
 
@@ -185,11 +189,14 @@ foreach ($OWNER_ARRAY as $item) {
 			} else {
 
 				$item->add = $row['StreetLow'] . ' ' . $row['StreetName'] . ", " . $row['Neighbourhood'] . ' ' . $row['ZipCode'];
-				goto a;
+				$testBoolean = false;
 				//break;
 			}
 	}
+	}
 
+
+	if($testBoolean) {
 	$queryThroughAllAddresses = "SELECT * FROM under2122 WHERE
 			  ParcelId = '$currentP'";
 
@@ -199,11 +206,13 @@ foreach ($OWNER_ARRAY as $item) {
 			if(is_null($row['StreetName'])) {
 			} else {
 				$item->add = $row['StreetLow'] . ' ' . $row['StreetName'] . ", " . $row['Neighbourhood'] . ' ' . $row['ZipCode'];
-				goto a;
+				$testBoolean = false;
 				//break;
 			}
 	}
+	}
 
+	if($testBoolean) {
 	$queryThroughAllAddresses = "SELECT * FROM under2126 WHERE
 			  ParcelId = '$currentP'";
 
@@ -213,11 +222,13 @@ foreach ($OWNER_ARRAY as $item) {
 			if(is_null($row['StreetName'])) {
 			} else {
 				$item->add = $row['StreetLow'] . ' ' . $row['StreetName'] . ", " . $row['Neighbourhood'] . ' ' . $row['ZipCode'];
-				goto a;
+				$testBoolean = false;
 				//break;
 			}
 	}
+	}
 
+	if($testBoolean) {
 	$queryThroughAllAddresses = "SELECT * FROM under2128 WHERE
 			  ParcelId = '$currentP'";
 
@@ -227,11 +238,13 @@ foreach ($OWNER_ARRAY as $item) {
 			if(is_null($row['StreetName'])) {
 			} else {
 				$item->add = $row['StreetLow'] . ' ' . $row['StreetName'] . ", " . $row['Neighbourhood'] . ' ' . $row['ZipCode'];
-				goto a;
+				$testBoolean = false;
 				//break;
 			}
 	}
+	}
 
+	if($testBoolean) {
 	$queryThroughAllAddresses = "SELECT * FROM under2131 WHERE
 			  ParcelId = '$currentP'";
 
@@ -241,11 +254,13 @@ foreach ($OWNER_ARRAY as $item) {
 			if(is_null($row['StreetName'])) {
 			} else {
 				$item->add = $row['StreetLow'] . ' ' . $row['StreetName'] . ", " . $row['Neighbourhood'] . ' ' . $row['ZipCode'];
-				goto a;
+				$testBoolean = false;
 				//break;
 			}
 	}
+	}
 
+	if($testBoolean) {
 	$queryThroughAllAddresses = "SELECT * FROM under2135 WHERE
 			  ParcelId = '$currentP'";
 
@@ -255,11 +270,15 @@ foreach ($OWNER_ARRAY as $item) {
 			if(is_null($row['StreetName'])) {
 			} else {
 				$item->add = $row['StreetLow'] . ' ' . $row['StreetName'] . ", " . $row['Neighbourhood'] . ' ' . $row['ZipCode'];
-				goto a;
+				$testBoolean = false;
 				//break;
 			}
 	}
 
+	}
+
+
+	if($testBoolean) {
 	$queryThroughAllAddresses = "SELECT * FROM over2135 WHERE
 			  ParcelId = '$currentP'";
 
@@ -269,13 +288,11 @@ foreach ($OWNER_ARRAY as $item) {
 			if(is_null($row['StreetName'])) {
 			} else {
 				$item->add = $row['StreetLow'] . ' ' . $row['StreetName'] . ", " . $row['Neighbourhood'] . ' ' . $row['ZipCode'];
-				goto a;
+				$testBoolean = false;
 				//break;
 			}
 	}
-
-	a:
-
+ 	}
 
 }
 
