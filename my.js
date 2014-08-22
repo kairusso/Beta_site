@@ -154,6 +154,15 @@
   		console.log(returnedData);
 
   		var violations = styleViol(returnedData.list, returnedData.address);
+  		var countTotal = total(returnedData.list);
+
+  		$('#totalJS').hover( function() {
+					textTemp = $('#totalJS').text();
+					$('#totalJS').text(countTotal);
+				}, function(){
+    				$('#totalJS').text(textTemp);
+		});
+
 
   		$('#output').append('<div id="main_output" class="row well">');
   		$('#main_output').append(violations);
